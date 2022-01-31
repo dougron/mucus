@@ -13,6 +13,23 @@ public class LoggerOutputManager implements MucusOutputManager
 {
 	
 	public static final Logger logger = LogManager.getLogger(LoggerOutputManager.class);
+	private static MucusOutputManager instance;
+
+	
+	private LoggerOutputManager()
+	{
+		
+	}
+	
+	
+	public static MucusOutputManager getInstance() 
+	{
+		if (instance == null)
+		{
+			instance = new LoggerOutputManager();
+		}
+		return instance;
+	}
 
 	
 	
@@ -132,4 +149,7 @@ public class LoggerOutputManager implements MucusOutputManager
 		logger.info("saveBotVariationOptionItem:\n" + listMid.toString());
 	}
 
+
+
+	
 }
