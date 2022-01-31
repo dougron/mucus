@@ -15,7 +15,6 @@ import java.util.TreeSet;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import DataObjects.combo_variables.DoubleAndDouble;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.chord_list.ChordEvent;
 import main.java.com.dougron.mucus.mu_framework.data_types.MuAnnotation;
@@ -32,8 +31,9 @@ import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.note_spli
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.voice_mu.VoiceMu;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.voice_mu.VoiceMuRest;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.voice_mu.VoiceMuplet;
-import time_signature_utilities.greatest_common_factor_calculator.GreatestCommonFactor;
-import time_signature_utilities.time_signature.TimeSignature;
+import main.java.da_utils.combo_variables.DoubleAndDouble;
+import main.java.da_utils.time_signature_utilities.greatest_common_factor_calculator.GreatestCommonFactor;
+import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
 
 // line 5 "../musicxml_measure.ump"
 public class MXML_Measure

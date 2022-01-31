@@ -12,10 +12,10 @@ package main.java.com.dougron.mucus.algorithms.superimposifier.left_to_right;
 import java.util.ArrayList;
 import java.util.List;
 
-import DataObjects.combo_variables.DoubleAndDouble;
 import main.java.com.dougron.mucus.algorithms.superimposifier.SuFi;
 import main.java.com.dougron.mucus.algorithms.superimposifier.SuFiNote;
 import main.java.com.dougron.mucus.algorithms.superimposifier.SuFiSu;
+import main.java.da_utils.combo_variables.DoubleAndDouble;
 
 /**
  * @author dougr

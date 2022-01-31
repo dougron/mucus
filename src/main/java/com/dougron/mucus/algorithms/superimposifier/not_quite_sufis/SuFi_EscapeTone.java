@@ -6,7 +6,7 @@ import main.java.com.dougron.mucus.algorithms.superimposifier.SuFiSu;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.data_types.BarsAndBeats;
 import main.java.com.dougron.mucus.mu_framework.data_types.MuNote;
-import time_signature_utilities.time_signature.TimeSignature;
+import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
 
 /*
  * generates escape tones, including neighbour tones which are a special case of escape tone for repeated notes

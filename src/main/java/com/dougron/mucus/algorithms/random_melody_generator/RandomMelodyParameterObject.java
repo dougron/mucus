@@ -14,7 +14,7 @@ import main.java.com.dougron.mucus.algorithms.mu_generator.MuGenerator;
 import main.java.com.dougron.mucus.mu_framework.chord_list.ChordList;
 import main.java.com.dougron.mucus.mu_framework.chord_list.ChordListGenerator;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureGenAndMap;
-import time_signature_utilities.time_signature.TimeSignature;
+import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
 
 public class RandomMelodyParameterObject
 {

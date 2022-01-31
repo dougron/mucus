@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import main.java.com.dougron.mucus.mu_framework.data_types.BarsAndBeats;
 import main.java.com.dougron.mucus.mu_framework.ruler.TimeSignatureListAndGenAndTempoListRuler;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureListGeneratorFactory;
-import time_signature_utilities.time_signature.TimeSignature;
+import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
 
 class TimeSignatureListAndGenAndTempoListRuler_Test
 {

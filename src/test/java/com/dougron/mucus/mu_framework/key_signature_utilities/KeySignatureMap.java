@@ -1,7 +1,7 @@
 /*CODE CAN BE EDITED - Umple no longer used*/
 /*This code was generated using the UMPLE 1.29.0.4181.a593105a9 modeling language!*/
 
-package main.java.com.dougron.mucus.mu_framework.key_signature_utilities;
+package test.java.com.dougron.mucus.mu_framework.key_signature_utilities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,9 @@ import java.util.List;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import StaticChordScaleDictionary.CSD;
 import main.java.com.dougron.mucus.mu_framework.data_types.BarsAndBeats;
+import main.java.com.dougron.mucus.mu_framework.key_signature_utilities.KeySignatureZone;
+import main.java.da_utils.static_chord_scale_dictionary.CSD;
 
 
 /**

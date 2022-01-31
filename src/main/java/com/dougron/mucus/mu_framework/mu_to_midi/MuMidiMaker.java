@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.TreeMap;
 
 import org.nd4j.shade.guava.collect.ImmutableSortedMap;
 
@@ -21,9 +20,9 @@ import main.java.com.dougron.mucus.mu_framework.mu_to_midi.track_things.TimeSign
 import main.java.com.dougron.mucus.mu_framework.mu_to_midi.track_things.TrackEndMarker;
 import main.java.com.dougron.mucus.mu_framework.mu_to_midi.track_things.TrackName;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureList;
-import time_signature_utilities.time_signature.TimeSignature;
-import time_signature_utilities.time_signature_map.TimeSignatureMap;
-import time_signature_utilities.time_signature_map.TimeSignatureZone;
+import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
+import main.java.da_utils.time_signature_utilities.time_signature_map.TimeSignatureMap;
+import main.java.da_utils.time_signature_utilities.time_signature_map.TimeSignatureZone;
 
 
 public class MuMidiMaker

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-import time_signature_utilities.time_signature.TimeSignature;
+import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
 
 public class BeatStrengthMap
 {

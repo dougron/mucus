@@ -1,10 +1,12 @@
-package main.java.com.dougron.mucus.algorithms.mu_generator;
+package test.java.com.dougron.mucus.algorithms.mu_generator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import main.java.com.dougron.mucus.algorithms.mu_generator.MuG_Anticipation;
+import main.java.com.dougron.mucus.algorithms.mu_generator.MuGenerator;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.data_types.MuNote;
 

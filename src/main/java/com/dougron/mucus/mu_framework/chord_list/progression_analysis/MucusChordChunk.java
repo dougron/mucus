@@ -1,9 +1,9 @@
 package main.java.com.dougron.mucus.mu_framework.chord_list.progression_analysis;
 
-import DataObjects.chord_chunk.ChordChunk;
-import DataObjects.chord_chunk.ChordChunkList;
-import StaticChordScaleDictionary.CSD;
 import main.java.com.dougron.mucus.mu_framework.chord_list.ChordEvent;
+import main.java.da_utils.chord_progression_analyzer.chord_chunk.ChordChunk;
+import main.java.da_utils.chord_progression_analyzer.chord_chunk.ChordChunkList;
+import main.java.da_utils.static_chord_scale_dictionary.CSD;
 
 public class MucusChordChunk extends ChordChunk
 {

@@ -1,4 +1,4 @@
-package main.java.com.dougron.mucus.algorithms.mu_generator;
+package test.java.com.dougron.mucus.algorithms.mu_generator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -14,7 +14,8 @@ import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import DataObjects.combo_variables.IntAndDouble;
+import main.java.com.dougron.mucus.algorithms.mu_generator.MuG_ApproachTone_RRP;
+import main.java.com.dougron.mucus.algorithms.mu_generator.MuGenerator;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuGenerator.AccentType;
 import main.java.com.dougron.mucus.algorithms.mu_generator.enums.NeighbourToneType;
 import main.java.com.dougron.mucus.mu_framework.Mu;
@@ -24,6 +25,7 @@ import main.java.com.dougron.mucus.mu_framework.data_types.BarsAndBeats;
 import main.java.com.dougron.mucus.mu_framework.data_types.MuNote;
 import main.java.com.dougron.mucus.mu_framework.data_types.RelativeRhythmicPosition;
 import main.java.com.dougron.mucus.mu_framework.mu_tags.MuTag;
+import main.java.da_utils.combo_variables.IntAndDouble;
 
 class MuG_ApproachTone_Tests
 {

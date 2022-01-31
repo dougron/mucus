@@ -1,4 +1,4 @@
-package main.java.com.dougron.mucus.algorithms.mu_generator;
+package test.java.com.dougron.mucus.algorithms.mu_generator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -7,11 +7,12 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import main.java.com.dougron.mucus.algorithms.mu_generator.SuFi_Enclosure;
 import main.java.com.dougron.mucus.algorithms.superimposifier.SuFi;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.data_types.MuNote;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureListGeneratorFactory;
-import time_signature_utilities.time_signature.TimeSignature;
+import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
 
 /**
  * this test (and possibly all overwritable_vectors sufis) will be developed in several stages:

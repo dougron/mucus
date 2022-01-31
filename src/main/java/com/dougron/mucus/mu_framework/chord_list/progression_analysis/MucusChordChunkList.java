@@ -1,10 +1,11 @@
 package main.java.com.dougron.mucus.mu_framework.chord_list.progression_analysis;
 
-import DataObjects.ableton_live_clip.LiveClip;
-import DataObjects.chord_chunk.ChordChunk;
-import DataObjects.chord_chunk.ChordChunkList;
+
 import main.java.com.dougron.mucus.mu_framework.chord_list.ChordEvent;
 import main.java.com.dougron.mucus.mu_framework.chord_list.ChordList;
+import main.java.da_utils.ableton_live.ableton_live_clip.LiveClip;
+import main.java.da_utils.chord_progression_analyzer.chord_chunk.ChordChunk;
+import main.java.da_utils.chord_progression_analyzer.chord_chunk.ChordChunkList;
 
 
 public class MucusChordChunkList extends ChordChunkList

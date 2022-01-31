@@ -10,7 +10,7 @@ import main.java.com.dougron.mucus.mu_framework.chord_list.SimpleEvenChordProgre
 import main.java.com.dougron.mucus.mu_framework.mu_tags.MuTag;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureListGeneratorFactory;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.MuXMLMaker;
-import time_signature_utilities.time_signature.TimeSignature;
+import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
 
 class ChordSymbolTest
 {

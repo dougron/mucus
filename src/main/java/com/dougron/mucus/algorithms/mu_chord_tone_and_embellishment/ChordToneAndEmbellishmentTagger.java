@@ -6,14 +6,14 @@ import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
 
-import DataObjects.combo_variables.IntAndString;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.chord_list.Chord;
 import main.java.com.dougron.mucus.mu_framework.data_types.BarsAndBeats;
 import main.java.com.dougron.mucus.mu_framework.mu_tags.MuTag;
 import main.java.com.dougron.mucus.mu_framework.mu_tags.MuTagBundle;
 import main.java.com.dougron.mucus.mu_framework.mu_tags.MuTagNamedParameter;
-import time_signature_utilities.time_signature.TimeSignature;
+import main.java.da_utils.combo_variables.IntAndString;
+import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
 
 public class ChordToneAndEmbellishmentTagger
 {

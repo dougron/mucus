@@ -3,8 +3,8 @@ package main.java.com.dougron.mucus.algorithms.random_melody_generator.parameter
 import main.java.com.dougron.mucus.algorithms.random_melody_generator.Parameter;
 import main.java.com.dougron.mucus.algorithms.random_melody_generator.RMRandomNumberContainer;
 import main.java.com.dougron.mucus.algorithms.random_melody_generator.RandomMelodyGenerator;
-import time_signature_utilities.time_signature.TimeSignature;
-import time_signature_utilities.ts_evenness.TS_Evenness;
+import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
+import main.java.da_utils.time_signature_utilities.ts_evenness.TS_Evenness;
 
 public class TimeSignature_LessEven implements FeedbackObject
 {

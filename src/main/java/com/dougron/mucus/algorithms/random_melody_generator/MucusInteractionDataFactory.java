@@ -12,7 +12,6 @@ import org.json.JSONObject;
 
 import com.google.common.base.Preconditions;
 
-import DataObjects.combo_variables.IntAndString;
 import main.java.com.dougron.mucus.algorithms.mu_chord_tone_and_embellishment.ChordToneAndEmbellishmentTagger;
 import main.java.com.dougron.mucus.algorithms.mu_zzaj_dynamics.MuZzajDynamics;
 import main.java.com.dougron.mucus.algorithms.mu_zzaj_dynamics.lstm_handler.MuZzajDynamics_LSTM_256_256;
@@ -25,6 +24,7 @@ import main.java.com.dougron.mucus.algorithms.random_melody_generator.random_num
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.data_types.MuAnnotation;
 import main.java.com.dougron.mucus.mu_framework.mu_tags.MuTag;
+import main.java.da_utils.combo_variables.IntAndString;
 
 public class MucusInteractionDataFactory
 {

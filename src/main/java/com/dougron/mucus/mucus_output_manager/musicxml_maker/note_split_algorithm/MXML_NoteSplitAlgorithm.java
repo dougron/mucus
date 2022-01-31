@@ -6,15 +6,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import DataObjects.combo_variables.DoubleAndDouble;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.MXML;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.MXML_Measure;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.MXML_NoteDurationType;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.voice_mu.VoiceMu;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.voice_mu.VoiceMuRest;
-import time_signature_utilities.greatest_common_factor_calculator.GreatestCommonFactor;
-import time_signature_utilities.time_signature.SplitListSource;
-import time_signature_utilities.time_signature.TimeSignature;
+import main.java.da_utils.combo_variables.DoubleAndDouble;
+import main.java.da_utils.time_signature_utilities.greatest_common_factor_calculator.GreatestCommonFactor;
+import main.java.da_utils.time_signature_utilities.time_signature.SplitListSource;
+import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
 
 /*
  * voice splitting algorithm for use with new TimeSignature, previously the TactusTimeSignature

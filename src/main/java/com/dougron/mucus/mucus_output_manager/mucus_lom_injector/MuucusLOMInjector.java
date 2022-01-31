@@ -3,9 +3,9 @@ package main.java.com.dougron.mucus.mucus_output_manager.mucus_lom_injector;
 import java.util.ArrayList;
 import java.util.List;
 
-import UDPUtils.OSCMessMaker;
-import UDPUtils.StaticUDPConnection;
 import list_partitioner.MyPartition;
+import main.java.da_utils.udp.udp_utils.OSCMessMaker;
+import main.java.da_utils.udp.udp_utils.StaticUDPConnection;
 import timed_notes_and_controllers.TimedNote;
 
 
@@ -254,7 +254,7 @@ public class MuucusLOMInjector
 	
 	
 	
-	OSCMessMaker getCreateClipMessage(int aTrackIndex, int aClipIndex, double aLengthInQuarters)
+	public OSCMessMaker getCreateClipMessage(int aTrackIndex, int aClipIndex, double aLengthInQuarters)
 	{
 		OSCMessMaker mess = new OSCMessMaker();
 		mess.addItem("call");
@@ -327,7 +327,7 @@ public class MuucusLOMInjector
 
 
 
-	OSCMessMaker getReplaceNoteRangeMessage(
+	public OSCMessMaker getReplaceNoteRangeMessage(
 			int aTrackIndex, int aClipIndex, List<TimedNote> noteList,
 			double replaceStartPosition, int pitchStartPosition, 
 			double replaceLength, int pitchRange)
@@ -375,7 +375,7 @@ public class MuucusLOMInjector
 
 
 
-	OSCMessMaker getAddNotesMessage(int aTrackIndex, int aClipIndex, List<TimedNote> noteList,
+	public OSCMessMaker getAddNotesMessage(int aTrackIndex, int aClipIndex, List<TimedNote> noteList,
 			String headerString)
 	{
 		OSCMessMaker mess = new OSCMessMaker();
@@ -387,7 +387,7 @@ public class MuucusLOMInjector
 
 
 
-	OSCMessMaker getClipPathMessage(int aTrackIndex, int aClipIndex)
+	public OSCMessMaker getClipPathMessage(int aTrackIndex, int aClipIndex)
 	{
 		OSCMessMaker pathMess = getClipSlotPathMessage(aTrackIndex, aClipIndex);
 		pathMess.addItem("clip");

@@ -1,13 +1,14 @@
-package main.java.com.dougron.mucus.mu_framework.ruler.tempo_list;
+package test.java.com.dougron.mucus.mu_framework.ruler;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import main.java.com.dougron.mucus.mu_framework.data_types.BarsAndBeats;
+import main.java.com.dougron.mucus.mu_framework.ruler.tempo_list.TempoList;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureGenAndMap;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureListGeneratorFactory;
-import time_signature_utilities.time_signature.TimeSignature;
+import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
 
 class TempoList_Test
 {

@@ -1,4 +1,4 @@
-package main.java.com.dougron.mucus.algorithms.mu_generator;
+package test.java.com.dougron.mucus.algorithms.mu_generator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import main.java.com.dougron.mucus.algorithms.mu_generator.SuFi_AddEmbellishmentToThisMu;
+import main.java.com.dougron.mucus.algorithms.mu_generator.SuFi_Enclosure;
 import main.java.com.dougron.mucus.algorithms.superimposifier.SuFi;
 import main.java.com.dougron.mucus.algorithms.superimposifier.SuFiSu;
 import main.java.com.dougron.mucus.algorithms.superimposifier.overwritable_vectors.SuFiSu_OverwritableVectors;

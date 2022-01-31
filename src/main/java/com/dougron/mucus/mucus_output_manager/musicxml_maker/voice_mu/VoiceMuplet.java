@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import DataObjects.combo_variables.DoubleAndDouble;
 import main.java.com.dougron.mucus.mu_framework.Mu;
+import main.java.da_utils.combo_variables.DoubleAndDouble;
 
 /**
  * a VoiceMu that wraps a Mu that is a tuplet wrapper. Mostly cos I wanted to have the name

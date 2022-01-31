@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import DataObjects.combo_variables.IntAndString;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.MXML;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.MXML_NoteDurationType;
@@ -17,6 +16,7 @@ import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.measure_i
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.measure_item.MeasureItem_TimeSignature;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.measure_item.MeasureItem_TupletNote;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.measure_item.MeasureItem_TupletRest;
+import main.java.da_utils.combo_variables.IntAndString;
 
 public class MeasureItemInterfaceKernel {
 	

@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import main.java.com.dougron.mucus.mu_framework.data_types.BarsAndBeats;
+import test.java.com.dougron.mucus.mu_framework.key_signature_utilities.KeySignatureMap;
 
 class KeySignatureMapTest
 {

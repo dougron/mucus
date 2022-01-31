@@ -1,4 +1,4 @@
-package main.java.com.dougron.mucus.algorithms.mu_generator;
+package test.java.com.dougron.mucus.algorithms.mu_generator;
 
 
 
@@ -6,13 +6,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-import StaticChordScaleDictionary.ChordToneName;
+import main.java.com.dougron.mucus.algorithms.mu_generator.MuG_ChordTone_RRP;
+import main.java.com.dougron.mucus.algorithms.mu_generator.MuGenerator;
 import main.java.com.dougron.mucus.algorithms.mu_generator.enums.ChordToneType;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.chord_list.Chord;
 import main.java.com.dougron.mucus.mu_framework.chord_list.SingleChordGenerator;
 import main.java.com.dougron.mucus.mu_framework.data_types.MuNote;
 import main.java.com.dougron.mucus.mu_framework.data_types.RelativeRhythmicPosition;
+import main.java.da_utils.static_chord_scale_dictionary.ChordToneName;
+
 
 class MuG_ChordToneRRP_Tests
 {
@@ -219,7 +222,7 @@ class MuG_ChordToneRRP_Tests
 				(
 						rrp, 
 						ChordToneType.CLOSEST_BELOW, 
-						new StaticChordScaleDictionary.ChordToneName[] 
+						new ChordToneName[] 
 								{
 										ChordToneName.ROOT,
 										ChordToneName.FIFTH
@@ -247,10 +250,10 @@ class MuG_ChordToneRRP_Tests
 						rrp, 
 						ChordToneType.CLOSEST_BELOW, 
 						2,
-						new StaticChordScaleDictionary.ChordToneName[] 
+						new ChordToneName[] 
 								{
-										ChordToneName.ROOT,
-										ChordToneName.FIFTH
+//										ChordToneName.ROOT,
+//										ChordToneName.FIFTH
 								}
 				);
 		note.addMuGenerator(mug);
@@ -275,7 +278,7 @@ class MuG_ChordToneRRP_Tests
 						rrp, 
 						ChordToneType.CLOSEST_ABOVE, 
 						2,
-						new StaticChordScaleDictionary.ChordToneName[] 
+						new ChordToneName[] 
 								{
 										ChordToneName.ROOT,
 										ChordToneName.FIFTH
@@ -303,7 +306,7 @@ class MuG_ChordToneRRP_Tests
 						rrp, 
 						ChordToneType.CLOSEST, 
 						2,
-						new StaticChordScaleDictionary.ChordToneName[] 
+						new ChordToneName[] 
 								{
 										ChordToneName.ROOT,
 										ChordToneName.FIFTH
@@ -331,7 +334,7 @@ class MuG_ChordToneRRP_Tests
 						rrp, 
 						ChordToneType.CLOSEST, 
 						2,
-						new StaticChordScaleDictionary.ChordToneName[] 
+						new ChordToneName[] 
 								{
 										ChordToneName.ROOT,
 										ChordToneName.FIFTH
@@ -359,7 +362,7 @@ class MuG_ChordToneRRP_Tests
 						rrp, 
 						ChordToneType.CLOSEST_BELOW_OR_EQUAL, 
 						2,
-						new StaticChordScaleDictionary.ChordToneName[] 
+						new ChordToneName[] 
 								{
 										ChordToneName.ROOT,
 										ChordToneName.FIFTH
@@ -387,7 +390,7 @@ class MuG_ChordToneRRP_Tests
 						rrp, 
 						ChordToneType.CLOSEST_BELOW_OR_EQUAL, 
 						2,
-						new StaticChordScaleDictionary.ChordToneName[] 
+						new ChordToneName[] 
 								{
 										ChordToneName.ROOT,
 										ChordToneName.FIFTH
@@ -415,7 +418,7 @@ class MuG_ChordToneRRP_Tests
 						rrp, 
 						ChordToneType.CLOSEST_ABOVE_OR_EQUAL, 
 						2,
-						new StaticChordScaleDictionary.ChordToneName[] 
+						new ChordToneName[] 
 								{
 										ChordToneName.ROOT,
 										ChordToneName.FIFTH
@@ -443,7 +446,7 @@ class MuG_ChordToneRRP_Tests
 						rrp, 
 						ChordToneType.CLOSEST_ABOVE_OR_EQUAL, 
 						2,
-						new StaticChordScaleDictionary.ChordToneName[] 
+						new ChordToneName[] 
 								{
 										ChordToneName.ROOT,
 										ChordToneName.FIFTH

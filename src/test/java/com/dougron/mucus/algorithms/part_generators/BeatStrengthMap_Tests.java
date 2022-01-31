@@ -1,4 +1,4 @@
-package main.java.com.dougron.mucus.algorithms.part_generators.drum_part_generator.beat_strength_map;
+package test.java.com.dougron.mucus.algorithms.part_generators;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -6,8 +6,8 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
-
-import time_signature_utilities.time_signature.TimeSignature;
+import main.java.com.dougron.mucus.algorithms.part_generators.drum_part_generator.beat_strength_map.BeatStrengthMap;
+import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
 
 class BeatStrengthMap_Tests
 {

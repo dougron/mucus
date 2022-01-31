@@ -16,12 +16,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import DataObjects.combo_variables.IntAndString;
 import main.java.com.dougron.mucus.algorithms.random_melody_generator.random_number_containers.IndexedSingleValue;
 import main.java.com.dougron.mucus.algorithms.random_melody_generator.random_number_containers.IndexedValueList;
 import main.java.com.dougron.mucus.algorithms.random_melody_generator.random_number_containers.RNDValueObject;
 import main.java.com.dougron.mucus.algorithms.random_melody_generator.random_number_containers.SingleValue;
 import main.java.com.dougron.mucus.algorithms.random_melody_generator.random_number_containers.ValueList;
+import main.java.da_utils.combo_variables.IntAndString;
 
 public class RMRandomNumberContainer
 {

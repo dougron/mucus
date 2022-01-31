@@ -7,9 +7,9 @@ import org.w3c.dom.Element;
 
 import com.google.common.collect.ImmutableMap;
 
-import DataObjects.combo_variables.IntAndString;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.MXML_Measure;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.MXML_MeasureItemInterface;
+import main.java.da_utils.combo_variables.IntAndString;
 
 public class MeasureItem_Clef implements MXML_MeasureItemInterface
 {

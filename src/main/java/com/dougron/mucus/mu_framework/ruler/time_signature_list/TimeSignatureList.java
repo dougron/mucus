@@ -8,7 +8,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import main.java.com.dougron.mucus.mu_framework.data_types.BarsAndBeats;
-import time_signature_utilities.time_signature.TimeSignature;
+import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
+
 
 /**
  * For the initial purposes of revisiting the design of TimeSignatureMap, TimeSignature
@@ -46,9 +47,9 @@ public class TimeSignatureList
 
 
 
-	public void add(TimeSignature aTimeSignature)
+	public void add(TimeSignature timeSignature)
 	{
-		timeSignatures.add(aTimeSignature);
+		timeSignatures.add(timeSignature);
 		
 	}
 

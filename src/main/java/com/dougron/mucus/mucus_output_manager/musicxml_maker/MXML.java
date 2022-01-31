@@ -7,8 +7,8 @@ import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
 
-import DataObjects.combo_variables.IntAndString;
-import XMLMaker.XMLKey;
+import main.java.da_utils.combo_variables.IntAndString;
+import main.java.da_utils.xml_maker.key.XMLKey;
 
 
 // line 34 "../musicxml_maker.ump"

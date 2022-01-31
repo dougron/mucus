@@ -7,11 +7,11 @@ import java.util.TreeMap;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import DataObjects.combo_variables.DoubleAndString;
 import main.java.com.dougron.mucus.mu_framework.data_types.BarsAndBeats;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureGenAndMap;
-import time_signature_utilities.time_signature.SuperTactus;
-import time_signature_utilities.time_signature.TimeSignature;
+import main.java.da_utils.combo_variables.DoubleAndString;
+import main.java.da_utils.time_signature_utilities.time_signature.SuperTactus;
+import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
 
 public class FloatBarChordProgression implements ChordListGenerator
 {

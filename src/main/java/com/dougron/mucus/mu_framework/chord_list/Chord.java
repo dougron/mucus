@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import DataObjects.chord_chunk.ChordChunk;
-import DataObjects.combo_variables.IntAndString;
-import StaticChordScaleDictionary.CSD;
-import StaticChordScaleDictionary.CSD.XMLChordElement;
-import StaticChordScaleDictionary.ChordToneName;
-import StaticChordScaleDictionary.NotePattern;
-import chord_progression_analyzer.ChordInKeyObject;
 import main.java.com.dougron.mucus.mu_framework.data_types.BarsAndBeats;
+import main.java.da_utils.chord_progression_analyzer.ChordInKeyObject;
+import main.java.da_utils.chord_progression_analyzer.chord_chunk.ChordChunk;
+import main.java.da_utils.combo_variables.IntAndString;
+import main.java.da_utils.static_chord_scale_dictionary.CSD;
+import main.java.da_utils.static_chord_scale_dictionary.CSD.XMLChordElement;
+import main.java.da_utils.static_chord_scale_dictionary.ChordToneName;
+import main.java.da_utils.static_chord_scale_dictionary.NotePattern;
 
 /**
  * data object fpor ChordList

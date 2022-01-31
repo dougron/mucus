@@ -1,4 +1,4 @@
-package main.java.com.dougron.mucus.mucus_output_manager.mucus_lom_injector;
+package test.java.com.dougron.mucus.mucus_output_manager;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -9,7 +9,8 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import UDPUtils.OSCMessMaker;
+import main.java.com.dougron.mucus.mucus_output_manager.mucus_lom_injector.MuucusLOMInjector;
+import main.java.da_utils.udp.udp_utils.OSCMessMaker;
 import timed_notes_and_controllers.Note;
 import timed_notes_and_controllers.TimedNote;
 

@@ -10,14 +10,14 @@ import java.util.List;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import DataObjects.combo_variables.IntAndString;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.chord_list.SimpleEvenChordProgression;
 import main.java.com.dougron.mucus.mu_framework.data_types.BarsAndBeats;
 import main.java.com.dougron.mucus.mu_framework.data_types.MuAnnotation;
 import main.java.com.dougron.mucus.mu_framework.data_types.MuNote;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureListGeneratorFactory;
-import time_signature_utilities.time_signature.TimeSignature;
+import main.java.da_utils.combo_variables.IntAndString;
+import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
 
 
 class Mu_Test

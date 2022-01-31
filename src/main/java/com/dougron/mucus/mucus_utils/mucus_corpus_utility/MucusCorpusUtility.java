@@ -3,20 +3,20 @@ package main.java.com.dougron.mucus.mucus_utils.mucus_corpus_utility;
 import java.util.ArrayList;
 import java.util.List;
 
-import DataObjects.ableton_live_clip.LiveClip;
-import DataObjects.ableton_live_clip.LiveMidiNote;
-import DataObjects.chord_chunk.ChordChunk;
-import DataObjects.chord_chunk.ChordChunkList;
-import DataObjects.combo_variables.IntAndString;
-import corpus_capture.CorpusItem;
-import corpus_capture.CorpusManager;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.chord_list.FloatBarChordProgression;
 import main.java.com.dougron.mucus.mu_framework.data_types.MuNote;
 import main.java.com.dougron.mucus.mu_framework.mu_tags.MuTag;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureListGenerator;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureListGeneratorFactory;
-import time_signature_utilities.time_signature.TimeSignature;
+import main.java.da_utils.ableton_live.ableton_live_clip.LiveClip;
+import main.java.da_utils.ableton_live.ableton_live_clip.LiveMidiNote;
+import main.java.da_utils.chord_progression_analyzer.chord_chunk.ChordChunk;
+import main.java.da_utils.chord_progression_analyzer.chord_chunk.ChordChunkList;
+import main.java.da_utils.combo_variables.IntAndString;
+import main.java.da_utils.corpus_capture.CorpusItem;
+import main.java.da_utils.corpus_capture.CorpusManager;
+import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
 
 public class MucusCorpusUtility
 {

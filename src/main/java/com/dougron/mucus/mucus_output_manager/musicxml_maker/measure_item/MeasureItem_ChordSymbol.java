@@ -3,11 +3,11 @@ package main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.measure_
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import DataObjects.combo_variables.IntAndString;
-import StaticChordScaleDictionary.CSD.XMLChordElement;
 import main.java.com.dougron.mucus.mu_framework.chord_list.ChordEvent;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.MXML_Measure;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.MXML_MeasureItemInterface;
+import main.java.da_utils.combo_variables.IntAndString;
+import main.java.da_utils.static_chord_scale_dictionary.CSD.XMLChordElement;
 
 public class MeasureItem_ChordSymbol implements MXML_MeasureItemInterface
 {

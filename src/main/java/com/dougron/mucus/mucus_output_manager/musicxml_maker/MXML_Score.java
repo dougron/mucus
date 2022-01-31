@@ -24,8 +24,8 @@ import org.w3c.dom.Element;
 
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.chord_list.ChordList;
-import main.java.com.dougron.mucus.mu_framework.key_signature_utilities.KeySignatureMap;
-import time_signature_utilities.time_signature_map.TSMapInterface;
+import main.java.da_utils.time_signature_utilities.time_signature_map.TSMapInterface;
+import test.java.com.dougron.mucus.mu_framework.key_signature_utilities.KeySignatureMap;
 
 /**
  * this is the class that makes the xml

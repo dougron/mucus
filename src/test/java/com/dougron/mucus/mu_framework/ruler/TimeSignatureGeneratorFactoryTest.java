@@ -9,7 +9,7 @@ import org.junit.Test;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureList;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureListGenerator;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureListGeneratorFactory;
-import time_signature_utilities.time_signature.TimeSignature;
+import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
 
 
 /**

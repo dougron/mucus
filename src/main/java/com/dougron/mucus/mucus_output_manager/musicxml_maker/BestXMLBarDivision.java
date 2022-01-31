@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 
-import DataObjects.combo_variables.IntAndInt;
+import main.java.da_utils.combo_variables.IntAndInt;
 
 /*
  * static class to calculate best subdivision for a bar when creating musicxml files

@@ -7,7 +7,6 @@ import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import StaticChordScaleDictionary.ChordToneName;
 import main.java.com.dougron.mucus.algorithms.mu_generator.enums.ChordToneType;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.chord_list.Chord;
@@ -15,6 +14,8 @@ import main.java.com.dougron.mucus.mu_framework.data_types.BarsAndBeats;
 import main.java.com.dougron.mucus.mu_framework.data_types.MuNote;
 import main.java.com.dougron.mucus.mu_framework.data_types.RelativeRhythmicPosition;
 import main.java.com.dougron.mucus.mu_framework.mu_tags.MuTag;
+import main.java.da_utils.static_chord_scale_dictionary.ChordToneName;
+
 
 /*
  * generates escape tones, including neighbour tones which are a special case of escape tone for repeated notes

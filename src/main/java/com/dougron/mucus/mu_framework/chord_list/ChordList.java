@@ -7,14 +7,14 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import DataObjects.chord_chunk.ChordChunk;
-import DataObjects.chord_chunk.ChordChunkList;
-import chord_progression_analyzer.ChordInKeyObject;
-import chord_progression_analyzer.ProgressionAnalyzer;
 import main.java.com.dougron.mucus.mu_framework.chord_list.progression_analysis.MucusChordChunkList;
 import main.java.com.dougron.mucus.mu_framework.data_types.BarsAndBeats;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureGenAndMap;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureList;
+import main.java.da_utils.chord_progression_analyzer.ChordInKeyObject;
+import main.java.da_utils.chord_progression_analyzer.ProgressionAnalyzer;
+import main.java.da_utils.chord_progression_analyzer.chord_chunk.ChordChunk;
+import main.java.da_utils.chord_progression_analyzer.chord_chunk.ChordChunkList;
 
 /**
  * ChordList is a linear representation of a chord structure similar to 

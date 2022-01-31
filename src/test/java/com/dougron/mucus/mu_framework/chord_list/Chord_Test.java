@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import DataObjects.combo_variables.IntAndString;
-import StaticChordScaleDictionary.ChordToneName;
 import main.java.com.dougron.mucus.mu_framework.chord_list.Chord;
+import main.java.da_utils.combo_variables.IntAndString;
+import main.java.da_utils.static_chord_scale_dictionary.ChordToneName;
 
 class Chord_Test
 {

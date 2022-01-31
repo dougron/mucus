@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import DataObjects.combo_variables.IntAndDouble;
-import DataObjects.combo_variables.IntAndString;
 import lombok.Getter;
 import lombok.Setter;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuGenerator;
@@ -32,7 +30,6 @@ import main.java.com.dougron.mucus.mu_framework.data_types.MuNote;
 import main.java.com.dougron.mucus.mu_framework.data_types.RelativeRhythmicPosition;
 import main.java.com.dougron.mucus.mu_framework.exceptions.SiblingToAddToIsNotAChildOfParentException;
 import main.java.com.dougron.mucus.mu_framework.functional_interfaces.MuEvaluator;
-import main.java.com.dougron.mucus.mu_framework.key_signature_utilities.KeySignatureMap;
 import main.java.com.dougron.mucus.mu_framework.length_model.FixedLengthInBars;
 import main.java.com.dougron.mucus.mu_framework.length_model.FixedLengthInBarsAndBeats;
 import main.java.com.dougron.mucus.mu_framework.length_model.FixedLengthInQuarters;
@@ -54,7 +51,10 @@ import main.java.com.dougron.mucus.mu_framework.ruler.TimeSignatureListAndGenAnd
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureGenAndMap;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureList;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureListGenerator;
-import time_signature_utilities.time_signature.TimeSignature;
+import main.java.da_utils.combo_variables.IntAndDouble;
+import main.java.da_utils.combo_variables.IntAndString;
+import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
+import test.java.com.dougron.mucus.mu_framework.key_signature_utilities.KeySignatureMap;
 
 public class Mu
 {

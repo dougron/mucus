@@ -3,7 +3,7 @@ package main.java.com.dougron.mucus.algorithms.random_melody_generator;
 import DataObjects.contour.FourPointContour;
 import main.java.com.dougron.mucus.mu_framework.data_types.RelativeRhythmicPosition;
 import main.java.com.dougron.mucus.mu_framework.mu_tags.MuTag;
-import time_signature_utilities.time_signature.TimeSignature;
+import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
 
 /*
  * this is the original set of options

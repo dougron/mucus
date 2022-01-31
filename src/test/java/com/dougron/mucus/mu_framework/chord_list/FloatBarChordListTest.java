@@ -10,7 +10,7 @@ import main.java.com.dougron.mucus.mu_framework.chord_list.ChordList;
 import main.java.com.dougron.mucus.mu_framework.chord_list.ChordListGenerator;
 import main.java.com.dougron.mucus.mu_framework.chord_list.FloatBarChordProgression;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureGenAndMap;
-import time_signature_utilities.time_signature.TimeSignature;
+import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
 
 class FloatBarChordListTest
 {

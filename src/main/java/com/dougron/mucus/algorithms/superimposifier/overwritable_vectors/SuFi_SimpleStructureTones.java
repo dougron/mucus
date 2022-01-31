@@ -3,12 +3,12 @@ package main.java.com.dougron.mucus.algorithms.superimposifier.overwritable_vect
 import java.util.ArrayList;
 import java.util.List;
 
-import ResourceUtils.RandomNumberSequence;
 import main.java.com.dougron.mucus.algorithms.superimposifier.SuFi;
 import main.java.com.dougron.mucus.algorithms.superimposifier.SuFiNote;
 import main.java.com.dougron.mucus.algorithms.superimposifier.SuFiSu;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.data_types.BarsAndBeats;
+import main.java.da_utils.resource_objects.RandomNumberSequence;
 
 public class SuFi_SimpleStructureTones implements SuFi
 {

@@ -1,9 +1,10 @@
 package main.java.com.dougron.mucus.algorithms.generic_generator;
 
-import StaticChordScaleDictionary.ChordToneName;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
+import main.java.da_utils.static_chord_scale_dictionary.ChordToneName;
 
 @AllArgsConstructor
 @ToString
