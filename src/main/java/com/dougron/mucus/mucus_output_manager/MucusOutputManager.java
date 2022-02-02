@@ -37,5 +37,7 @@ public interface MucusOutputManager
 	void logInExistingUser (String aTimeStamp, JSONObject aExistingUserFile);
 
 	void saveBotVariationOptionItem (MucusInteractionData listMid);
+	
+	
 
 }

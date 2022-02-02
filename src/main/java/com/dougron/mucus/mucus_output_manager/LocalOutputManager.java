@@ -4,16 +4,19 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONObject;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
 import main.java.com.dougron.mucus.algorithms.random_melody_generator.MucusInteractionData;
 import main.java.com.dougron.mucus.algorithms.random_melody_generator.RMRandomNumberContainer;
 import main.java.com.dougron.mucus.algorithms.random_melody_generator.RandomMelodyParameterObject;
 import main.java.com.dougron.mucus.mu_framework.Mu;
+import main.java.com.dougron.mucus.mu_framework.mu_controller.MuController;
 import main.java.com.dougron.mucus.mu_framework.mu_tags.MuTag;
 import main.java.com.dougron.mucus.mu_framework.mu_xml_utility.MuXMLUtility;
 import main.java.com.dougron.mucus.mucus_output_manager.continuous_integrator.ContinuousIntegrator;
@@ -33,7 +36,16 @@ public class LocalOutputManager implements MucusOutputManager
 		.put(MuTag.PART_BASS, new Integer[] {3, 0})
 		.build();
 	
-	
+	private List<MuController> muControllerList = ImmutableList.<MuController>builder()
+			.add(MuController.builder()
+					.partNameTag(MuTag.PART_MELODY)
+					.controllerTag(MuTag.CONTROLLER_LP)
+					.lomPath("path live_set tracks 0 devices 4 parameters 1")
+					.controllerName("melodyLP")
+					.parameterName("value")
+					.max(127.0)
+					.build())
+			.build();
 	
 	private JSONObject currentUser;
 	private String path = "D:/Documents/miscForBackup/Mucus Output/";
@@ -103,7 +115,7 @@ public class LocalOutputManager implements MucusOutputManager
 //			mu.setName(aTimeStamp);
 //		}
 		
-		ContinuousIntegrator.injectMultiPartMuIntoLive(aMu, partTrackAndClipIndexMap, injector);	
+		ContinuousIntegrator.injectMultiPartMuIntoLive(aMu, partTrackAndClipIndexMap, muControllerList, injector);	
 	}
 
 

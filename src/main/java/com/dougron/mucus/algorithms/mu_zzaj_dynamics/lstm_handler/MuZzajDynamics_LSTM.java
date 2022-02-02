@@ -8,6 +8,7 @@ package main.java.com.dougron.mucus.algorithms.mu_zzaj_dynamics.lstm_handler;
  */
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class MuZzajDynamics_LSTM implements MuZzajDynamics
 //	int numberOfNeighbours = 8;
 	int sequenceLength = 10;
 	int featureCount = 5;
-	public static String modelPath = "main/java/com/dougron/mucus/algorithms/mu_zzaj_dynamics/models/";
+	public static String modelPath = "mu_zzaj_dynamics_models/";
 	
 	
 	public MuZzajDynamics_LSTM(String modelFileName) throws IOException

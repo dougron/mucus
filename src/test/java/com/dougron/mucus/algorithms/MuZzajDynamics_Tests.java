@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import org.junit.jupiter.api.Test;
 
+import main.java.com.dougron.mucus.algorithms.mu_zzaj_dynamics.dense_model_handler.MuZzajDynamics_18;
 import main.java.com.dougron.mucus.algorithms.mu_zzaj_dynamics.lstm_handler.MuZzajDynamics_LSTM_128_128;
 import main.java.com.dougron.mucus.algorithms.mu_zzaj_dynamics.lstm_handler.MuZzajDynamics_LSTM_256_256;
 
@@ -25,10 +26,11 @@ class MuZzajDynamics_Tests
 	}
 	
 	
+	
 	@Test
 	void assert_that_the_dense_model_path_is_correct () throws Exception
 	{
-		assertDoesNotThrow(() -> {new MuZzajDynamics_LSTM_128_128();});		
+		assertDoesNotThrow(() -> {new MuZzajDynamics_18();});		
 	}
 
 	

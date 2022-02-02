@@ -8,6 +8,7 @@ package main.java.com.dougron.mucus.algorithms.mu_zzaj_dynamics.lstm_handler;
  */
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,6 @@ import org.deeplearning4j.nn.modelimport.keras.KerasModelImport;
 import org.deeplearning4j.nn.modelimport.keras.exceptions.InvalidKerasConfigurationException;
 import org.deeplearning4j.nn.modelimport.keras.exceptions.UnsupportedKerasConfigurationException;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
-import org.nd4j.common.io.ClassPathResource;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
@@ -40,10 +40,12 @@ public class MuZzajDynamics_LSTM_256_256 implements MuZzajDynamics
 	
 	public MuZzajDynamics_LSTM_256_256()
 	{
+		
+		InputStream stream = getClass().getClassLoader().getResourceAsStream("mu_zzaj_dynamics_models/model-lstm-256-256.h5");
+
 		try
 		{
-			String simpleMlp = new ClassPathResource(MuZzajDynamics_LSTM.modelPath + "model-lstm-256-256.h5").getFile().getPath();
-			model = KerasModelImport.importKerasSequentialModelAndWeights(simpleMlp);
+			model = KerasModelImport.importKerasSequentialModelAndWeights(stream);
 		} 
 		catch (IOException e)
 		{
@@ -157,5 +159,8 @@ public class MuZzajDynamics_LSTM_256_256 implements MuZzajDynamics
 	}
 	
 		
+	public static void main(String[] args) {
+		new MuZzajDynamics_LSTM_256_256();
+	}
 	
 }

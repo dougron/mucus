@@ -8,6 +8,7 @@ package main.java.com.dougron.mucus.algorithms.mu_zzaj_dynamics.dense_model_hand
  */
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import org.deeplearning4j.nn.modelimport.keras.KerasModelImport;
@@ -21,6 +22,8 @@ import org.nd4j.linalg.factory.Nd4j;
 import com.google.common.base.Preconditions;
 
 import main.java.com.dougron.mucus.algorithms.mu_zzaj_dynamics.MuZzajDynamics;
+import main.java.com.dougron.mucus.algorithms.mu_zzaj_dynamics.lstm_handler.MuZzajDynamics_LSTM;
+import main.java.com.dougron.mucus.algorithms.mu_zzaj_dynamics.lstm_handler.MuZzajDynamics_LSTM_256_256;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.mu_tags.MuTag;
 
@@ -42,8 +45,8 @@ public class MuZzajDynamics_18 implements MuZzajDynamics
 	{
 		try
 		{
-			String simpleMlp = new ClassPathResource("mu_zzaj_dynamics/resources/model.h5").getFile().getPath();
-			model = KerasModelImport.importKerasSequentialModelAndWeights(simpleMlp);
+			InputStream stream = MuZzajDynamics_LSTM_256_256.class.getClassLoader().getResourceAsStream("mu_zzaj_dynamics_models/model.h5");
+			model = KerasModelImport.importKerasSequentialModelAndWeights(stream);
 		} 
 		catch (IOException e)
 		{

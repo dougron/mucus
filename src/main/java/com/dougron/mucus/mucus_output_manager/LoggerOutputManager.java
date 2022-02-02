@@ -1,8 +1,9 @@
 package main.java.com.dougron.mucus.mucus_output_manager;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
+
 
 import main.java.com.dougron.mucus.algorithms.random_melody_generator.MucusInteractionData;
 import main.java.com.dougron.mucus.algorithms.random_melody_generator.RMRandomNumberContainer;

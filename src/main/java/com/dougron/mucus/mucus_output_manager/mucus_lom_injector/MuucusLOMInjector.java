@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import list_partitioner.MyPartition;
+import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.da_utils.udp.udp_utils.OSCMessMaker;
 import main.java.da_utils.udp.udp_utils.StaticUDPConnection;
 import timed_notes_and_controllers.TimedNote;
@@ -176,6 +177,106 @@ public class MuucusLOMInjector
 	
 	
 	
+	public void sendControllerClearAllMessage()
+	{
+		OSCMessMaker mess = new OSCMessMaker();
+		mess.addItem("controller");
+		mess.addItem("clearAll");
+		conn.sendUDPMessage(mess);
+	}
+	
+	
+	
+	public void sendAssignControllerNameMessage(String ccName) 
+	{
+		OSCMessMaker mess = new OSCMessMaker();
+		mess.addItem("controller");
+		mess.addItem("assignFunctionName");
+		mess.addItem(ccName);
+		conn.sendUDPMessage(mess);	
+	}
+	
+	
+
+	public void sendControllerLengthInQuarters(String ccName, double lengthInQuarters) 
+	{
+		OSCMessMaker mess = new OSCMessMaker();
+		mess.addItem("controller");
+		mess.addItem(ccName);
+		mess.addItem("lengthInQuarters");
+		mess.addItem(lengthInQuarters);
+		conn.sendUDPMessage(mess);		
+	}
+
+
+
+	public void sendControllerResolutionInNoteValues(String ccName, String aNoteValue) 
+	{
+		OSCMessMaker mess = new OSCMessMaker();
+		mess.addItem("controller");
+		mess.addItem(ccName);
+		mess.addItem("resolutionInNoteValues");
+		mess.addItem(aNoteValue);
+		conn.sendUDPMessage(mess);		
+	}
+
+
+
+	public void sendControllerOutputRange(String ccName, double min, double max) 
+	{
+		OSCMessMaker mess = new OSCMessMaker();
+		mess.addItem("controller");
+		mess.addItem(ccName);
+		mess.addItem("functionOutputRange");
+		mess.addItem(min);
+		mess.addItem(max);
+		conn.sendUDPMessage(mess);		
+		
+	}
+
+
+
+	public void setControllerPath(String ccName, String lomPath) 
+	{
+		OSCMessMaker mess = new OSCMessMaker();
+		mess.addItem("controller");
+		mess.addItem(ccName);
+		mess.addItem("setPath");
+		for (String str: lomPath.split(" "))
+		{
+			mess.addItem(str);
+		}
+		conn.sendUDPMessage(mess);		
+	}
+	
+
+
+	public void sendControllerBreakPointList(String ccName, List<Mu> aMuList, double lengthInQuarters) 
+	{
+		OSCMessMaker mess = new OSCMessMaker();
+		mess.addItem("controller");
+		mess.addItem(ccName);
+		mess.addItem("newFunction");
+		for (Mu mu: aMuList)
+		{
+			mess.addItem(mu.getGlobalPositionInQuarters() / lengthInQuarters);
+			mess.addItem(mu.getControllerValue());
+		}
+		conn.sendUDPMessage(mess);			
+	}
+
+
+
+	public void setControllerParameterName(String ccName, String parameterName) 
+	{
+		OSCMessMaker mess = new OSCMessMaker();
+		mess.addItem("controller");
+		mess.addItem(ccName);
+		mess.addItem("setParameterName");
+		mess.addItem(parameterName);
+		conn.sendUDPMessage(mess);		
+		
+	}
 	
 	//---------------------------
 	// PRIVATES
@@ -408,4 +509,7 @@ public class MuucusLOMInjector
 		mess.addItem(clip);
 		return mess;
 	}
+
+
+	
 }

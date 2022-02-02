@@ -96,6 +96,9 @@ public class Mu
 	private Mu previousMu = null;
 	private int muIndex = 0;
 	
+	private double controllerValue;
+	private boolean hasControllerValue = false;
+	
 	
 	public Mu getDeepCopy()
 	{
@@ -937,6 +940,19 @@ public class Mu
 			list.addAll(mu.getMusWithAnnotationsButNoNotes());
 		}
 		return list; 
+	}
+	
+	
+	
+	public List<Mu> getMusWithControllerValues()
+	{
+		List<Mu> list = new ArrayList<Mu>();
+		if (hasControllerValue()) list.add(this);
+		for (Mu mu: mus)
+		{
+			if (mu.hasControllerValue()) list.add(mu);
+		}
+		return list; 	
 	}
 	
 	
@@ -3271,6 +3287,29 @@ public class Mu
 			}
 			return velocity;
 		}
+	}
+
+
+	// this will change when a Mu can acquire many controller values.....
+	public double getControllerValue() 
+	{
+		return controllerValue;
+	}
+
+
+
+	// this will change when a Mu can acquire many controller values.....
+	public void setControllerValue(double controllerValue) 
+	{
+		this.controllerValue = controllerValue;
+		this.hasControllerValue = true;
+	}
+	
+	
+	
+	public boolean hasControllerValue()
+	{
+		return hasControllerValue;
 	}
 
 

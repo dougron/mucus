@@ -6,6 +6,7 @@ import java.util.Map;
 
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.data_types.MuNote;
+import main.java.com.dougron.mucus.mu_framework.mu_controller.MuController;
 import main.java.com.dougron.mucus.mu_framework.mu_tags.MuTag;
 import main.java.com.dougron.mucus.mu_framework.position_model.PositionIsZeroInBars;
 import main.java.com.dougron.mucus.mucus_output_manager.mucus_lom_injector.MuucusLOMInjector;
@@ -38,10 +39,11 @@ public class ContinuousIntegrator
 			Mu aMu, 
 			String aFileName, 
 			Map<MuTag, Integer[]> partTrackAndClipIndexMap, 
+			List<MuController> muControllerList, 
 			MuucusLOMInjector aInjector
 			)
 	{
-		injectMultiPartMuIntoLive(aMu, partTrackAndClipIndexMap, aInjector);
+		injectMultiPartMuIntoLive(aMu, partTrackAndClipIndexMap, muControllerList, aInjector);
 		return makeMultiPartMusicXML(aFileName, aMu);
 	}
 	
@@ -51,9 +53,10 @@ public class ContinuousIntegrator
 			Mu aMu, 
 			String aFileName,
 			Map<MuTag, Integer[]> partTrackAndClipIndexMap, 
+			List<MuController> muControllerList, 
 			MuucusLOMInjector aInjector)
 	{
-		injectMultiPartMuIntoLive(aMu, partTrackAndClipIndexMap, aInjector);
+		injectMultiPartMuIntoLive(aMu, partTrackAndClipIndexMap, muControllerList, aInjector);
 		return makeMultiPartMusicXMLWithoutAutomaticTimeStamp(aFileName, aMu);
 	}
 	
@@ -94,20 +97,81 @@ public class ContinuousIntegrator
 		aMu.setParent(null);
 		double tempo = aMu.getStartTempo();
 		aInjector.setTempo(tempo);
+		sendNotesToLive(aMu, partTrackAndClipIndexMap, aInjector);
+	}
+	
+	
+	
+	public static void injectMultiPartMuIntoLive
+	(
+			Mu aMu, 
+			Map<MuTag, Integer[]> partTrackAndClipIndexMap,
+			List<MuController> muControllerList, 
+			MuucusLOMInjector aInjector
+			)
+	{	
+		aMu.setPositionModel(new PositionIsZeroInBars());
+		aMu.setParent(null);
+		double tempo = aMu.getStartTempo();
+		aInjector.setTempo(tempo);
+		aInjector.sendControllerClearAllMessage();
+		sendNotesToLive(aMu, partTrackAndClipIndexMap, aInjector);
+		sendControllersToLive(aMu, muControllerList, aInjector);
+	}
+
+
+
+	private static void sendControllersToLive(Mu aMu, List<MuController> muControllerList,
+			MuucusLOMInjector aInjector) {
+		for (MuController muController: muControllerList)
+		{
+			ArrayList<Mu> taggedMus = aMu.getMuWithTag(muController.getPartNameTag());
+			for (Mu mu: taggedMus)
+			{
+				injectControllersIntoLive(mu, muController, aInjector);		
+			}
+		}
+	}
+
+
+
+	private static void sendNotesToLive(
+			Mu aMu, 
+			Map<MuTag, Integer[]> partTrackAndClipIndexMap,
+			MuucusLOMInjector aInjector
+			) 
+	{
 		for (MuTag muTag: partTrackAndClipIndexMap.keySet())
 		{
 			ArrayList<Mu> taggedMus = aMu.getMuWithTag(muTag);
 			if (taggedMus.size() > 0)
 			{
 				Integer[] trackAndClipIndex = partTrackAndClipIndexMap.get(muTag);
-				
 				injectMuIntoLive(trackAndClipIndex[0], trackAndClipIndex[1], taggedMus.get(0), aInjector);	// only adds the first one for now
 			}
-		}	
+		}
 	}
 
 	
 	
+	private static void injectControllersIntoLive(Mu aMu, MuController aMuController, MuucusLOMInjector aInjector) 
+	{
+		String ccName = aMuController.getControllerName();
+		double lengthInQuarters = aMu.getLengthInQuarters();
+		aInjector.sendAssignControllerNameMessage(ccName);
+		aInjector.sendControllerLengthInQuarters(ccName, lengthInQuarters);
+		aInjector.sendControllerResolutionInNoteValues(ccName, "64n");
+		aInjector.sendControllerOutputRange(ccName, aMuController.getMin(), aMuController.getMax());
+		aInjector.setControllerPath(ccName, aMuController.getLomPath());
+		aInjector.setControllerParameterName(ccName, aMuController.getParameterName());
+		List<Mu> list = aMu.getMuWithTag(aMuController.getControllerTag());
+		aInjector.sendControllerBreakPointList(ccName, list, lengthInQuarters);
+		
+		
+	}
+
+
+
 	private static void injectMuIntoLive(int aTrackIndex, int aClipIndex, Mu aMu, MuucusLOMInjector aInjector)
 	{
 //		clearClip(aTrackIndex, aClipIndex, aInjector);
