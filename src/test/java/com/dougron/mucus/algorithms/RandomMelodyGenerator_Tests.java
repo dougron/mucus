@@ -1,7 +1,6 @@
 package test.java.com.dougron.mucus.algorithms;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Random;
 
@@ -141,6 +140,18 @@ class RandomMelodyGenerator_Tests
 		assertTrue(chordAnalysis.getJSONObject("0.0").get("name") instanceof String);
 		
 	}
+	
+	
+	// a test to check output. not significant for coverage
+//	@Test
+//	void getRandomNumberContainer_returns_RMRandomNumberContainer () throws Exception {
+//		Random rnd = new Random();
+//		RandomMelodyGenerator rmg = RMG_002.getInstance();
+//		RMRandomNumberContainer rndContainer = rmg.getRandomNumberContainer(rnd);
+//		System.out.println(rndContainer.toString());
+//		RandomMelodyParameterObject po = rmg.getParameterObject(rndContainer, rnd);
+//		System.out.println(po.toString());
+//	}
 	
 	
 	

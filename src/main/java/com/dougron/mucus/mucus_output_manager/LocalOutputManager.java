@@ -164,7 +164,7 @@ public class LocalOutputManager implements MucusOutputManager
 		try
 		{
 			BufferedWriter bw = new BufferedWriter(new FileWriter(new File(file)));
-			bw.write(aThinking.toString());
+			if (aThinking != null) bw.write(aThinking.toString());
 			bw.close();
 		} 
 		catch (IOException e)

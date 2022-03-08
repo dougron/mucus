@@ -419,17 +419,10 @@ public class MucusInteractionData
 
 
 
-	public JSONObject getThinkingJSON() {
-		// TODO Auto-generated method stub
-		return null;
+	public JSONObject getThinkingJSON ()
+	{
+		return jsonThinking;
 	}
-
-
-
-//	public JSONObject getThinkingJSON ()
-//	{
-//		return jsonThinking;
-//	}
 
 
 
