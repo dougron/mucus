@@ -385,7 +385,7 @@ public class Mu
 
 
 
-	private void checkForNullRulerAndCreate()
+	public void checkForNullRulerAndCreate()
 	{
 		if (ruler == null) ruler = new TimeSignatureListAndGenAndTempoListRuler();		
 	}
