@@ -15,6 +15,12 @@ public class BarsAndBeats
 		barPosition = aBarPosition;
 		offsetInQuarters = aOffsetInQuarters;
 	}
+	
+	
+	public static BarsAndBeats at(int bars, double beats)
+	{
+		return new BarsAndBeats(bars, beats);
+	}
 
 	
 	

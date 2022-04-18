@@ -1,9 +1,9 @@
 package main.java.com.dougron.mucus.algorithms.random_melody_generator.parameter_specific_feedback.feedback_objects;
 
-import DataObjects.contour.FourPointContour;
 import main.java.com.dougron.mucus.algorithms.random_melody_generator.Parameter;
 import main.java.com.dougron.mucus.algorithms.random_melody_generator.RMRandomNumberContainer;
 import main.java.com.dougron.mucus.algorithms.random_melody_generator.RandomMelodyGenerator;
+import main.java.da_utils.four_point_contour.FourPointContour;
 
 public class StructureToneContour_Different
 		implements FeedbackObject

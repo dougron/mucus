@@ -19,6 +19,7 @@ public class MucusChordChunk extends ChordChunk
 		
 		setPosition(chordEvent.getPositionInQuarters());
 		this.noteList = makeNoteList(position(), chordEvent.getChord().getChordTones(), length());
+//		System.out.println(chordEvent.getChord().name() + " " + noteList.toString());
 		setChordOptionList(CSD.getChordOptions(makeNoteValueList(noteList)));
 		if (getChordOptionList().size() > 0)
 		{

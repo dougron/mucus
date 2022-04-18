@@ -21,7 +21,7 @@ public class FloatBarChordProgression implements ChordListGenerator
 	private List<DoubleAndString> chordPositionAndSymbolList = new ArrayList<DoubleAndString>();
 
 
-
+	
 	public FloatBarChordProgression(double aLengthInFloatBars, Object[] positionInFloatBarsCombosAndChordName)
 	{
 		lengthInFloatBars = aLengthInFloatBars;

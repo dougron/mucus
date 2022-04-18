@@ -11,7 +11,6 @@ import java.util.Random;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import DataObjects.contour.FourPointContour;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuG_Anticipation_RRP;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuG_ApproachTone_RRP;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuG_EscapeTone_RRP;
@@ -31,6 +30,7 @@ import main.java.com.dougron.mucus.mu_framework.data_types.MuNote;
 import main.java.com.dougron.mucus.mu_framework.data_types.RelativeRhythmicPosition;
 import main.java.com.dougron.mucus.mu_framework.mu_tags.MuTag;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureListGeneratorFactory;
+import main.java.da_utils.four_point_contour.FourPointContour;
 import main.java.da_utils.static_chord_scale_dictionary.CSD;
 import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
 

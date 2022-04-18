@@ -117,7 +117,7 @@ class ChordToneAndEmbellishmentTagger_Test
 		assertTrue(note1.hasTag(MuTag.IS_SYNCOPATION));
 		assertTrue(note2.hasTag(MuTag.IS_SYNCOPATION));
 		assertFalse(note3.hasTag(MuTag.IS_SYNCOPATION));
-		assertTrue(note4.hasTag(MuTag.IS_SYNCOPATION));
+		assertFalse(note4.hasTag(MuTag.IS_SYNCOPATION));
 	}
 	
 	

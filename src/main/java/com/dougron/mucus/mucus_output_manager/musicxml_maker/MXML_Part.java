@@ -342,13 +342,24 @@ public class MXML_Part
 			for (ChordEvent ce: aPart.chordListForPrint.getChordEventList())
 			{
 				int measureIndex = ce.getPositionInBarsAndBeats().getBarPosition();
-				aPart.getMeasure(measureIndex).addChordEvent(ce);
+				if (aPart.hasMeasure(measureIndex))
+				{
+					aPart.getMeasure(measureIndex).addChordEvent(ce);
+				}
 			}
 		}
 		
 	}
 
 
+	
+	private boolean hasMeasure(int measureIndex)
+	{
+		return measures.size() > measureIndex;
+	}
+
+
+	
 	private void addOtherMus(MXML_Part part)
 	{
 		for (Mu mu: musWithOtherStuff)

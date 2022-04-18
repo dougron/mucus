@@ -28,8 +28,26 @@ public class MuXMLMaker {
 	private static final String NOT_VALID_MU_MESSAGE = "not a valid Mu";
 	private static ArrayList<MXML_BarLineStyleForMu> barlines = new ArrayList<MXML_BarLineStyleForMu>();
 	
-	private static MuTag[] scorePartOrder = new MuTag[] {MuTag.PART_MELODY, MuTag.PART_CHORDS, MuTag.PART_BASS};
-	private static MuTag[] defaultScorePartClef = new MuTag[] {MuTag.TREBLE_CLEF, MuTag.TREBLE_CLEF, MuTag.BASS_CLEF};
+	private static MuTag[] scorePartOrder = new MuTag[] 
+			{
+					MuTag.PART_MELODY, 
+					MuTag.PART_CHORDS, 
+					MuTag.PART_BASS, 
+					MuTag.PART_1, 
+					MuTag.PART_2, 
+					MuTag.PART_3,
+					MuTag.PART_4,
+			};
+	private static MuTag[] defaultScorePartClef = new MuTag[] 
+			{
+					MuTag.TREBLE_CLEF, 
+					MuTag.TREBLE_CLEF, 
+					MuTag.BASS_CLEF, 
+					MuTag.TREBLE_CLEF, 
+					MuTag.TREBLE_CLEF, 
+					MuTag.TREBLE_CLEF,
+					MuTag.TREBLE_CLEF
+			};
 	
 	/* for mu with single part */
 	public static String makeXML(Mu mu, String path) 

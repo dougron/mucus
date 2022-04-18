@@ -9,11 +9,11 @@ import java.util.TreeMap;
 
 import org.json.JSONObject;
 
-import DataObjects.contour.FourPointContour;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuGenerator;
 import main.java.com.dougron.mucus.mu_framework.chord_list.ChordList;
 import main.java.com.dougron.mucus.mu_framework.chord_list.ChordListGenerator;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureGenAndMap;
+import main.java.da_utils.four_point_contour.FourPointContour;
 import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
 
 public class RandomMelodyParameterObject

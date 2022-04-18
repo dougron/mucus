@@ -129,18 +129,29 @@ public class ChordToneAndEmbellishmentTagger
 		for (Mu mu: aMu.getMusWithNotesIgnoringTupletHolders())
 		{
 			double nextTactusGlobalPosition = getNextTactusGlobalPosition(mu);
-			if (mu.getStrengthOfGlobalPositionInQuarters(mu.getGlobalPositionInQuarters()) < mu.getStrengthOfGlobalPositionInQuarters(nextTactusGlobalPosition))
+			if (nextTactusGlobalPosition >= aMu.getGlobalEndPositionInQuarters())
 			{
 				// not a syncopation
 			}
 			else
 			{
-				if (!hasNoteOnNextTactusOrCloserOnTheOtherSide(mu, nextTactusGlobalPosition))
+				double globalPositionInQuarters = mu.getGlobalPositionInQuarters();
+				int strengthOfSyncopationPosition = mu.getStrengthOfGlobalPositionInQuarters(nextTactusGlobalPosition);
+				if (mu.getStrengthOfGlobalPositionInQuarters(globalPositionInQuarters) < strengthOfSyncopationPosition)
 				{
-					mtb = mu.addTag(MuTag.IS_SYNCOPATION);
-					mtb.addNamedParameter(MuTagNamedParameter.SYNCOPATED_BEAT_GLOBAL_POSITION, nextTactusGlobalPosition);
+					// not a syncopation
 				}
-			}		
+				else
+				{
+					if (!hasNoteOnNextTactusOrCloserOnTheOtherSide(mu, nextTactusGlobalPosition))
+					{
+						mtb = mu.addTag(MuTag.IS_SYNCOPATION);
+						mtb.addNamedParameter(MuTagNamedParameter.SYNCOPATED_BEAT_GLOBAL_POSITION, nextTactusGlobalPosition);
+						mtb.addNamedParameter(MuTagNamedParameter.SYNCOPATED_OFFSET_IN_QUARTERS, globalPositionInQuarters - nextTactusGlobalPosition);
+						mtb.addNamedParameter(MuTagNamedParameter.STRENGTH_OF_SYNCOPATED_BEAT_POSITION, strengthOfSyncopationPosition);
+					}
+				}		
+			}
 		}
 	}
 
@@ -564,12 +575,13 @@ public class ChordToneAndEmbellishmentTagger
 					tagChordTones(mu);
 				if (mu.hasTag(MuTag.IS_SYNCOPATION))
 				{
-					Chord chord = getChordFromBeginningOfNextBar(mu);
+					Chord chord = getChordFromSyncopationOffset(mu);
 					if (chord.isChordTone(mu.getTopPitch()))
 					{
 						mu.addTag(MuTag.IS_CHORD_TONE);
 					}
-				} else if (mu.isChordTone())
+				} 
+				else if (mu.isChordTone())
 				{
 					mu.addTag(MuTag.IS_CHORD_TONE);
 				} 
@@ -579,6 +591,17 @@ public class ChordToneAndEmbellishmentTagger
 	
 	
 	
+	private static Chord getChordFromSyncopationOffset(Mu aMu)
+	{
+		double globalPositionInQuarters = aMu.getGlobalPositionInQuarters();
+		MuTagBundle bundle = aMu.getMuTagBundleContaining(MuTag.IS_SYNCOPATION).get(0);
+		double syncopationOffset = (double)bundle.getNamedParameter(MuTagNamedParameter.SYNCOPATED_OFFSET_IN_QUARTERS);
+		BarsAndBeats bab = aMu.getGlobalPositionInBarsAndBeats(globalPositionInQuarters - syncopationOffset);
+		return aMu.getChordAtGlobalPosition(bab);
+	}
+
+
+
 	private static Chord getChordFromBeginningOfNextBar(Mu mu)
 	{
 		BarsAndBeats globalPositionInBarsAndBeats = mu.getGlobalPositionInBarsAndBeats();

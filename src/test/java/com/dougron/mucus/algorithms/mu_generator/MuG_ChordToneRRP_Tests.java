@@ -252,8 +252,8 @@ class MuG_ChordToneRRP_Tests
 						2,
 						new ChordToneName[] 
 								{
-//										ChordToneName.ROOT,
-//										ChordToneName.FIFTH
+										ChordToneName.ROOT,
+										ChordToneName.FIFTH
 								}
 				);
 		note.addMuGenerator(mug);
