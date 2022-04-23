@@ -14,5 +14,5 @@ public enum Parameter
 	TESSITURA_START_NOTE, TESSITURA_MELODY_RANGE, TESSITURA_SOLVER, 
 	PATTERN_EMBELLISHER, 
 	LOOP_MODEL,	// for whether a phrase will loop in playback or be continuous with other phrases on one or both sides
-	DURATION
+	DURATION, PLUGIN_RUNNER
 }
