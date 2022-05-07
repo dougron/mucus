@@ -10,7 +10,7 @@ import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSi
 public class SingleChordGenerator implements ChordListGenerator
 {
 
-	private Chord chord = ChordList.DEFAULT_CHORD;
+	Chord chord = ChordList.DEFAULT_CHORD;
 
 	
 
@@ -81,5 +81,6 @@ public class SingleChordGenerator implements ChordListGenerator
 		element.appendChild(chord_element);
 		return element;
 	}
+
 
 }

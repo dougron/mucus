@@ -23,9 +23,11 @@ public class SimpleEvenChordProgression implements ChordListGenerator
 	
 	
 	private List<Chord> chordList;
+	String[] argumentString;
 
 	public SimpleEvenChordProgression(String[] progression)
 	{
+		this.argumentString = progression;
 		chordList = new ArrayList<Chord>();
 		for (String str: progression)
 		{

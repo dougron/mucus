@@ -53,7 +53,11 @@ public class ChordEvent
 	
 	public String toString()
 	{
-		return chord.name() + "\n" + positionInBarsAndBeats.toString();
+		StringBuilder sb = new StringBuilder();
+		sb.append(chord.name() + "\n");
+		sb.append(positionInBarsAndBeats.toString() + "\n");
+		sb.append(chord.associatedChordChunkToString());
+		return sb.toString();
 	}
 
 

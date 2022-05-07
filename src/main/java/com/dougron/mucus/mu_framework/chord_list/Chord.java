@@ -445,6 +445,22 @@ public class Chord
 		sb.append("\n" + notePattern.toString());
 		return sb.toString();
 	}
+	
+	
+	
+	public String associatedChordChunkToString()
+	{
+		StringBuilder sb = new StringBuilder();
+		if (associatedChordChunk == null)
+		{
+			sb.append("associatedChordChunk=null");
+		}
+		else
+		{
+			sb.append("associatedChordChunk.associatedCIKO=" + associatedChordChunk.getAssociatedCIKO().toStringKeyChordAndSimpleFunction());
+		}
+		return sb.toString();
+	}
 
 
 

@@ -573,9 +573,15 @@ public class MXML_Part
 		int start = 0;
 		int end = part.getMeasures().length;
 		boolean b = true;
+		int debugloopCount = 0;
 		while (b) 
 		{
 //			int index = (int)(Math.round((end - start) / 2.0)) + start;	//this is the divide and conquer sorting algorithm
+			if (debugloopCount > 1000) {
+				System.out.println("debugloopCount failed on VoiceMu\n" + vm.toString());
+				break;
+			}
+			debugloopCount++;
 			int index = (end - start) / 2 + start;
 			MXML_Measure m = part.getMeasure(index);
 			switch (m.getHomeVector(vm)) 

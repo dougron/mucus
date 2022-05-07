@@ -470,9 +470,16 @@ public class VoiceMu
 //	    	str = "VoiceMu:---\n";
 //	    }
 		StringBuilder sb = new StringBuilder();
-		sb.append(superToString());
+		sb.append(superToString() + "\n");
 	    sb.append("--globalPositionInQuarters=" + getGlobalPositionInQuarters() + "\n");
-	    sb.append("  positionInBar=" + getPositionInBar());
+	    if (measure == null)
+	    {
+	    	sb.append("  no positionInBar as no measure is present as yet\n");
+	    }
+	    else
+	    {
+	    	sb.append("  positionInBar=" + getPositionInBar());
+	    }
 	    sb.append("  lengthInQuarters=" + getLengthInQuarters() + "\n");
 	    sb.append("  topNote=" + getTopNote());
 	    sb.append("  voice=" + getVoice());

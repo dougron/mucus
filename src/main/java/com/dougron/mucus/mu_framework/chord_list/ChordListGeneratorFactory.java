@@ -28,5 +28,27 @@ public class ChordListGeneratorFactory
 		}
 		return null;
 	}
+	
+	
+	public static ChordListGenerator getCopyOfGenerator(ChordListGenerator aChordListGenerator)
+	{
+		switch (aChordListGenerator.getClass().getSimpleName())
+		{
+		case "SingleChordGenerator":
+			SingleChordGenerator singleChordGenerator = (SingleChordGenerator)aChordListGenerator;
+			return new SingleChordGenerator(singleChordGenerator.chord);
+		case "SimpleEvenChordProgression":
+			SimpleEvenChordProgression simpleEvenChordGenerator = (SimpleEvenChordProgression)aChordListGenerator;
+			return new SimpleEvenChordProgression(simpleEvenChordGenerator.argumentString);
+		case "FloatBarChordProgression":
+			FloatBarChordProgression floatBarChordProgression = (FloatBarChordProgression)aChordListGenerator;
+			return new FloatBarChordProgression(
+					floatBarChordProgression.lengthInFloatBars,
+					floatBarChordProgression.positionInFloatBarsCombosAndChordName
+					);
+		default:
+			return new SingleChordGenerator();
+		}
+	}
 
 }

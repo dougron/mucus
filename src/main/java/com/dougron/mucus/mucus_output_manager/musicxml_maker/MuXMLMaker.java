@@ -37,6 +37,7 @@ public class MuXMLMaker {
 					MuTag.PART_2, 
 					MuTag.PART_3,
 					MuTag.PART_4,
+					MuTag.PART_5,
 			};
 	private static MuTag[] defaultScorePartClef = new MuTag[] 
 			{
@@ -45,6 +46,7 @@ public class MuXMLMaker {
 					MuTag.BASS_CLEF, 
 					MuTag.TREBLE_CLEF, 
 					MuTag.TREBLE_CLEF, 
+					MuTag.TREBLE_CLEF,
 					MuTag.TREBLE_CLEF,
 					MuTag.TREBLE_CLEF
 			};

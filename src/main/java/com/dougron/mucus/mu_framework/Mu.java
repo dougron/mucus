@@ -99,6 +99,9 @@ public class Mu
 	private double controllerValue;
 	private boolean hasControllerValue = false;
 	
+	private int muId;
+	private static int muIdCount = 0;
+	
 	
 	public Mu getDeepCopy()
 	{
@@ -234,6 +237,14 @@ public class Mu
 		lengthModel = new LengthFromChildren(this);		// default 
 		positionModel = new PositionIsZeroInBars();		// default
 		name = aName;
+		muId = muIdCount;
+		muIdCount++;
+	}
+	
+	
+	public int getMuId()
+	{
+		return muId;
 	}
 
 	
@@ -651,7 +662,7 @@ public class Mu
 		int len = lengthModel.getLengthInBars();
 		lengthModel = new LengthFromChildren(this);
 		lengthModel.calculateLength(mus);
-		if (len != lengthModel.getLengthInBars()) parent.recalculateLength();
+		if (parent != null && len != lengthModel.getLengthInBars()) parent.recalculateLength();
 	}
 
 
@@ -818,6 +829,32 @@ public class Mu
 	{
 		checkForNullChordListAndCreate();
 		return chordList;
+	}
+	
+	
+	
+	public ChordList getMuSpecificParentChordListExcerpt()
+	{
+		ChordList excerptChordList = new ChordList();
+		excerptChordList.setLengthInBarsAndBeats(getLengthInBarsAndBeats());
+		double start = getGlobalPositionInQuarters();
+		double end = getGlobalEndPositionInQuarters();
+		int startBarPos = getGlobalPositionInBarsAndBeats().getBarPosition();
+		ChordList masterChordList = getMasterChordList();
+		for (ChordEvent ce: masterChordList.getChordEventList())
+		{
+			if (ce.getPositionInQuarters() >= start && ce.getPositionInQuarters() < end)
+			{
+				excerptChordList.addChord(
+						ce.getChord(), 
+						BarsAndBeats.at(
+								ce.getPositionInBarsAndBeats().getBarPosition() - startBarPos, 
+								ce.getPositionInBarsAndBeats().getOffsetInQuarters()
+								), 
+						getMasterTimeSignatureGenAndMap());
+			}
+		}
+		return excerptChordList;
 	}
 
 
@@ -1359,6 +1396,22 @@ public class Mu
 			return parent.getMasterTimeSignatureGenAndMap();
 		}
 
+	}
+	
+	
+	
+	public ChordList getMasterChordList()
+	{
+		if (parent == null)
+		{
+			checkForNullChordListAndCreate();
+			return chordList;
+		}
+		else
+		{
+			return parent.getMasterChordList();
+		}
+		
 	}
 
 

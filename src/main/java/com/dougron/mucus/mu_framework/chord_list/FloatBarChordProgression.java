@@ -17,13 +17,14 @@ public class FloatBarChordProgression implements ChordListGenerator
 {
 
 	
-	private double lengthInFloatBars;
+	double lengthInFloatBars;
 	private List<DoubleAndString> chordPositionAndSymbolList = new ArrayList<DoubleAndString>();
-
+	Object [] positionInFloatBarsCombosAndChordName;
 
 	
 	public FloatBarChordProgression(double aLengthInFloatBars, Object[] positionInFloatBarsCombosAndChordName)
 	{
+		this.positionInFloatBarsCombosAndChordName = positionInFloatBarsCombosAndChordName;
 		lengthInFloatBars = aLengthInFloatBars;
 		for (int i = 0; i < positionInFloatBarsCombosAndChordName.length; i += 2)
 		{
