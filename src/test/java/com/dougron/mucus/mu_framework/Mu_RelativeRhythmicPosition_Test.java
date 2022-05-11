@@ -1,10 +1,11 @@
 package test.java.com.dougron.mucus.mu_framework;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
 import main.java.com.dougron.mucus.mu_framework.Mu;
+import main.java.com.dougron.mucus.mu_framework.data_types.BarsAndBeats;
 import main.java.com.dougron.mucus.mu_framework.data_types.RelativeRhythmicPosition;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureListGeneratorFactory;
 import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
@@ -58,6 +59,38 @@ class Mu_RelativeRhythmicPosition_Test
 			parent.addMu(child2, 9.0);
 			RelativeRhythmicPosition rrp = child2.getRelativeRhythmicPosition(child1);
 			assertEquals(-2, rrp.getBarOffset());
+			assertEquals(0, rrp.getSuperTactusOffset());
+			assertEquals(0, rrp.getTactusOffset());
+			assertEquals(0, rrp.getSubTactusOffset());
+		}
+		
+		
+		@Test
+		void given_mu_not_on_beginning_of_bar_in_BarsAndBeats_then_mu_on_previous_bar_returns_correct_relative_rhythmic_position() throws Exception
+		{
+			Mu parent = new Mu("parent");
+			Mu child1 = new Mu("child1");
+			Mu child2 = new Mu("child2");
+			parent.addMu(child1, BarsAndBeats.at(1,  0.0));
+			parent.addMu(child2, BarsAndBeats.at(2,  1.0));
+			RelativeRhythmicPosition rrp = child2.getRelativeRhythmicPosition(child1);
+			assertEquals(-2, rrp.getBarOffset());
+			assertEquals(0, rrp.getSuperTactusOffset());
+			assertEquals(0, rrp.getTactusOffset());
+			assertEquals(0, rrp.getSubTactusOffset());
+		}
+		
+		
+		@Test
+		void given_mus_in_same_bar_with_one_at_beginning_of_bar_in_BarsAndBeats_then_mu_on_previous_bar_returns_correct_relative_rhythmic_position() throws Exception
+		{
+			Mu parent = new Mu("parent");
+			Mu child1 = new Mu("child1");
+			Mu child2 = new Mu("child2");
+			parent.addMu(child1, BarsAndBeats.at(2,  0.0));
+			parent.addMu(child2, BarsAndBeats.at(2,  1.0));
+			RelativeRhythmicPosition rrp = child2.getRelativeRhythmicPosition(child1);
+			assertEquals(-1, rrp.getBarOffset());
 			assertEquals(0, rrp.getSuperTactusOffset());
 			assertEquals(0, rrp.getTactusOffset());
 			assertEquals(0, rrp.getSubTactusOffset());
@@ -653,7 +686,56 @@ class Mu_RelativeRhythmicPosition_Test
 			assertEquals(2.5, grandchild.getGlobalEndPositionInBarsAndBeats().getOffsetInQuarters());
 		}
 		
+		
+		@Test
+		void the_black_orpheus_errors_test_1() throws Exception
+		{
+			Mu parent = new Mu("parent");
+			RelativeRhythmicPosition rrp = parent.getRelativeRhythmicPosition(BarsAndBeats.at(-1, 3.0), BarsAndBeats.at(-1, 0.0));
+			assertEquals(-1, rrp.getBarOffset());
+			assertEquals(0, rrp.getSuperTactusOffset());
+			assertEquals(0, rrp.getTactusOffset());
+			assertEquals(0, rrp.getSubTactusOffset());
+		}
+		
 	
+		
+		@Test
+		void the_black_orpheus_errors_test_2() throws Exception
+		{
+			Mu parent = new Mu("parent");
+			RelativeRhythmicPosition rrp = parent.getRelativeRhythmicPosition(BarsAndBeats.at(0, 3.0), BarsAndBeats.at(0, 0.0));
+			assertEquals(-1, rrp.getBarOffset());
+			assertEquals(0, rrp.getSuperTactusOffset());
+			assertEquals(0, rrp.getTactusOffset());
+			assertEquals(0, rrp.getSubTactusOffset());
+		}
+		
+		
+		@Test
+		void when_adding_child_mu_at_relativeRhythmicPosition_with_bar_offset_of_minus1_then_child_will_be_at_beginning_of_bar() throws Exception
+		{
+			Mu parent = new Mu("parent");
+			Mu child1 = new Mu("child1");
+			parent.addMu(child1, BarsAndBeats.at(1, 3.0));
+			Mu child2 = parent.addMuAtQuartersPosition(child1, new RelativeRhythmicPosition(-1, 0, 0, 0));
+			
+			assertEquals(4.0, child2.getGlobalPositionInQuarters());
+		}
+		
+		
+		@Test
+		void when_adding_child_mu_at_relativeRhythmicPosition_with_bar_offset_of_1_then_child_will_be_at_beginning_of_next_bar() throws Exception
+		{
+			Mu parent = new Mu("parent");
+			Mu child1 = new Mu("child1");
+			parent.addMu(child1, BarsAndBeats.at(1, 3.0));
+			Mu child2 = parent.addMuAtQuartersPosition(child1, new RelativeRhythmicPosition(1, 0, 0, 0));
+			
+			assertEquals(8.0, child2.getGlobalPositionInQuarters());
+		}
+		
+		
 		
 		
 		

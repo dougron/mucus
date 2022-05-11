@@ -221,6 +221,13 @@ public class Chord
 	{
 		return extendedChordTones;
 	}
+	
+	
+	
+	public int[] getAllDiatonicNotes()
+	{
+		return allDiatonicNotes;
+	}
 
 	
 	
@@ -543,7 +550,7 @@ public class Chord
 	
 	
 	
-	private int getClosestDiatonicToneIndex(int aPitch)
+	public int getClosestDiatonicToneIndex(int aPitch)
 	{
 		int dist = 127;
 		

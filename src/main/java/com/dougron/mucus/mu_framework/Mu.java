@@ -2536,7 +2536,14 @@ public class Mu
 
 	private int getRelativeBarPosition(BarsAndBeats aGlobalStartPosition, BarsAndBeats aGlobalEndPosition)
 	{
-		if (aGlobalStartPosition.getBarPosition() == aGlobalEndPosition.getBarPosition()) return 0;
+		if (
+				aGlobalStartPosition.getBarPosition() == aGlobalEndPosition.getBarPosition()
+//				&& aGlobalStartPosition.getOffsetInQuarters() > 0.0
+				&& aGlobalEndPosition.getOffsetInQuarters() > 0.0
+				) 
+		{
+			return 0;
+		}
 		if (aGlobalStartPosition.getBarPosition() < aGlobalEndPosition.getBarPosition())
 		{
 			return relativeBarPositionForOtherAfterThis(aGlobalStartPosition, aGlobalEndPosition);
@@ -2590,7 +2597,12 @@ public class Mu
 	}
 	
 	
-	
+	/*
+	 * be wary of the aStartMu, which dictates the position used for the start of 
+	 * the RelativeRhythmicPosition calculation,
+	 * and 'this' to which the actual mu is being added
+	 * 
+	 */
 	public Mu addMuAtQuartersPosition(Mu aStartPositionMu, RelativeRhythmicPosition rrp)
 	{
 		Mu mu = new Mu("rrp_note");
@@ -2603,10 +2615,10 @@ public class Mu
 		BarsAndBeats globalPositionAfterSubTactusOffset = getGlobalPositionAfterSubTactusOffset(rrp, globalPositionAfterTactusOffset);
 		
 //		double localPosition = getLocalPositionInQuarters(globalPositionAfterSubTactusOffset);
-		double startPositionInQuarters = aStartPositionMu.getGlobalPositionInQuarters();
+		double thisPositionInQuarters = getGlobalPositionInQuarters();
 		double endPositionInQuarters = getGlobalPositionInQuarters(globalPositionAfterSubTactusOffset);
 		
-		addMu(mu, endPositionInQuarters - startPositionInQuarters);
+		addMu(mu, endPositionInQuarters - thisPositionInQuarters);
 		return mu;
 	}
 
