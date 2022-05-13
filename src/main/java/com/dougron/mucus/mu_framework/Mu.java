@@ -1681,8 +1681,29 @@ public class Mu
 		}
 		else
 		{
-			return getChordAtGlobalPosition(getGlobalPositionInBarsAndBeats());
+			BarsAndBeats pos = getGlobalPositionInBarsAndBeats();
+			int globalParentLengthInBars = getGlobalParentLengthInBars();
+			Chord chord = getChordAtGlobalPosition(pos);
+			if (chord == null)
+			{
+				if (getGlobalPositionInQuarters(pos) < 0)
+				{
+					while (getGlobalPositionInQuarters(pos) < 0) pos.setBarPosition(pos.getBarPosition() + globalParentLengthInBars);
+				}
+			}
+			return getChordAtGlobalPosition(pos);
 		}
+	}
+
+
+
+	private int getGlobalParentLengthInBars()
+	{
+		if (parent == null)
+		{
+			return getLengthInBars();
+		}
+		return parent.getGlobalParentLengthInBars();
 	}
 
 
