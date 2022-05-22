@@ -1093,6 +1093,13 @@ public class Mu
 	}
 
 
+	public void addMuNote(int aPitch, int aVelocity)
+	{
+		testForNullMuNotesAndCreate();
+		muNotes.add(new MuNote(aPitch, aVelocity));		
+	}
+	
+	
 
 	public void setIsTupletPrintContainer(boolean isTupletPrintContainer)
 	{
@@ -2987,6 +2994,7 @@ public class Mu
 
 	public double getStartTempo()
 	{
+		checkForNullRulerAndCreate();
 		return ruler.getTempoAtQuartersPosition(0.0);
 	}
 
