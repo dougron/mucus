@@ -1667,6 +1667,7 @@ public class Mu
 	{
 		if (parent == null)
 		{
+			checkForNullChordListAndCreate();
 			return chordList.getChord(
 					aGlobalPositionInBarsAndBeats.getBarPosition(), 
 					aGlobalPositionInBarsAndBeats.getOffsetInQuarters()
@@ -1967,6 +1968,25 @@ public class Mu
 	public void makePreviousNextMusWithNotes()
 	{
 		List<Mu> list = getMusWithNotesIgnoringTupletHolders();
+		if (list.size() > 1)
+		{		
+			Collections.sort(list, globalPositionInQuartersComparator);
+			list.get(0).setNextMu(list.get(1));
+			for (int i = 1; i < list.size() - 1; i++)
+			{
+				Mu mu = list.get(i);
+				mu.setPreviousMu(list.get(i - 1));
+				mu.setNextMu(list.get(i + 1));
+			}
+			list.get(list.size() - 1).setPreviousMu(list.get(list.size() - 2));
+		}		
+	}
+	
+	
+	
+	public void makePreviousNextMusWithNotesSkippingNotesInTupletHolders()
+	{
+		List<Mu> list = getMusWithNotes();
 		if (list.size() > 1)
 		{		
 			Collections.sort(list, globalPositionInQuartersComparator);
