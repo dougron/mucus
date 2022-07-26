@@ -3356,6 +3356,14 @@ public class Mu
 	
 	
 	
+	public int getBeatStrengthOfEnd()
+	{
+		double positionInBar = getGlobalEndPositionInQuarters() - getGlobalPositionInQuarters(getGlobalBarIndexOfEnd());
+		return getTimeSignature(getGlobalBarIndexOfEnd()).getStrengthOfPositionInQuarters(positionInBar);
+	}
+	
+	
+	
 	public int getBeatStrengthConsideringSyncopation ()
 	{
 		List<MuTagBundle> mtbList = getMuTagBundleContaining(MuTag.IS_SYNCOPATION);
