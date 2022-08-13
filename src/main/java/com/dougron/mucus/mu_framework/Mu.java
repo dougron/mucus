@@ -66,7 +66,7 @@ public class Mu
 	private PositionModel positionModel;
 	private Mu parent;
 	private List<Mu> mus = new ArrayList<Mu>();
-	@Getter	@Setter private String name;
+	@Getter @Setter private String name;
 	private Ruler ruler;
 	private ChordList chordList;
 	ChordListGenerator chordListGenerator = new SingleChordGenerator();
