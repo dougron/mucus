@@ -1,8 +1,10 @@
 package main.java.com.dougron.mucus.mucus_output_manager.continuous_integrator;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.data_types.MuNote;
@@ -97,6 +99,8 @@ public class ContinuousIntegrator
 		aMu.setParent(null);
 		double tempo = aMu.getStartTempo();
 		aInjector.setTempo(tempo);
+		setSceneTempoForAllClipInicesInPartTrackAndClipIndexMap(tempo, partTrackAndClipIndexMap, aInjector);
+		setSceneNameForAllClipIndicesInPartTrackAndClipIndexMap(aMu.getName(), partTrackAndClipIndexMap, aInjector);
 		sendNotesToLive(aMu, partTrackAndClipIndexMap, aInjector);
 	}
 	
@@ -114,9 +118,51 @@ public class ContinuousIntegrator
 		aMu.setParent(null);
 		double tempo = aMu.getStartTempo();
 		aInjector.setTempo(tempo);
+		setSceneTempoForAllClipInicesInPartTrackAndClipIndexMap(tempo, partTrackAndClipIndexMap, aInjector);
+		setSceneNameForAllClipIndicesInPartTrackAndClipIndexMap(aMu.getName(), partTrackAndClipIndexMap, aInjector);
 		aInjector.sendControllerClearAllMessage();
 		sendNotesToLive(aMu, partTrackAndClipIndexMap, aInjector);
 		sendControllersToLive(aMu, muControllerList, aInjector);
+	}
+	
+	
+	
+	private static void setSceneNameForAllClipIndicesInPartTrackAndClipIndexMap(
+			String aName,
+			Map<MuTag, Integer[]> aMap, 
+			MuucusLOMInjector aInjector
+			)
+	{
+		Set<Integer> sceneIndexSet = new HashSet<Integer>();
+		for (Integer[] indexArr: aMap.values())
+		{
+			sceneIndexSet.add(indexArr[1]);
+		}
+		for (Integer index: sceneIndexSet)
+		{
+			aInjector.setSceneName(aName, index);
+		}
+		
+	}
+
+
+
+	private static void setSceneTempoForAllClipInicesInPartTrackAndClipIndexMap(
+			double tempo, 
+			Map<MuTag, Integer[]> map,
+			MuucusLOMInjector aInjector
+			)
+	{
+		// make set of clipIndices
+		Set<Integer> sceneIndexSet = new HashSet<Integer>();
+		for (Integer[] indexArr: map.values())
+		{
+			sceneIndexSet.add(indexArr[1]);
+		}
+		for (Integer index: sceneIndexSet)
+		{
+			aInjector.setSceneTempo(tempo, index);
+		}
 	}
 
 

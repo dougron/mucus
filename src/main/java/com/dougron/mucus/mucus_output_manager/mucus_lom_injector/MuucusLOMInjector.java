@@ -167,6 +167,29 @@ public class MuucusLOMInjector
 	}
 	
 	
+	public void setSceneTempo(double aTempo, int aSceneIndex)
+	{
+		OSCMessMaker mess = new OSCMessMaker();
+		mess.addItem("scene_tempo");
+		mess.addItem(aTempo);
+		mess.addItem(aSceneIndex);
+		conn.sendUDPMessage(mess);
+		
+	}
+	
+	
+	
+	public void setSceneName(String aName, int aSceneIndex)
+	{
+		OSCMessMaker mess = new OSCMessMaker();
+		mess.addItem("scene_name");
+		mess.addItem(aName);
+		mess.addItem(aSceneIndex);
+		conn.sendUDPMessage(mess);
+		
+	}
+	
+	
 	
 	public void sendTextMessage(String text)
 	{
@@ -509,6 +532,18 @@ public class MuucusLOMInjector
 		mess.addItem(clip);
 		return mess;
 	}
+	
+	
+	private OSCMessMaker getScenePath(int sceneIndex)	// sceneIndex would be same as clipslot index
+	{
+		OSCMessMaker mess = new OSCMessMaker();
+		mess .addItem("path");
+		mess.addItem("live_set");
+		mess.addItem("scenes");
+		mess.addItem(sceneIndex);
+		return mess;
+	}
+	
 
 
 	

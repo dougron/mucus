@@ -81,6 +81,14 @@ public class BeatStrengthMap
 			{
 				newMap.put(key, map.get(key).toArray(new Double[map.get(key).size()]));
 			}
+			// check for missing keys (0,1,2,3,4 should all be present and this does not hold for 2/4 time at least)
+			for (int i: new int[] {0, 1, 2, 3, 4})
+			{
+				if (!newMap.containsKey(i))
+				{
+					newMap.put(i, new Double[] {});
+				}
+			}
 			return newMap;
 		}
 }

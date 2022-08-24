@@ -78,4 +78,43 @@ public class ParameterObject
 	@Builder.Default 	@Getter	@Setter private int[] chordEmbellishmentRepetitionPattern = new int[] {0};	
 	@Singular			@Getter	@Setter	private Map<Integer, List<MuGenerator>> chordEmbellishments;
 	@Builder.Default	@Getter	@Setter private double chordClearanceOfEmbellishmentFromPreviousStructureTone = 0.5;
+
+
+	public ParameterObject deepCopy()
+	{
+		return ParameterObject.builder()
+				.phraseLengthInBars(phraseLengthInBars)
+				.timeSignatures(timeSignatures)
+				.tempo(tempo)
+				.chordFactoryChords(chordFactoryChords)
+				.hatDrive(hatDrive)
+				.hatSync(hatSync)
+				.kikSnrDrive(kikSnrDrive)
+				.kikSnrSync(kikSnrSync)
+				.drumAccentVelocity(drumAccentVelocity)
+				.drumNonAccentVelocity(drumNonAccentVelocity)
+				.kikEmbellishmentRepetitionPattern(kikEmbellishmentRepetitionPattern)
+				.kikEmbellishments(kikEmbellishments)
+				.kikClearanceOfEmbellishmentFromPreviousStructureTone(kikClearanceOfEmbellishmentFromPreviousStructureTone)
+				.bassDurationByLoopingPattern(bassDurationByLoopingPattern)
+				.bassDurationStrategy(bassDurationStrategy)
+				.bassPitchByLoopingPitchTypes(bassPitchByLoopingPitchTypes)
+				.bassPitchStrategy(bassPitchStrategy)
+				.bassAccentVelocity(bassAccentVelocity)
+				.bassNonAccentVelocity(bassNonAccentVelocity)
+				.bassCentrePitch(bassCentrePitch)
+				.bassEmbellishmentRepetitionPattern(bassEmbellishmentRepetitionPattern)
+				.bassEmbellishments(bassEmbellishments)
+				.bassClearanceOfEmbellishmentFromPreviousStructureTone(bassClearanceOfEmbellishmentFromPreviousStructureTone)
+				.chordOnsetsByBeatStrength(chordOnsetsByBeatStrength)
+				.chordDurationByLoopingPattern(chordDurationByLoopingPattern)
+				.chordDurationStrategy(chordDurationStrategy)
+				.chordAccentVelocity(chordAccentVelocity)
+				.chordNonAccentVelocity(chordNonAccentVelocity)
+				.chordCentrePitch(chordCentrePitch)
+				.chordEmbellishmentRepetitionPattern(chordEmbellishmentRepetitionPattern)
+				.chordEmbellishments(chordEmbellishments)
+				.chordClearanceOfEmbellishmentFromPreviousStructureTone(chordClearanceOfEmbellishmentFromPreviousStructureTone)
+				.build();
+	}
 }
