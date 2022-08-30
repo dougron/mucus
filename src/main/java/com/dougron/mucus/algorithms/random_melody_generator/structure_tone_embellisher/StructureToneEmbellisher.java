@@ -4,20 +4,22 @@ import java.util.List;
 
 import com.google.common.base.Preconditions;
 
-import main.java.com.dougron.mucus.algorithms.generic_generator.ParameterObject;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuGenerator;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.data_types.MuNote;
 
 /*
- * based on the RandomMelodyGenerator.addEmbellishmentMus() call, but adapted to 
- * use the generic_generator ParameterObject
+ * based on the RandomMelodyGenerator.addEmbellishmentMus() call
+ * 
+ * ditched the generic ParameterObject for all algorithms, instead favouring a 
+ * specific ParameterObject for each process which implements an interface of itself,
+ * instead of a monolithic central ParameterObject
  */
 
 public class StructureToneEmbellisher
 {
 
-	public static Mu addEmbellishmentMus(Mu aMu, ParameterObject aPo)
+	public static Mu addEmbellishmentMus(Mu aMu, StructureToneEmbellisherParameterObject aPo)
 	{
 		for (int key: aPo.getEmbellishmentRepetitionPattern())
 		{
@@ -76,7 +78,7 @@ public class StructureToneEmbellisher
 	public static double getGlobalCutOffPositionInQuarters 
 	(
 			Mu aMu,
-			ParameterObject aPo, 
+			StructureToneEmbellisherParameterObject aPo, 
 			Mu previousStructureToneMu
 			)
 	{

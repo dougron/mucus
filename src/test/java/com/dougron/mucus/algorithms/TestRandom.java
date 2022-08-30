@@ -41,4 +41,11 @@ public class TestRandom extends Random
 		if (readIndex == list.size()) readIndex = 0;
 		return x;
 	}
+	
+	
+	
+	public int size()
+	{
+		return list.size();
+	}
 }

@@ -1,4 +1,4 @@
-package main.java.com.dougron.mucus.algorithms.generic_generator;
+package main.java.com.dougron.mucus.algorithms.random_melody_generator.structure_tone_embellisher;
 
 import java.util.List;
 import java.util.Map;
@@ -8,6 +8,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.Singular;
 import lombok.ToString;
+import main.java.com.dougron.mucus.algorithms.generic_generator.DurationModel;
+import main.java.com.dougron.mucus.algorithms.generic_generator.DurationType;
+import main.java.com.dougron.mucus.algorithms.generic_generator.PitchType;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuGenerator;
 import main.java.da_utils.static_chord_scale_dictionary.ChordToneName;
 import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
@@ -16,7 +19,7 @@ import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
 //main.java.com.dougron.lorez2021.bass_part_generator.Builder
 @Builder
 @ToString
-public class ParameterObject
+public class StructureToneEmbellisherParameterObject
 {
 
 //	@Builder.Default	@Getter	@Setter	int[] phraseLengthOptions;
@@ -80,9 +83,9 @@ public class ParameterObject
 	@Builder.Default	@Getter	@Setter private double chordClearanceOfEmbellishmentFromPreviousStructureTone = 0.5;
 
 
-	public ParameterObject deepCopy()
+	public StructureToneEmbellisherParameterObject deepCopy()
 	{
-		return ParameterObject.builder()
+		return StructureToneEmbellisherParameterObject.builder()
 				.phraseLengthInBars(phraseLengthInBars)
 				.timeSignatures(timeSignatures)
 				.tempo(tempo)

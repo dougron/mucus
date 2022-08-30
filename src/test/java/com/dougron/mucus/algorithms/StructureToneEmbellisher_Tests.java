@@ -6,11 +6,11 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import main.java.com.dougron.mucus.algorithms.generic_generator.ParameterObject;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuG_ChordTone_RRP;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuGenerator;
 import main.java.com.dougron.mucus.algorithms.mu_generator.enums.ChordToneType;
 import main.java.com.dougron.mucus.algorithms.random_melody_generator.structure_tone_embellisher.StructureToneEmbellisher;
+import main.java.com.dougron.mucus.algorithms.random_melody_generator.structure_tone_embellisher.StructureToneEmbellisherParameterObject;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.data_types.BarsAndBeats;
 import main.java.com.dougron.mucus.mu_framework.data_types.MuNote;
@@ -34,7 +34,7 @@ class StructureToneEmbellisher_Tests
 		// StructureToneEmbellisher is being used to embellish many different parts.
 		// instrument specific values are copied to the general parameters that StructureToneEmbellisher 
 		// will use
-		ParameterObject po = ParameterObject.builder()
+		StructureToneEmbellisherParameterObject po = StructureToneEmbellisherParameterObject.builder()
 				.bassEmbellishment(0, embList )
 				.build();
 		po.setEmbellishments(po.getBassEmbellishments());
@@ -56,7 +56,7 @@ class StructureToneEmbellisher_Tests
 		List<MuGenerator> embList = List.of(
 					new MuG_ChordTone_RRP(new RelativeRhythmicPosition(0, 0, 0, -1), ChordToneType.CLOSEST_ABOVE)
 				);
-		ParameterObject po = ParameterObject.builder()
+		StructureToneEmbellisherParameterObject po = StructureToneEmbellisherParameterObject.builder()
 				.bassEmbellishment(0, embList )
 				.build();
 		po.setEmbellishments(po.getBassEmbellishments());
@@ -78,7 +78,7 @@ class StructureToneEmbellisher_Tests
 		List<MuGenerator> embList = List.of(
 					new MuG_ChordTone_RRP(new RelativeRhythmicPosition(0, 0, 0, -1), ChordToneType.CLOSEST_ABOVE)
 				);
-		ParameterObject po = ParameterObject.builder()
+		StructureToneEmbellisherParameterObject po = StructureToneEmbellisherParameterObject.builder()
 				.bassEmbellishment(0, embList )
 				.bassNonAccentVelocity(44)
 				.build();
