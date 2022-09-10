@@ -99,7 +99,7 @@ public class ContinuousIntegrator
 		aMu.setParent(null);
 		double tempo = aMu.getStartTempo();
 		aInjector.setTempo(tempo);
-		setSceneTempoForAllClipInicesInPartTrackAndClipIndexMap(tempo, partTrackAndClipIndexMap, aInjector);
+		setSceneTempoForAllClipIndicesInPartTrackAndClipIndexMap(tempo, partTrackAndClipIndexMap, aInjector);
 		setSceneNameForAllClipIndicesInPartTrackAndClipIndexMap(aMu.getName(), partTrackAndClipIndexMap, aInjector);
 		sendNotesToLive(aMu, partTrackAndClipIndexMap, aInjector);
 	}
@@ -118,7 +118,7 @@ public class ContinuousIntegrator
 		aMu.setParent(null);
 		double tempo = aMu.getStartTempo();
 		aInjector.setTempo(tempo);
-		setSceneTempoForAllClipInicesInPartTrackAndClipIndexMap(tempo, partTrackAndClipIndexMap, aInjector);
+		setSceneTempoForAllClipIndicesInPartTrackAndClipIndexMap(tempo, partTrackAndClipIndexMap, aInjector);
 		setSceneNameForAllClipIndicesInPartTrackAndClipIndexMap(aMu.getName(), partTrackAndClipIndexMap, aInjector);
 		aInjector.sendControllerClearAllMessage();
 		sendNotesToLive(aMu, partTrackAndClipIndexMap, aInjector);
@@ -147,7 +147,7 @@ public class ContinuousIntegrator
 
 
 
-	private static void setSceneTempoForAllClipInicesInPartTrackAndClipIndexMap(
+	private static void setSceneTempoForAllClipIndicesInPartTrackAndClipIndexMap(
 			double tempo, 
 			Map<MuTag, Integer[]> map,
 			MuucusLOMInjector aInjector

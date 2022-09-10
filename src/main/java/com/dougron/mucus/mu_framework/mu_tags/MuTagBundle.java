@@ -17,7 +17,8 @@ public class MuTagBundle
 		{
 			for (MuTagNamedParameter key : namedParameters.keySet())
 			{
-				mtb.addNamedParameter(key, (double) namedParameters.get(key));
+//				mtb.addNamedParameter(key, (double) namedParameters.get(key));
+				mtb.addNamedParameter(key, namedParameters.get(key));
 			} 
 		}
 		return mtb;

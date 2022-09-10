@@ -398,7 +398,11 @@ public class Chord
 		else if (closestChordTone == aPitch)
 		{
 			int index = closestIndex + aContour;
-			if (index < aAllChordTones.length)
+			if (index < 0)
+			{
+				return aAllChordTones[0];
+			}
+			else if (index < aAllChordTones.length)
 			{
 				return aAllChordTones[index];
 			}
