@@ -14,9 +14,9 @@ import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import main.java.com.dougron.mucus.algorithms.generic_generator.AccentType;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuG_ApproachTone_RRP;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuGenerator;
-import main.java.com.dougron.mucus.algorithms.mu_generator.MuGenerator.AccentType;
 import main.java.com.dougron.mucus.algorithms.mu_generator.enums.NeighbourToneType;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.chord_list.Chord;

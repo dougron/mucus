@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import main.java.com.dougron.mucus.algorithms.generic_generator.AccentType;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuG_Anticipation;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuG_Anticipation_RRP;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuG_EscapeTone;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuG_EscapeTone_RRP;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuG_NothingToAdd;
-import main.java.com.dougron.mucus.algorithms.mu_generator.MuGenerator.AccentType;
 import main.java.com.dougron.mucus.algorithms.mu_generator.enums.EscapeToneType;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.Mu.PrintParameter;

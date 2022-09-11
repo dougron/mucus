@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import main.java.com.dougron.mucus.algorithms.generic_generator.AccentType;
 import main.java.com.dougron.mucus.algorithms.superimposifier.DurationModel;
 import main.java.com.dougron.mucus.algorithms.superimposifier.PitchModel;
 import main.java.com.dougron.mucus.algorithms.superimposifier.RhythmModel;

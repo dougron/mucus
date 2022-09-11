@@ -11,12 +11,12 @@ import java.util.Random;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import main.java.com.dougron.mucus.algorithms.generic_generator.AccentType;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuG_Anticipation_RRP;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuG_ApproachTone_RRP;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuG_EscapeTone_RRP;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuG_NothingToAdd;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuGenerator;
-import main.java.com.dougron.mucus.algorithms.mu_generator.MuGenerator.AccentType;
 import main.java.com.dougron.mucus.algorithms.mu_generator.enums.EscapeToneType;
 import main.java.com.dougron.mucus.algorithms.random_melody_generator.random_number_containers.IndexedSingleValue;
 import main.java.com.dougron.mucus.algorithms.random_melody_generator.random_number_containers.IndexedValueList;

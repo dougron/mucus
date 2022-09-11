@@ -4,12 +4,13 @@ import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import main.java.com.dougron.mucus.algorithms.generic_generator.AccentType;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 
 public interface MuGenerator
 {
 	
-	public static enum AccentType{ACCENTED, UNACCENTED};
+//	public static enum AccentType{ACCENTED, UNACCENTED};
 	public static enum AccentBehaviour{ONLY_ON_STRUCTURE_TONES, ON_ALL_TONES};
 	public static AccentBehaviour accentBehaviour = AccentBehaviour.ONLY_ON_STRUCTURE_TONES;
 

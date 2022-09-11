@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import main.java.com.dougron.mucus.algorithms.generic_generator.AccentType;
 import main.java.com.dougron.mucus.algorithms.mu_generator.enums.EscapeToneType;
 import main.java.com.dougron.mucus.algorithms.mu_generator.enums.NeighbourToneType;
 import main.java.com.dougron.mucus.mu_framework.Mu;
@@ -138,7 +139,7 @@ public class MuG_EscapeTone implements MuGenerator
 		Mu mu = getAssociatedChordToneMu();
 		Mu previousMu = getPreviousMu(mu);
 		int contour = getContourToPreviousNote(mu, previousMu);
-		if (accentType == MuGenerator.AccentType.ACCENTED) moveAssociatedChordTone(mu, lengthInQuarters);
+		if (accentType == AccentType.ACCENTED) moveAssociatedChordTone(mu, lengthInQuarters);
 		switch (contour)
 		{
 		case 0:	

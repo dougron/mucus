@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import main.java.com.dougron.mucus.algorithms.generic_generator.AccentType;
 import main.java.com.dougron.mucus.algorithms.mu_generator.enums.NeighbourToneType;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.data_types.BarsAndBeats;
@@ -146,7 +147,7 @@ public class MuG_ApproachTone_RRP implements MuGenerator
 		
 		
 		if (
-				accentType == MuGenerator.AccentType.ACCENTED
+				accentType == AccentType.ACCENTED
 				&& mu.hasTag(MuTag.IS_STRUCTURE_TONE)
 				&& MuGenerator.accentBehaviour == AccentBehaviour.ONLY_ON_STRUCTURE_TONES
 				) 
