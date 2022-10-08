@@ -986,6 +986,7 @@ public class MXML_Measure
 		}
 		min.setHasTieEnd(vm.getHasTieEnd());
 		min.setHasTieStart(vm.getHasTieStart());
+		min.getNotations().addAll(vm.getNotations());
 		return new MeasureItem_Note[] {min};
 	}
 	

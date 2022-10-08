@@ -16,7 +16,7 @@ public class EndOfSiblingInBarsAndBeats implements PositionModel
 	
 	private BarsAndBeats positionInBarsAndBeats;
 	private Mu associatedMu;
-	private Mu sibling;
+	private transient Mu sibling;
 
 
 

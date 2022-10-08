@@ -17,7 +17,7 @@ public class EndOfSiblingInBars implements PositionModel
 	private Mu sibling;
 //	private boolean hasUpToDatePositionInBarsAndBeats = false;
 //	private BarsAndBeats positionInBarsAndBeats;			// hidden. this subclass of positionModel can only set positionInBars
-	private Mu associatedMu;
+	private transient Mu associatedMu;
 
 
 

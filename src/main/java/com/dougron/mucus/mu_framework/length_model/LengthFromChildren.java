@@ -13,7 +13,7 @@ public class LengthFromChildren implements LengthModel
 
 	
 	private int lengthInBars;
-	private Mu associatedMu;
+	private transient Mu associatedMu;
 	private double lengthInQuarters;
 
 

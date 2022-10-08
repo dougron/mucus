@@ -12,7 +12,7 @@ public class FixedLengthInQuarters implements LengthModel
 {
 
 	private double lengthInQuarters;
-	private Mu associatedMu;
+	private transient Mu associatedMu;
 
 	
 	

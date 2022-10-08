@@ -35,6 +35,14 @@ public class MuucusLOMInjector
 	// INTERFACE
 	//----------------------------------------------
 	
+	public void sendDuplicateSceneMessage(int sceneIndex)
+	{
+		conn.sendUDPMessage(getLiveSetPathMessage());
+		conn.sendUDPMessage(getDuplicateSceneMessage(sceneIndex));
+		
+	}
+	
+	
 	
 	public void createClip(int aTrackIndex, int aClipIndex, double aLengthInQuarters)
 	{
@@ -386,6 +394,16 @@ public class MuucusLOMInjector
 		mess.addItem(aLengthInQuarters);
 		return mess;
 	}
+	
+	
+	public OSCMessMaker getDuplicateSceneMessage(int aSceneIndex)
+	{
+		OSCMessMaker mess = new OSCMessMaker();
+		mess.addItem("call");
+		mess.addItem("duplicate_scene");
+		mess.addItem(aSceneIndex);
+		return mess;
+	}
 
 	
 	
@@ -543,6 +561,19 @@ public class MuucusLOMInjector
 		mess.addItem(sceneIndex);
 		return mess;
 	}
+	
+	
+	private OSCMessMaker getLiveSetPathMessage()
+	{
+		OSCMessMaker mess = new OSCMessMaker();
+		mess .addItem("path");
+		mess.addItem("live_set");
+		return mess;
+	}
+
+
+
+	
 	
 
 

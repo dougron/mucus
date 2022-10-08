@@ -15,7 +15,7 @@ public class BeginningOfParentInBarsAnBeats implements PositionModel
 	
 	
 	private BarsAndBeats positionInBarsAndBeats;
-	private Mu associatedMu;
+	private transient Mu associatedMu;
 
 
 

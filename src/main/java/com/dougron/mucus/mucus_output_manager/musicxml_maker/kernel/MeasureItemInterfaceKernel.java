@@ -16,6 +16,7 @@ import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.measure_i
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.measure_item.MeasureItem_TimeSignature;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.measure_item.MeasureItem_TupletNote;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.measure_item.MeasureItem_TupletRest;
+import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.voice_mu.Notation;
 import main.java.da_utils.combo_variables.IntAndString;
 
 public class MeasureItemInterfaceKernel {
@@ -121,6 +122,15 @@ public class MeasureItemInterfaceKernel {
   		{
   			notations.appendChild(makeChildWithAttribute(document, "tied", "type", "start"));
   		}
+  		if (min.getNotations().size() > 0)
+  		{
+  			for (Notation n: min.getNotations())
+  			{
+  				Element groupElement = document.createElement(n.groupName);
+  				groupElement.appendChild(document.createElement(n.name));
+  				notations.appendChild(groupElement);
+  			}
+  		}
   		if (min instanceof MeasureItem_TupletNote && ((MeasureItem_TupletNote)min).getHasStartOfTupletNotationElement())
   		{
   			Element zzzz = makeChildWithAttribute(document, "tuplet", "type", "start");
@@ -164,6 +174,8 @@ public class MeasureItemInterfaceKernel {
   						)
   				|| (min instanceof MeasureItem_TupletNote  
   						&& ((MeasureItem_TupletNote)min).hasEndOfTupletNotationElement()
+  				|| min.getNotations().size() > 0
+  						
   						)	
   				);
   	}

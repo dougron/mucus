@@ -13,7 +13,7 @@ public class FixedLengthInBarsAndBeats implements LengthModel
 
 	
 	
-	private Mu associatedMu;
+	private transient Mu associatedMu;
 	private BarsAndBeats lengthInBarsAndBeats;
 
 

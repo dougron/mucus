@@ -14,7 +14,7 @@ public class BeginningOfParentInQuarters implements PositionModel
 	
 	
 	private double positionInQuarters;
-	private Mu associatedMu;
+	private transient Mu associatedMu;
 
 
 

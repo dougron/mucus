@@ -2,12 +2,14 @@
 /*This code was generated using the UMPLE 1.29.0.4181.a593105a9 modeling language!*/
 
 package main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.voice_mu;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.data_types.MuAnnotation;
 import main.java.com.dougron.mucus.mu_framework.data_types.MuNote;
+import main.java.com.dougron.mucus.mu_framework.mu_tags.MuTag;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.MXML_Measure;
 
 /**
@@ -43,6 +45,11 @@ public class VoiceMu
 	private static int roundingAccuracy = 9;
 	private static double minimumLength;
 	private static boolean hasMinimumLength = false;
+	
+	private List<Notation> notations;
+
+	
+
 
 	//VoiceMu Associations
 	private MXML_Measure measure;
@@ -68,6 +75,7 @@ public class VoiceMu
 		hasEndPositionInBar = false;
 		hasTieStart = false;
 		hasTieEnd = false;
+		notations = new ArrayList<Notation>();
 		if (aMu == null 
 //				|| !aMu.hasMuNotes()
 				)
@@ -78,13 +86,31 @@ public class VoiceMu
 		else 
 		{
 			setGlobalPositionInQuarters(Mu.round(mu.getGlobalPositionInQuarters()));
-			setLengthInQuarters(Mu.round(mu.getLengthInQuarters()));
+			setLength(mu);
 			int n = 0;
 			for (MuNote mn: mu.getMuNotes()) 
 			{
 				if (mn.getPitch() > n) n = mn.getPitch();
 			}
 			setTopNote(n);
+		}
+	}
+
+
+
+	private void setLength(Mu aMu)
+	{
+		if (aMu.hasTag(MuTag.NOTATE_AS_STACCATO_EIGHTH))
+		{
+			setLengthInQuarters(0.5);
+			if (!notations.contains(Notation.STACCATO))
+			{
+				notations.add(Notation.STACCATO);
+			}
+		}
+		else
+		{
+			setLengthInQuarters(Mu.round(aMu.getLengthInQuarters()));
 		}
 	}
 
@@ -207,6 +233,27 @@ public class VoiceMu
 		nextVoiceMu = aNextVoiceMu;
 		wasSet = true;
 		return wasSet;
+	}
+
+	
+
+	public void setNotations(List<Notation> notations)
+	{
+		notations = notations;
+	}
+	
+	
+	
+	public void addNotation(Notation aNotation)
+	{
+		notations.add(aNotation);
+	}
+	
+	
+	
+	public List<Notation> getNotations()
+	{
+		return notations;
 	}
 
 
@@ -514,6 +561,19 @@ public class VoiceMu
 	    else 
 	    {
 	    	sb.append(getNextVoiceMu().toShortString());
+	    }
+	    if (notations.size() == 0)
+	    {
+	    	sb.append("no notations\n");
+	    }
+	    else
+	    {
+	    	sb.append("notations:");
+	    	for (Notation notation: notations)
+	    	{
+	    		sb.append(notation + " ");
+	    	}
+	    	sb.append("\n");
 	    }
 	    
 	    

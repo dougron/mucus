@@ -106,6 +106,13 @@ public class ContinuousIntegrator
 	
 	
 	
+	public static void duplicateSceneInLive(int sceneIndex, MuucusLOMInjector aInjector)
+	{
+		aInjector.sendDuplicateSceneMessage(sceneIndex);
+	}
+	
+	
+	
 	public static void injectMultiPartMuIntoLive
 	(
 			Mu aMu, 
@@ -117,6 +124,7 @@ public class ContinuousIntegrator
 		aMu.setPositionModel(new PositionIsZeroInBars());
 		aMu.setParent(null);
 		double tempo = aMu.getStartTempo();
+		aInjector.sendDuplicateSceneMessage(0);
 		aInjector.setTempo(tempo);
 		setSceneTempoForAllClipIndicesInPartTrackAndClipIndexMap(tempo, partTrackAndClipIndexMap, aInjector);
 		setSceneNameForAllClipIndicesInPartTrackAndClipIndexMap(aMu.getName(), partTrackAndClipIndexMap, aInjector);

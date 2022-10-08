@@ -13,7 +13,7 @@ public class EndOfSiblingInQuarters implements PositionModel
 
 	private double positionInQuarters;
 	private Mu associatedMu;
-	private Mu sibling;
+	private transient Mu sibling;
 
 
 

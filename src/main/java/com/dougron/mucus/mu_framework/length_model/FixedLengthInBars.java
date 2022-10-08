@@ -15,7 +15,7 @@ public class FixedLengthInBars implements LengthModel
 	
 	
 	private int lengthInBars;
-	private Mu associatedMu;
+	private transient Mu associatedMu;
 
 
 

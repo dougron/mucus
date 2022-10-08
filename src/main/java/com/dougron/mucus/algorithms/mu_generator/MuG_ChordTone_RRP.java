@@ -383,16 +383,17 @@ public class MuG_ChordTone_RRP implements MuGenerator
 	public String toOneLineString()
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("MuG_EscapeTone_RRP: " + chordToneType);
-		sb.append(",relativeRhythmicPosition=" + relativeRhythmicPosition.toString() + ",");
+		sb.append("MuG_ChordTone_RRP:");
+		sb.append(" " + relativeRhythmicPosition.toString());
+		sb.append(" " + chordToneType);
 		if (chordToneNames != null)
 		{
-			sb.append(",chordTones=");
+			sb.append(" ");
 			for (ChordToneName ctn: chordToneNames)
 			{
 				sb.append(ctn + ",");
 			}
-		}		
+		}	
 		return sb.toString();
 	}
 	

@@ -36,5 +36,7 @@ public enum MuTag
 	
 	CONTROLLER_LP, 
 	
-	HISTORY
+	HISTORY, 
+	
+	NOTATE_AS_STACCATO_EIGHTH
 }

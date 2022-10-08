@@ -60,9 +60,10 @@ public class MuG_ApproachTone_RRP implements MuGenerator
 	public String toOneLineString()
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("MuG_ApproachTone_RRP: ");
-		sb.append("relativeRhythmicPosition=" + relativeRhythmicPosition.toString() + "," + accentType);
-		sb.append("," + neighbourToneType);
+		sb.append("MuG_ApproachTone_RRP:");
+		sb.append(" " + relativeRhythmicPosition.toString());
+		sb.append(" " + accentType);
+		sb.append(" " + neighbourToneType);
 		return sb.toString();
 	}
 	

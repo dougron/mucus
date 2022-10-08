@@ -10,6 +10,7 @@ import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.MXML_Measure;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.MXML_MeasureItemInterface;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.kernel.MeasureItemInterfaceKernel;
+import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.voice_mu.Notation;
 
 
 public class MeasureItem_Note implements MXML_MeasureItemInterface
@@ -31,7 +32,7 @@ public class MeasureItem_Note implements MXML_MeasureItemInterface
 
 	//MeasureItem_Note Associations
 	private List<MeasureItem_Annotation> measureItemAnnotations;
-
+	private List<Notation> notations;
 	
 	
 	//------------------------
@@ -50,6 +51,7 @@ public class MeasureItem_Note implements MXML_MeasureItemInterface
 		voice = aVoice;
 		measure = aMeasure;
 		measureItemAnnotations = new ArrayList<MeasureItem_Annotation>();
+		notations = new ArrayList<Notation>();
 	}
 
 	
@@ -137,6 +139,20 @@ public class MeasureItem_Note implements MXML_MeasureItemInterface
 
 	
 	
+	public List<Notation> getNotations()
+	{
+		return notations;
+	}
+
+
+
+	public void setNotations(List<Notation> notations)
+	{
+		this.notations = notations;
+	}
+
+
+
 	public int getType()
 	{
 		return type;

@@ -64,7 +64,7 @@ public class Mu
 		
 	private LengthModel lengthModel;
 	private PositionModel positionModel;
-	private Mu parent;
+	private transient Mu parent;
 	private List<Mu> mus = new ArrayList<Mu>();
 	@Getter @Setter private String name;
 	private Ruler ruler;
@@ -92,8 +92,8 @@ public class Mu
 
 	private List<MuRelationship> muRelationships = null;
 
-	private Mu nextMu = null;
-	private Mu previousMu = null;
+	private transient Mu nextMu = null;
+	private transient Mu previousMu = null;
 	private int muIndex = 0;
 	
 	private double controllerValue;
