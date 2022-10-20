@@ -76,6 +76,14 @@ public class MuG_Anticipation implements MuGenerator
 	}
 	
 	
+
+	@Override
+	public String toVeryShortOneLineString()
+	{
+		return "Ant:" + noteLength + "/" + noteCount;
+	}
+	
+	
 	
 	public MuG_Anticipation(int aNoteCount, double aNoteLengthInQuarters)
 	{

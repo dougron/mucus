@@ -71,6 +71,13 @@ public class MuG_EscapeTone_RRP implements MuGenerator
 	}
 	
 	
+	@Override
+	public String toVeryShortOneLineString()
+	{
+		return "Esc:" + relativeRhythmicPosition.toString();
+	}
+	
+	
 	
 	@Override
 	public String toOneLineStringForJSON ()

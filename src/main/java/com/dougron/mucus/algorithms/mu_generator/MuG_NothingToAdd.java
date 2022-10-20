@@ -77,6 +77,13 @@ public class MuG_NothingToAdd implements MuGenerator
 	}
 	
 	
+	@Override
+	public String toVeryShortOneLineString()
+	{
+		return "NoEmb:";
+	}
+	
+	
 	
 	public String toOneLineStringForJSON()
 	{

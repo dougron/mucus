@@ -48,6 +48,7 @@ public interface MuGenerator
 		}
 	}
 	String toOneLineString ();
+	String toVeryShortOneLineString ();
 	String toOneLineStringForJSON ();
 
 	

@@ -70,6 +70,13 @@ public class MuG_EscapeTone implements MuGenerator
 	
 	
 	@Override
+	public String toVeryShortOneLineString()
+	{
+		return "Esc:" + lengthInQuarters;
+	}
+	
+	
+	@Override
 	public String toOneLineStringForJSON ()
 	{
 		StringBuilder sb = new StringBuilder();

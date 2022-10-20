@@ -78,6 +78,14 @@ public class MuG_ApproachTone_RRP implements MuGenerator
 		sb.append(" " + neighbourToneType);
 		return sb.toString();
 	}
+
+	
+
+	@Override
+	public String toVeryShortOneLineString()
+	{
+		return "Appr:" + relativeRhythmicPosition.toString();
+	}
 	
 	
 	

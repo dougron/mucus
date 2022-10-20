@@ -125,6 +125,15 @@ public class MuG_Anticipation_RRP implements MuGenerator
 	}
 	
 	
+
+	@Override
+	public String toVeryShortOneLineString()
+	{
+		return "Ant:" + relativeRhythmicPosition.toString();
+	}
+
+	
+	
 	
 	@Override
 	public String toOneLineStringForJSON ()

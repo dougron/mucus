@@ -398,6 +398,13 @@ public class MuG_ChordTone_RRP implements MuGenerator
 	}
 	
 	
+	@Override
+	public String toVeryShortOneLineString()
+	{
+		return "CT:" + relativeRhythmicPosition.toString();
+	}
+	
+	
 	
 	@Override
 	public String toOneLineStringForJSON ()
