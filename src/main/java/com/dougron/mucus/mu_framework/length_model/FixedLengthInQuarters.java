@@ -60,10 +60,16 @@ public class FixedLengthInQuarters implements LengthModel
 		double globalEndPosition = globalPosition + lengthInQuarters;
 		int startBarPosition = associatedMu.getGlobalPositionInBars();
 		BarsAndBeats endBab = associatedMu.getGlobalPositionInBarsAndBeats(globalEndPosition);
-		BarsAndBeats lengthBab = new BarsAndBeats(
-				endBab.getBarPosition() - startBarPosition,
-				endBab.getOffsetInQuarters()
-				);
+		int barLength = endBab.getBarPosition() - startBarPosition;
+		double beatLength;
+		if (barLength == 0) {
+			beatLength = getLengthInQuarters();
+		}
+		else
+		{
+			beatLength = endBab.getOffsetInQuarters();
+		}
+		BarsAndBeats lengthBab = new BarsAndBeats(barLength, beatLength);
 		return lengthBab;
 	}
 	

@@ -1756,6 +1756,18 @@ public class Mu
 				+ globalPositionInBarsAndBeats.getOffsetInQuarters() 
 				/ ts.getLengthInQuarters();
 	}
+	
+	
+	
+	public double getLengthInFloatBars()
+	{
+		BarsAndBeats globalPositionInBarsAndBeats = getGlobalPositionInBarsAndBeats();
+		BarsAndBeats lengthInBarsAndBeats = getLengthInBarsAndBeats();
+		TimeSignature ts = getTimeSignature(globalPositionInBarsAndBeats.getBarPosition() + lengthInBarsAndBeats.getBarPosition());
+		return lengthInBarsAndBeats.getBarPosition() 
+				+ (lengthInBarsAndBeats.getOffsetInQuarters() 
+						/ ts.getLengthInQuarters());
+	}
 
 
 
