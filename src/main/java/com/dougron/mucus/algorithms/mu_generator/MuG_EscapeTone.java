@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import lombok.NoArgsConstructor;
 import main.java.com.dougron.mucus.algorithms.generic_generator.AccentType;
 import main.java.com.dougron.mucus.algorithms.mu_generator.enums.EscapeToneType;
 import main.java.com.dougron.mucus.algorithms.mu_generator.enums.NeighbourToneType;
@@ -17,7 +18,8 @@ import main.java.com.dougron.mucus.mu_framework.data_types.MuNote;
  * generates escape tones, including neighbour tones which are a special case of escape tone for repeated notes
  */
 
-public class MuG_EscapeTone implements MuGenerator
+
+public class MuG_EscapeTone extends DeserializableMuG implements MuGenerator
 {
 	
 
@@ -90,6 +92,7 @@ public class MuG_EscapeTone implements MuGenerator
 	
 	public MuG_EscapeTone(double aLengthInQuarters, EscapeToneType aEscapeToneType, AccentType aAccentType)
 	{
+		super(MuG_EscapeTone.class);
 		lengthInQuarters = aLengthInQuarters;
 		escapeToneType = aEscapeToneType;
 		accentType = aAccentType;
@@ -106,6 +109,7 @@ public class MuG_EscapeTone implements MuGenerator
 			NeighbourToneType aNeighbourToneType
 			)
 	{
+		super(MuG_EscapeTone.class);
 		lengthInQuarters = aLengthInQuarters;
 		escapeToneType = aEscapeToneType;
 		accentType = aAccentType;

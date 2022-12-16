@@ -1,11 +1,14 @@
 package main.java.com.dougron.mucus.algorithms.mu_generator;
 
+
+
 import java.util.ArrayList;
 
 import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import lombok.NoArgsConstructor;
 import main.java.com.dougron.mucus.algorithms.generic_generator.AccentType;
 import main.java.com.dougron.mucus.algorithms.mu_generator.enums.NeighbourToneType;
 import main.java.com.dougron.mucus.mu_framework.Mu;
@@ -18,7 +21,7 @@ import main.java.com.dougron.mucus.mu_framework.mu_tags.MuTag;
  * generates escape tones, including neighbour tones which are a special case of escape tone for repeated notes
  */
 
-public class MuG_ApproachTone_RRP implements MuGenerator
+public class MuG_ApproachTone_RRP extends DeserializableMuG implements MuGenerator
 {
 	
 	private Mu parent;
@@ -95,6 +98,7 @@ public class MuG_ApproachTone_RRP implements MuGenerator
 			AccentType aAccentType
 			)
 	{
+		super(MuG_ApproachTone_RRP.class);
 		relativeRhythmicPosition = aRelativeRhythmicPosition;
 //		escapeToneType = aEscapeToneType;
 		accentType = aAccentType;
@@ -110,6 +114,7 @@ public class MuG_ApproachTone_RRP implements MuGenerator
 			NeighbourToneType aNeighbourToneType
 			)
 	{
+		super(MuG_ApproachTone_RRP.class);
 		relativeRhythmicPosition = aRelativeRhythmicPosition;
 //		escapeToneType = aEscapeToneType;
 		accentType = aAccentType;

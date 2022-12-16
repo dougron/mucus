@@ -35,8 +35,22 @@ public interface MuGenerator
 		{
 		case "MuG_Anticipation_RRP":
 			return MuG_Anticipation_RRP.getMuGeneratorFromXMLElement(element);
+		case "MuG_ApproachTone_RRP":
+			return MuG_ApproachTone_RRP.getMuGeneratorFromXMLElement(element);
+		case "MuG_ChordTone_RRP":
+			return MuG_ChordTone_RRP.getMuGeneratorFromXMLElement(element);
 		case "MuG_EscapeTone_RRP":
-			return MuG_EscapeTone_RRP.getMuGeneratorFromXMLElement(element);
+			// quick nasty solution to ChordTones that were saved as EscapeTones
+			MuGenerator mug;
+			try
+			{
+				mug = MuG_EscapeTone_RRP.getMuGeneratorFromXMLElement(element);
+			}
+			catch (Exception ex)
+			{
+				mug = MuG_ChordTone_RRP.getMuGeneratorFromXMLElementForChordToneNamedAsEscapeToneError(element);
+			}
+			return mug;
 		case "MuG_Anticipation":
 			return MuG_Anticipation.getMuGeneratorFromXMLElement(element);
 		case "MuG_EscapeTone":
@@ -50,6 +64,6 @@ public interface MuGenerator
 	String toOneLineString ();
 	String toVeryShortOneLineString ();
 	String toOneLineStringForJSON ();
-
+	String getClassName();
 	
 }

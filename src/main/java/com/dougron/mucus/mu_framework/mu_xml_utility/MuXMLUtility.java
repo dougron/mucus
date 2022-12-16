@@ -389,44 +389,47 @@ public class MuXMLUtility
 			int muIndex = Integer.parseInt(node.getAttributes().getNamedItem("index").getNodeValue());
 			Element element = (Element)node;
 			int parentIndex = Integer.parseInt(element.getElementsByTagName("parent_index").item(0).getTextContent());
-			Node positionNode = element.getElementsByTagName("position_model").item(0);
-			String positionType = positionNode.getAttributes().getNamedItem("type").getNodeValue();
-			Element positionElement = (Element)positionNode;
-			int barPosition;
-			double quartersPosition;
-			Mu sibling;
-			Mu child = muMap.get(muIndex);
-			switch (positionType)
+			if (muIndex != parentIndex)	// this inequality is focussed on the situation where both muIndex and parentIndex equal zero: this is the top level mu and must not be added to itself
 			{
-			case "BeginningOfParentInBars":
-				barPosition = Integer.parseInt(positionElement.getElementsByTagName("bar_position").item(0).getTextContent());
-				muMap.get(parentIndex).addMu(child, barPosition);
-				break;
-			case "BeginningOfParentInBarsAndBeats":
-				barPosition = Integer.parseInt(positionElement.getElementsByTagName("bar_position").item(0).getTextContent());
-				quartersPosition = Double.parseDouble(positionElement.getElementsByTagName("beat_position").item(0).getTextContent());
-				muMap.get(parentIndex).addMu(child, new BarsAndBeats(barPosition, quartersPosition));
-				break;
-			case "BeginningOfParentInQuarters":
-				quartersPosition = Double.parseDouble(positionElement.getElementsByTagName("position_in_quarters").item(0).getTextContent());
-				muMap.get(parentIndex).addMu(child, quartersPosition);
-				break;
-			case "EndOfSiblingInBars":
-				sibling = muMap.get(Integer.parseInt(positionElement.getElementsByTagName("sibling_index").item(0).getTextContent()));
-				barPosition = Integer.parseInt(positionElement.getElementsByTagName("bar_position").item(0).getTextContent());
-				muMap.get(parentIndex).addMuToEndOfSibling(child, barPosition, sibling);
-				break;
-			case "EndOfSiblingInBarsAndBeats":
-				sibling = muMap.get(Integer.parseInt(positionElement.getElementsByTagName("sibling_index").item(0).getTextContent()));
-				barPosition = Integer.parseInt(positionElement.getElementsByTagName("bar_position").item(0).getTextContent());
-				quartersPosition = Double.parseDouble(positionElement.getElementsByTagName("beat_position").item(0).getTextContent());
-				muMap.get(parentIndex).addMuToEndOfSibling(child, new BarsAndBeats(barPosition, quartersPosition), sibling);
-				break;
-			case "EndOfSiblingInQuarters":
-				sibling = muMap.get(Integer.parseInt(positionElement.getElementsByTagName("sibling_index").item(0).getTextContent()));
-				quartersPosition = Double.parseDouble(positionElement.getElementsByTagName("position_in_quarters").item(0).getTextContent());
-				muMap.get(parentIndex).addMuToEndOfSibling(child, quartersPosition, sibling);
-				break;
+				Node positionNode = element.getElementsByTagName("position_model").item(0);
+				String positionType = positionNode.getAttributes().getNamedItem("type").getNodeValue();
+				Element positionElement = (Element)positionNode;
+				int barPosition;
+				double quartersPosition;
+				Mu sibling;
+				Mu child = muMap.get(muIndex);
+				switch (positionType)
+				{
+				case "BeginningOfParentInBars":
+					barPosition = Integer.parseInt(positionElement.getElementsByTagName("bar_position").item(0).getTextContent());
+					muMap.get(parentIndex).addMu(child, barPosition);
+					break;
+				case "BeginningOfParentInBarsAndBeats":
+					barPosition = Integer.parseInt(positionElement.getElementsByTagName("bar_position").item(0).getTextContent());
+					quartersPosition = Double.parseDouble(positionElement.getElementsByTagName("beat_position").item(0).getTextContent());
+					muMap.get(parentIndex).addMu(child, new BarsAndBeats(barPosition, quartersPosition));
+					break;
+				case "BeginningOfParentInQuarters":
+					quartersPosition = Double.parseDouble(positionElement.getElementsByTagName("position_in_quarters").item(0).getTextContent());
+					muMap.get(parentIndex).addMu(child, quartersPosition);
+					break;
+				case "EndOfSiblingInBars":
+					sibling = muMap.get(Integer.parseInt(positionElement.getElementsByTagName("sibling_index").item(0).getTextContent()));
+					barPosition = Integer.parseInt(positionElement.getElementsByTagName("bar_position").item(0).getTextContent());
+					muMap.get(parentIndex).addMuToEndOfSibling(child, barPosition, sibling);
+					break;
+				case "EndOfSiblingInBarsAndBeats":
+					sibling = muMap.get(Integer.parseInt(positionElement.getElementsByTagName("sibling_index").item(0).getTextContent()));
+					barPosition = Integer.parseInt(positionElement.getElementsByTagName("bar_position").item(0).getTextContent());
+					quartersPosition = Double.parseDouble(positionElement.getElementsByTagName("beat_position").item(0).getTextContent());
+					muMap.get(parentIndex).addMuToEndOfSibling(child, new BarsAndBeats(barPosition, quartersPosition), sibling);
+					break;
+				case "EndOfSiblingInQuarters":
+					sibling = muMap.get(Integer.parseInt(positionElement.getElementsByTagName("sibling_index").item(0).getTextContent()));
+					quartersPosition = Double.parseDouble(positionElement.getElementsByTagName("position_in_quarters").item(0).getTextContent());
+					muMap.get(parentIndex).addMuToEndOfSibling(child, quartersPosition, sibling);
+					break;
+				}
 			}
 		}
 	}

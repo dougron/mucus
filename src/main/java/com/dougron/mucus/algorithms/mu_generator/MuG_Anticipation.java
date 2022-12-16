@@ -6,13 +6,14 @@ import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import lombok.NoArgsConstructor;
 import main.java.com.dougron.mucus.algorithms.generic_generator.AccentType;
 import main.java.com.dougron.mucus.algorithms.superimposifier.DurationModel;
 import main.java.com.dougron.mucus.algorithms.superimposifier.PitchModel;
 import main.java.com.dougron.mucus.algorithms.superimposifier.RhythmModel;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 
-public class MuG_Anticipation implements MuGenerator
+public class MuG_Anticipation extends DeserializableMuG implements MuGenerator
 {
 
 	private Mu parent;
@@ -87,6 +88,7 @@ public class MuG_Anticipation implements MuGenerator
 	
 	public MuG_Anticipation(int aNoteCount, double aNoteLengthInQuarters)
 	{
+		super(MuG_Anticipation.class);
 		noteLength = aNoteLengthInQuarters;
 		noteCount = aNoteCount;
 		accentType = AccentType.UNACCENTED;
@@ -99,6 +101,7 @@ public class MuG_Anticipation implements MuGenerator
 	
 	public MuG_Anticipation(int aNoteCount, double aNoteLengthInQuarters, AccentType aAccentType)
 	{
+		super(MuG_Anticipation.class);
 		noteLength = aNoteLengthInQuarters;
 		noteCount = aNoteCount;
 		accentType = aAccentType;

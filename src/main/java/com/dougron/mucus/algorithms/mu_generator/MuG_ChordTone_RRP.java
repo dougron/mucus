@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import lombok.NoArgsConstructor;
 import main.java.com.dougron.mucus.algorithms.generic_generator.AccentType;
 import main.java.com.dougron.mucus.algorithms.mu_generator.enums.ChordToneType;
 import main.java.com.dougron.mucus.mu_framework.Mu;
@@ -22,7 +23,8 @@ import main.java.da_utils.static_chord_scale_dictionary.ChordToneName;
  * generates escape tones, including neighbour tones which are a special case of escape tone for repeated notes
  */
 
-public class MuG_ChordTone_RRP implements MuGenerator
+
+public class MuG_ChordTone_RRP extends DeserializableMuG implements MuGenerator
 {
 	
 	
@@ -46,6 +48,7 @@ public class MuG_ChordTone_RRP implements MuGenerator
 			int aJumpCount
 			)
 	{
+		super(MuG_ChordTone_RRP.class);
 		relativeRhythmicPosition = aRelativeRhythmicPosition;
 		chordToneType = aChordToneType;
 		jumpCount = aJumpCount;
@@ -58,6 +61,7 @@ public class MuG_ChordTone_RRP implements MuGenerator
 			ChordToneType aChordToneType
 			)
 	{
+		super(MuG_ChordTone_RRP.class);
 		relativeRhythmicPosition = aRelativeRhythmicPosition;
 		chordToneType = aChordToneType;
 	}
@@ -70,6 +74,7 @@ public class MuG_ChordTone_RRP implements MuGenerator
 			ChordToneName[] aChordToneNames
 			)
 	{
+		super(MuG_ChordTone_RRP.class);
 		relativeRhythmicPosition = aRelativeRhythmicPosition;
 		chordToneType = aChordToneType;
 		chordToneNames = aChordToneNames;
@@ -84,6 +89,7 @@ public class MuG_ChordTone_RRP implements MuGenerator
 			ChordToneName[] aChordToneNames
 			)
 	{
+		super(MuG_ChordTone_RRP.class);
 		relativeRhythmicPosition = aRelativeRhythmicPosition;
 		chordToneType = aChordToneType;
 		chordToneNames = aChordToneNames;
@@ -309,13 +315,13 @@ public class MuG_ChordTone_RRP implements MuGenerator
 	public Element getXMLElement(Document document)
 	{
 		Element element = document.createElement("mu_generator");
-		element.setAttribute("type", "MuG_EscapeTone_RRP");
+		element.setAttribute("type", "MuG_ChordTone_RRP");
 		
 		Element parentIndex = document.createElement("parent_index");
 		parentIndex.appendChild(document.createTextNode("" + parent.getMuIndex()));
 		element.appendChild(parentIndex);
 		
-		Element escape_tone_type = document.createElement("escape_tone_type");
+		Element escape_tone_type = document.createElement("chord_tone_type");
 		escape_tone_type.appendChild(document.createTextNode("" + chordToneType));
 		element.appendChild(escape_tone_type);
 		
@@ -340,6 +346,19 @@ public class MuG_ChordTone_RRP implements MuGenerator
 	
 	
 	
+	public static MuGenerator getMuGeneratorFromXMLElementForChordToneNamedAsEscapeToneError(Element element)
+	{
+		// in this error, MuG_ChordTone_RRP was erroneously named MuG_EscapeTone_RRP in the muxml file
+		// and somehow the chord_tone_type became escape_tone_type
+		Element relative_rhythmic_position = (Element)element.getElementsByTagName("relative_rhythmic_position").item(0);
+		RelativeRhythmicPosition rrp = RelativeRhythmicPosition.getRelativeRhythmicPositionFromXMLElement(relative_rhythmic_position);		
+		ChordToneType ctt = ChordToneType.valueOf(element.getElementsByTagName("escape_tone_type").item(0).getTextContent());
+		int jc = Integer.parseInt(element.getElementsByTagName("jump_count").item(0).getTextContent());
+		return new MuG_ChordTone_RRP(rrp, ctt, jc);
+	}
+	
+	
+	
 	@Override
 	public JSONObject getJSONObject ()
 	{
@@ -357,7 +376,7 @@ public class MuG_ChordTone_RRP implements MuGenerator
 			content.put("chordToneNames", arr);
 		}
 		JSONObject json = new JSONObject();
-		json.put("MuG_EscapeTone_RRP", content);
+		json.put("MuG_ChordTone_RRP", content);
 		return json;
 	}
 	
@@ -365,7 +384,7 @@ public class MuG_ChordTone_RRP implements MuGenerator
 	public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("MuG_EscapeTone_RRP: " + chordToneType);
+		sb.append("MuG_ChordTone_RRP: " + chordToneType);
 		sb.append("\nrelativeRhythmicPosition=" + relativeRhythmicPosition.toString());
 		if (chordToneNames != null)
 		{
@@ -410,7 +429,7 @@ public class MuG_ChordTone_RRP implements MuGenerator
 	public String toOneLineStringForJSON ()
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("MuG_EscapeTone_RRP:" + chordToneType);
+		sb.append("MuG_ChordTone_RRP:" + chordToneType);
 		sb.append(" relativeRhythmicPosition=" + relativeRhythmicPosition.toString() + " ");
 		if (chordToneNames != null)
 		{

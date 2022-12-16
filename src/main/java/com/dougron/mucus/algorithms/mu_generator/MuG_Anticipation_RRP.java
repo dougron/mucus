@@ -6,13 +6,14 @@ import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import lombok.NoArgsConstructor;
 import main.java.com.dougron.mucus.algorithms.generic_generator.AccentType;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.data_types.MuNote;
 import main.java.com.dougron.mucus.mu_framework.data_types.RelativeRhythmicPosition;
 import main.java.com.dougron.mucus.mu_framework.mu_tags.MuTag;
 
-public class MuG_Anticipation_RRP implements MuGenerator
+public class MuG_Anticipation_RRP extends DeserializableMuG implements MuGenerator
 {
 	
 	private Mu parent;
@@ -25,6 +26,7 @@ public class MuG_Anticipation_RRP implements MuGenerator
 	
 	public MuG_Anticipation_RRP(RelativeRhythmicPosition aRelativeRhythmicPosition)
 	{
+		super(MuG_Anticipation_RRP.class);
 		relativeRhythmicPosition = aRelativeRhythmicPosition;
 	}
 
@@ -204,8 +206,5 @@ public class MuG_Anticipation_RRP implements MuGenerator
 		return json;
 	}
 
-
-
-	
 
 }

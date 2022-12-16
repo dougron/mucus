@@ -38,6 +38,6 @@ public interface MucusOutputManager
 
 	void saveBotVariationOptionItem (MucusInteractionData listMid);
 	
-	
+	void setPath(String aPath);
 
 }

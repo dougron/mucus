@@ -166,4 +166,13 @@ public class ConsoleOutputManager implements MucusOutputManager
 		System.out.println(consoleString + "saveBotVariationOptionItem called for " + fileName);
 		
 	}
+
+
+
+	@Override
+	public void setPath(String aPath)
+	{
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -147,4 +147,13 @@ public class TestingOutputManager implements MucusOutputManager
 		
 	}
 
+
+
+	@Override
+	public void setPath(String aPath)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
 }

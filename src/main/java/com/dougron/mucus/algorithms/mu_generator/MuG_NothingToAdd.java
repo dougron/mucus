@@ -4,12 +4,21 @@ import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import lombok.NoArgsConstructor;
 import main.java.com.dougron.mucus.algorithms.generic_generator.AccentType;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 
-public class MuG_NothingToAdd implements MuGenerator
+
+public class MuG_NothingToAdd extends DeserializableMuG implements MuGenerator
 {
 	
+	public MuG_NothingToAdd()
+	{
+		super(MuG_NothingToAdd.class);
+	}
+
+
+
 	Mu parent;
 	private Object[] parameterObjectArray = new Object[] {"MuG_NothingToAdd"};
 	
