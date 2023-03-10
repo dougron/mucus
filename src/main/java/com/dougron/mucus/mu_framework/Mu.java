@@ -463,22 +463,28 @@ public class Mu
 	
 	
 	
-	public void addMu(Mu aMu, double aPositionInQuarters)
+	public void addMu(Mu aMu, double aPositionInQuarters) 
 	{
 //		System.out.println("addMu(" + aMu.getName() + ", " + aPositionInQuarters + ")");
-		aMu.setParent(this);
-		aMu.setPositionModel(new BeginningOfParentInQuarters(aPositionInQuarters, aMu));
-		mus.add(aMu);
-		if (lengthModel instanceof LengthFromChildren) 
+		if (this == aMu)
 		{
-			lengthModel.calculateLength(mus);
-		}
+			System.out.println("trying to add Mu as a child to itself");
+		} 
 		else
 		{
-			if (!aMu.isFixedLengthInQuarters()) aMu.setLengthInQuarters(DEFAULT_FIXED_LENGTH_IN_QUARTERS);
-		}
+			aMu.setParent(this);
+			aMu.setPositionModel(new BeginningOfParentInQuarters(aPositionInQuarters, aMu));
+			mus.add(aMu);
+			if (lengthModel instanceof LengthFromChildren) 
+			{
+				lengthModel.calculateLength(mus);
+			}
+			else
+			{
+				if (!aMu.isFixedLengthInQuarters()) aMu.setLengthInQuarters(DEFAULT_FIXED_LENGTH_IN_QUARTERS);
+			}
 //		addMu(aMu, new BarsAndBeats(0, aPositionInQuarters));	
-		
+		}
 	}
 
 

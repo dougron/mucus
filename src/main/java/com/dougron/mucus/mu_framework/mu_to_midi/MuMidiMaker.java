@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import org.nd4j.shade.guava.collect.ImmutableSortedMap;
+import com.google.common.collect.ImmutableSortedMap;
 
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.data_types.MuNote;

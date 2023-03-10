@@ -14,8 +14,8 @@ import main.java.com.dougron.mucus.mu_framework.position_model.PositionIsZeroInB
 import main.java.com.dougron.mucus.mucus_output_manager.mucus_lom_injector.MuucusLOMInjector;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.MuXMLMaker;
 import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
+import main.java.da_utils.timed_notes_and_controllers.TimedNote;
 import test.java.com.dougron.mucus.TestingStuff;
-import timed_notes_and_controllers.TimedNote;
 
 /**
  * class to wrap static code to output material from mucus_test items

@@ -13,8 +13,6 @@ import org.json.JSONObject;
 import com.google.common.base.Preconditions;
 
 import main.java.com.dougron.mucus.algorithms.mu_chord_tone_and_embellishment.ChordToneAndEmbellishmentTagger;
-import main.java.com.dougron.mucus.algorithms.mu_zzaj_dynamics.MuZzajDynamics;
-import main.java.com.dougron.mucus.algorithms.mu_zzaj_dynamics.lstm_handler.MuZzajDynamics_LSTM_256_256;
 import main.java.com.dougron.mucus.algorithms.part_generators.bass_part_generator.BassPartGenerator;
 import main.java.com.dougron.mucus.algorithms.part_generators.chord_part_generator.ChordPartGenerator;
 import main.java.com.dougron.mucus.algorithms.part_generators.drum_part_generator.DrumPartGenerator;
@@ -35,7 +33,7 @@ public class MucusInteractionDataFactory
 	private static final int NON_ACCENT_DYNAMIC = 32;
 //	private static final double SOME_SMALL_AMOUNT_BELOW_WHICH_NOTES_COULD_BE_SEEN_TO_BE_CONTEMPORANEOUS = 0.005;
 //	private static final double DYNAMIC_ACCENT_THRESHOLD = 0.5;
-	private static final MuZzajDynamics dynamicsModel = new MuZzajDynamics_LSTM_256_256();
+//	private static final MuZzajDynamics dynamicsModel = new MuZzajDynamics_LSTM_256_256();
 	
 	
 
@@ -99,8 +97,8 @@ public class MucusInteractionDataFactory
 		ChordToneAndEmbellishmentTagger.tagSyncopations(mu1);
 //		addMucusDynamics(mu1);
 //		addBinaryComparisonDynamics(mu1);
-//		addBinaryLengthComparisonDynamics(mu1);
-		addLSTMMucusDynamics(mu1);
+		addBinaryLengthComparisonDynamics(mu1);
+//		addLSTMMucusDynamics(mu1);
 		
 		getChordsPartForMu(parent, po, mu1);		
 		getBassPartForMu(parent, po, mu1);		
@@ -114,14 +112,14 @@ public class MucusInteractionDataFactory
 	
 	
 	
-	private static void addLSTMMucusDynamics (Mu aMu)
-	{
-		List<Mu> muList = aMu.getMusWithNotes();
-		Collections.sort(muList, Mu.globalPositionInQuartersComparator);
-		dynamicsModel.getPrediction(muList);
-		setVelocitiesOfMuNotesBasedOnDynamicAccentTag(muList);
-		
-	}
+//	private static void addLSTMMucusDynamics (Mu aMu)
+//	{
+//		List<Mu> muList = aMu.getMusWithNotes();
+//		Collections.sort(muList, Mu.globalPositionInQuartersComparator);
+//		dynamicsModel.getPrediction(muList);
+//		setVelocitiesOfMuNotesBasedOnDynamicAccentTag(muList);
+//		
+//	}
 
 
 
@@ -204,18 +202,18 @@ public class MucusInteractionDataFactory
 
 
 
-	private static Mu addMucusDynamics (Mu aMu)
-	{
-		List<Mu> musWithNotes = aMu.getMusWithNotes();
-		if (musWithNotes.size() > 7)
-		{
-			Collections.sort(musWithNotes, Mu.globalPositionInQuartersComparator);
-			tagNotesWithDynamicAccentUsing8NearestNotesNN(musWithNotes);
-			setVelocitiesOfMuNotesBasedOnDynamicAccentTag(musWithNotes);
-		}
-		
-		return aMu;
-	}
+//	private static Mu addMucusDynamics (Mu aMu)
+//	{
+//		List<Mu> musWithNotes = aMu.getMusWithNotes();
+//		if (musWithNotes.size() > 7)
+//		{
+//			Collections.sort(musWithNotes, Mu.globalPositionInQuartersComparator);
+//			tagNotesWithDynamicAccentUsing8NearestNotesNN(musWithNotes);
+//			setVelocitiesOfMuNotesBasedOnDynamicAccentTag(musWithNotes);
+//		}
+//		
+//		return aMu;
+//	}
 
 
 
@@ -251,16 +249,16 @@ public class MucusInteractionDataFactory
 //	}
 	
 	
-	public static void tagNotesWithDynamicAccentUsing8NearestNotesNN (
-			List<Mu> musWithNotes)
-	{
-		List<Mu> sortList = new ArrayList<Mu>(musWithNotes);
-		for (Mu mu: musWithNotes)
-		{
-			Collections.sort(sortList, Mu.getAbsoluteQuartersDistanceComparator(mu.getGlobalPositionInQuarters()));
-			dynamicsModel.getPrediction(sortList);
-		}
-	}
+//	public static void tagNotesWithDynamicAccentUsing8NearestNotesNN (
+//			List<Mu> musWithNotes)
+//	{
+//		List<Mu> sortList = new ArrayList<Mu>(musWithNotes);
+//		for (Mu mu: musWithNotes)
+//		{
+//			Collections.sort(sortList, Mu.getAbsoluteQuartersDistanceComparator(mu.getGlobalPositionInQuarters()));
+//			dynamicsModel.getPrediction(sortList);
+//		}
+//	}
 
 
 

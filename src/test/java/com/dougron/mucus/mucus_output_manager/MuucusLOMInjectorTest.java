@@ -10,9 +10,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import main.java.com.dougron.mucus.mucus_output_manager.mucus_lom_injector.MuucusLOMInjector;
+import main.java.da_utils.timed_notes_and_controllers.Note;
+import main.java.da_utils.timed_notes_and_controllers.TimedNote;
 import main.java.da_utils.udp.udp_utils.OSCMessMaker;
-import timed_notes_and_controllers.Note;
-import timed_notes_and_controllers.TimedNote;
 
 class MuucusLOMInjectorTest
 {

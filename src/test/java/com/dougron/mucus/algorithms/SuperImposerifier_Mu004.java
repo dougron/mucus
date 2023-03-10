@@ -1,8 +1,10 @@
 package test.java.com.dougron.mucus.algorithms;
 
-import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 import main.java.com.dougron.mucus.algorithms.superimposifier.left_to_right.SuFiSu_LeftToRight;
 import main.java.com.dougron.mucus.algorithms.superimposifier.left_to_right.SuFi_IntervalModel_Generator;
