@@ -21,7 +21,7 @@ class Ruler_Test
 	
 	
 	@BeforeEach
-	private void setup()
+	void setup()
 	{
 		r = new TimeSignatureListAndGenAndTempoListRuler();
 	}

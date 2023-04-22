@@ -2,6 +2,7 @@ package main.java.com.dougron.mucus.mu_framework.mu_xml_utility;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class MuXMLUtility
 		int index = 0;
 		List<Mu> muList = getListOfAllMusWithMuIndexSet(aMu, index);
 		try 
-	  	{
+		{
 			Document document = getDocument();
 	        Element root = document.createElement("mu_hierarchy"); 
           	document.appendChild(root);          	
@@ -91,6 +92,47 @@ public class MuXMLUtility
 		}
 		return muMap.get(0);
 	}
+	
+	
+	
+	public static String getMuAsXmlString(Mu aMu)
+	{
+		TransformerFactory tf = TransformerFactory.newInstance();
+		Transformer transformer;
+		int index = 0;
+		List<Mu> muList = getListOfAllMusWithMuIndexSet(aMu, index);
+		try 
+		{
+			Document document = getDocument();
+	        Element root = document.createElement("mu_hierarchy"); 
+          	document.appendChild(root);          	
+
+
+          	for (Mu mu: muList)
+          	{
+          		root.appendChild(getMuXMLContent(document, mu));
+          	}
+ 
+          
+//          	doTheTransforminAndStreamin(aPath, document);
+          	transformer = tf.newTransformer();
+          	StringWriter writer = new StringWriter();
+          	transformer.transform(new DOMSource(root), new StreamResult(writer));
+          	return writer.getBuffer().toString();
+	  	} 
+	  	catch (ParserConfigurationException pce) 
+	  	{
+          	pce.printStackTrace();
+      	} 
+      	catch (TransformerException tfe) 
+      	{
+          	tfe.printStackTrace();
+      	}
+		return "";
+	}
+	
+	
+// ----- privates -------------------------------------------------------
 	
 	
 	
