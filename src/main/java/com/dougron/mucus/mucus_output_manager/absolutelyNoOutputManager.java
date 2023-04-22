@@ -7,7 +7,7 @@ import main.java.com.dougron.mucus.algorithms.random_melody_generator.RMRandomNu
 import main.java.com.dougron.mucus.algorithms.random_melody_generator.RandomMelodyParameterObject;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 
-public class absolutelyNoOutputManager implements MucusOutputManager
+public class AbsolutelyNoOutputManager implements MucusOutputManager
 {
 
 	@Override
