@@ -33,6 +33,7 @@ public class MuXMLMaker {
 					MuTag.PART_MELODY, 
 					MuTag.PART_CHORDS, 
 					MuTag.PART_BASS, 
+					MuTag.PART_DRUMS, 
 					MuTag.PART_1, 
 					MuTag.PART_2, 
 					MuTag.PART_3,
@@ -43,6 +44,7 @@ public class MuXMLMaker {
 			{
 					MuTag.TREBLE_CLEF, 
 					MuTag.TREBLE_CLEF, 
+					MuTag.BASS_CLEF, 
 					MuTag.BASS_CLEF, 
 					MuTag.TREBLE_CLEF, 
 					MuTag.TREBLE_CLEF, 

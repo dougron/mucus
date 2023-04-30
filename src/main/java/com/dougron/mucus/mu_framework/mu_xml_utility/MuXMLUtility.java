@@ -2,6 +2,7 @@ package main.java.com.dougron.mucus.mu_framework.mu_xml_utility;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +23,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuGenerator;
@@ -81,6 +83,26 @@ public class MuXMLUtility
 		try
 		{
 			Document doc = getXMLDocumentToLoad(aPath);   
+			NodeList nodeList = doc.getElementsByTagName("mu"); 
+			
+			loadMuMap(muMap, nodeList);		
+			makeParentChildSiblingPositionRelationships(muMap, nodeList);			 
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		return muMap.get(0);
+	}
+
+
+
+	public static Mu getMuFromXmlString(String muAsXml)
+	{
+		HashMap<Integer, Mu> muMap = new HashMap<Integer, Mu>();
+		try
+		{
+			Document doc = getXMLDocumentFromXmlString(muAsXml);   
 			NodeList nodeList = doc.getElementsByTagName("mu"); 
 			
 			loadMuMap(muMap, nodeList);		
@@ -489,6 +511,19 @@ public class MuXMLUtility
 		return doc;
 	}
 	
+	
+	
+	private static Document getXMLDocumentFromXmlString(String xmlString)
+			throws ParserConfigurationException, SAXException, IOException
+	{
+//		File file = new File(aPath);  
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();  
+		DocumentBuilder db = dbf.newDocumentBuilder();  
+		Document doc = db.parse(new InputSource(new StringReader(xmlString)));  
+		doc.getDocumentElement().normalize();
+		return doc;
+	}
+	
 
 
 
@@ -717,5 +752,6 @@ public class MuXMLUtility
 		name.appendChild(document.createTextNode(aMu.getName()));
 		element.appendChild(name);
 	}
+
 
 }
