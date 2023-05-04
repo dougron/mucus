@@ -471,7 +471,7 @@ public class MuXMLUtility
 				case "BeginningOfParentInBarsAndBeats":
 					barPosition = Integer.parseInt(positionElement.getElementsByTagName("bar_position").item(0).getTextContent());
 					quartersPosition = Double.parseDouble(positionElement.getElementsByTagName("beat_position").item(0).getTextContent());
-					muMap.get(parentIndex).addMu(child, new BarsAndBeats(barPosition, quartersPosition));
+					muMap.get(parentIndex).addMuWithoutLengthAdjustment(child, new BarsAndBeats(barPosition, quartersPosition));
 					break;
 				case "BeginningOfParentInQuarters":
 					quartersPosition = Double.parseDouble(positionElement.getElementsByTagName("position_in_quarters").item(0).getTextContent());

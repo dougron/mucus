@@ -435,7 +435,31 @@ public class Mu
 			lengthModel.calculateLength(mus);
 		}
 		Collections.sort(mus, globalPositionInQuartersComparator);
-		
+	}
+	
+	
+	
+	// hack for MuXMLMaker because of loss of length of structure tone when deserializing
+	public void addMuWithoutLengthAdjustment(Mu aMu, BarsAndBeats aBarsAndBeatsPosition)
+	{
+//		System.out.println("addMu(" + aMu.getName() + ", " + aBarsAndBeatsPosition.toString() + ")");
+		if (lengthModel instanceof FixedLengthInBars || lengthModel instanceof FixedLengthInQuarters)
+		{
+			aMu.setParent(this);
+			aMu.setPositionModel(new BeginningOfParentInBarsAnBeats(aBarsAndBeatsPosition, aMu));
+			// this is the line removed from addMu
+//			if (!aMu.isFixedLengthInQuarters()) aMu.setLengthInQuarters(DEFAULT_FIXED_LENGTH_IN_QUARTERS);
+			aMu.setHasTimeSignatureGenerator(false);
+			mus.add(aMu);
+		}		
+		else if (lengthModel instanceof LengthFromChildren || lengthModel instanceof FixedLengthInBarsAndBeats)
+		{
+			aMu.setParent(this);
+			aMu.setPositionModel(new BeginningOfParentInBarsAnBeats(aBarsAndBeatsPosition, aMu));
+			mus.add(aMu);
+			lengthModel.calculateLength(mus);
+		}
+		Collections.sort(mus, globalPositionInQuartersComparator);
 	}
 	
 	

@@ -28,8 +28,8 @@ class MuXmlUtility_Tests
 		String xmlString = MuXMLUtility.getMuAsXmlString(mu);
 		Mu decodedMu = MuXMLUtility.getMuFromXmlString(xmlString);
 		assertThat(mu.toString()).isEqualTo(decodedMu.toString());
-		System.out.println(mu.toString());
-		System.out.println(decodedMu.toString());
+//		System.out.println(mu.toString());
+//		System.out.println(decodedMu.toString());
 	}
 	
 	
