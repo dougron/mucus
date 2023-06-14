@@ -116,6 +116,12 @@ public class ChordList
 		}
 		
 	}
+	
+	
+	public boolean hasProgressionAnalyzer()
+	{
+		return pa != null;
+	}
 		
 		
 	
