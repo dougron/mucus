@@ -335,15 +335,12 @@ public class MuG_ApproachTone_RRP extends DeserializableMuG implements MuGenerat
 	public Element getXMLElement(Document document)
 	{
 		Element element = document.createElement("mu_generator");
-		element.setAttribute("type", "MuG_EscapeTone_RRP");
+		element.setAttribute("type", "MuG_ApproachTone_RRP");
 		
 		Element parentIndex = document.createElement("parent_index");
 		parentIndex.appendChild(document.createTextNode("" + parent.getMuIndex()));
 		element.appendChild(parentIndex);
 		
-//		Element escape_tone_type = document.createElement("escape_tone_type");
-//		escape_tone_type.appendChild(document.createTextNode("" + escapeToneType));
-//		element.appendChild(escape_tone_type);
 		
 		Element neighbour_tone_type = document.createElement("neighbour_tone_type");
 		neighbour_tone_type.appendChild(document.createTextNode("" + neighbourToneType));
@@ -363,7 +360,6 @@ public class MuG_ApproachTone_RRP extends DeserializableMuG implements MuGenerat
 	{
 		Element relative_rhythmic_position = (Element)element.getElementsByTagName("relative_rhythmic_position").item(0);
 		RelativeRhythmicPosition rrp = RelativeRhythmicPosition.getRelativeRhythmicPositionFromXMLElement(relative_rhythmic_position);		
-//		EscapeToneType ett = EscapeToneType.valueOf(element.getElementsByTagName("escape_tone_type").item(0).getTextContent());
 		NeighbourToneType ntt = NeighbourToneType.valueOf(element.getElementsByTagName("neighbour_tone_type").item(0).getTextContent());
 		AccentType at = AccentType.valueOf(element.getElementsByTagName("accent_type").item(0).getTextContent());
 		return new MuG_ApproachTone_RRP(rrp, at, ntt);

@@ -1806,6 +1806,12 @@ public class Mu
 		muGenerator = mug;	
 		muGenerator.setParent(this);
 	}
+	
+	
+	public void clearMuGenerator()
+	{
+		muGenerator = null;
+	}
 
 
 

@@ -61,6 +61,7 @@ public class StructureToneEmbellisher
 					if (recentlyAddedMu.getGlobalPositionInQuarters() < globalCutOffPositionInQuarters)
 					{
 						currentMu.getMus().remove(0);
+						currentMu.clearMuGenerator();
 						break;
 					}
 					currentMu = currentMu.getMus().get(0);
