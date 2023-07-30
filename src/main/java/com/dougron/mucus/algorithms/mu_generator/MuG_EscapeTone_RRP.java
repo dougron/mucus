@@ -211,7 +211,12 @@ public class MuG_EscapeTone_RRP extends DeserializableMuG implements MuGenerator
 
 
 
-	private void dealWithContourAndMakeNote(Mu mu, Mu previousMu, int contour, Mu embellishmentMu, double lengthInQuarters)
+	private void dealWithContourAndMakeNote(
+			Mu mu, 
+			Mu previousMu, 
+			int contour, 
+			Mu embellishmentMu, 
+			double lengthInQuarters)
 	{
 		switch (escapeToneType)
 		{
@@ -224,10 +229,30 @@ public class MuG_EscapeTone_RRP extends DeserializableMuG implements MuGenerator
 		case STEP_JUMP:
 			for (MuNote note: previousMu.getMuNotes())
 			{
-				makeNote(previousMu.getTopPitch(), -contour, lengthInQuarters, mu, embellishmentMu);
+				makeNote(note.getPitch(), -contour, lengthInQuarters, mu, embellishmentMu);
 			}
 		}
 	}
+	
+	
+	// old one, which I may have broken
+//	private void dealWithContourAndMakeNote(Mu mu, Mu previousMu, int contour, Mu embellishmentMu, double lengthInQuarters)
+//	{
+//		switch (escapeToneType)
+//		{
+//		case JUMP_STEP:
+//			for (MuNote note: mu.getMuNotes())
+//			{
+//				makeNote(note.getPitch(), contour, lengthInQuarters, mu, embellishmentMu);
+//			}
+//			break;
+//		case STEP_JUMP:
+//			for (MuNote note: previousMu.getMuNotes())
+//			{
+//				makeNote(previousMu.getTopPitch(), -contour, lengthInQuarters, mu, embellishmentMu);
+//			}
+//		}
+//	}
 
 
 

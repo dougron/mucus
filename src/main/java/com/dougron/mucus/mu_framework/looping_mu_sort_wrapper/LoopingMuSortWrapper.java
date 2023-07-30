@@ -49,4 +49,10 @@ public class LoopingMuSortWrapper
 			return 0;
 		}		
 	};
+	
+	
+	public String toString()
+	{
+		return mu.toString();
+	}
 }

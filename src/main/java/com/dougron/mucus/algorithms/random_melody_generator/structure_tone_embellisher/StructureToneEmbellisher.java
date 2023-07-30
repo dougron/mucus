@@ -7,6 +7,7 @@ import com.google.common.base.Preconditions;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuGenerator;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.data_types.MuNote;
+import main.java.com.dougron.mucus.mu_framework.mu_tags.MuTag;
 
 /*
  * based on the RandomMelodyGenerator.addEmbellishmentMus() call
@@ -49,6 +50,7 @@ public class StructureToneEmbellisher
 				else
 				{
 					recentlyAddedMu = currentMu.getMus().get(0);
+					recentlyAddedMu.addTag(MuTag.IS_EMBELLISHMENT);
 					if (aPo.getNonAccentVelocity() != 0)
 					{
 						for (MuNote mn: recentlyAddedMu.getMuNotes())

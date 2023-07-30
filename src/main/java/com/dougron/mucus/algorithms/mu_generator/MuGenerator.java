@@ -6,6 +6,7 @@ import org.w3c.dom.Element;
 
 import main.java.com.dougron.mucus.algorithms.generic_generator.AccentType;
 import main.java.com.dougron.mucus.mu_framework.Mu;
+import main.java.com.dougron.mucus.mu_framework.data_types.RelativeRhythmicPosition;
 
 public interface MuGenerator
 {
@@ -65,5 +66,8 @@ public interface MuGenerator
 	String toVeryShortOneLineString ();
 	String toOneLineStringForJSON ();
 	String getClassName();
+	
+//	public RelativeRhythmicPosition getRelativeRhythmicPosition();
+//	public void setRelativeRhythmicPosition(RelativeRhythmicPosition rrp);
 	
 }
