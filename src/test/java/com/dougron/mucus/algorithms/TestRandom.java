@@ -44,6 +44,16 @@ public class TestRandom extends Random
 	
 	
 	
+	public int nextInt(int range)
+	{
+		double x = list.get(readIndex);
+		readIndex++;
+		if (readIndex == list.size()) readIndex = 0;
+		return (int)(x * range);
+	}
+	
+	
+	
 	public int size()
 	{
 		return list.size();

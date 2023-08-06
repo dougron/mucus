@@ -1,10 +1,14 @@
 package main.java.com.dougron.mucus.algorithms.mu_generator;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import com.google.common.math.DoubleMath;
 
 import lombok.NoArgsConstructor;
 import main.java.com.dougron.mucus.algorithms.generic_generator.AccentType;
@@ -34,6 +38,7 @@ public class MuG_EscapeTone_RRP extends DeserializableMuG implements MuGenerator
 	private boolean hasParameterObjectArray;
 	private Object[] parameterObjectArray;
 	
+	private static final double epsilon = 0.001;
 	
 	@Override
 	public JSONObject getJSONObject ()
@@ -166,6 +171,7 @@ public class MuG_EscapeTone_RRP extends DeserializableMuG implements MuGenerator
 				accentType == AccentType.ACCENTED
 				&& mu.hasTag(MuTag.IS_STRUCTURE_TONE)
 				&& MuGenerator.accentBehaviour == AccentBehaviour.ONLY_ON_STRUCTURE_TONES
+						&& associatedChordToneCanMove(mu, gap)
 				) 
 			moveAssociatedChordTone(mu, gap);
 		
@@ -181,7 +187,19 @@ public class MuG_EscapeTone_RRP extends DeserializableMuG implements MuGenerator
 			dealWithNegativeContour(mu, previousMu, embellishment, gap);
 		}
 	}
-
+	
+	
+	private boolean associatedChordToneCanMove(Mu mu, double gap)
+	{
+		Mu parentOfStructureTone = mu.getParent();
+		List<Mu> collidedMus = parentOfStructureTone.getMus().stream()
+				.filter(e -> e.hasMuNotes() && DoubleMath.fuzzyEquals(
+						mu.getGlobalPositionInQuarters() + gap, 
+						e.getGlobalPositionInQuarters(), 
+						epsilon))
+				.collect(Collectors.toList());
+		return collidedMus.size() == 0;
+	}
 	
 	
 	private void moveAssociatedChordTone(Mu mu, double offsetInQuarters)

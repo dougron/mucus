@@ -3,12 +3,15 @@ package main.java.com.dougron.mucus.algorithms.mu_generator;
 
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import lombok.NoArgsConstructor;
+import com.google.common.math.DoubleMath;
+
 import main.java.com.dougron.mucus.algorithms.generic_generator.AccentType;
 import main.java.com.dougron.mucus.algorithms.mu_generator.enums.NeighbourToneType;
 import main.java.com.dougron.mucus.mu_framework.Mu;
@@ -32,6 +35,8 @@ public class MuG_ApproachTone_RRP extends DeserializableMuG implements MuGenerat
 	private NeighbourToneType neighbourToneType;
 	private boolean hasParameterObjectArray;
 	private Object[] parameterObjectArray;
+	
+	private static final double epsilon = 0.001;
 	
 	
 	
@@ -164,6 +169,7 @@ public class MuG_ApproachTone_RRP extends DeserializableMuG implements MuGenerat
 				accentType == AccentType.ACCENTED
 				&& mu.hasTag(MuTag.IS_STRUCTURE_TONE)
 				&& MuGenerator.accentBehaviour == AccentBehaviour.ONLY_ON_STRUCTURE_TONES
+				&& associatedChordToneCanMove(mu, gap)
 				) 
 			moveAssociatedChordTone(mu, gap);
 		
@@ -181,6 +187,20 @@ public class MuG_ApproachTone_RRP extends DeserializableMuG implements MuGenerat
 	}
 
 	
+	
+	private boolean associatedChordToneCanMove(Mu mu, double gap)
+	{
+		Mu parentOfStructureTone = mu.getParent();
+		List<Mu> collidedMus = parentOfStructureTone.getMus().stream()
+				.filter(e -> e.hasMuNotes() && DoubleMath.fuzzyEquals(
+						mu.getGlobalPositionInQuarters() + gap, 
+						e.getGlobalPositionInQuarters(), 
+						epsilon))
+				.collect(Collectors.toList());
+		return collidedMus.size() == 0;
+	}
+
+
 	
 	private void moveAssociatedChordTone(Mu mu, double offsetInQuarters)
 	{
