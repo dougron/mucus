@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>Mucus</groupId>
 	<artifactId>Mucus</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 
@@ -77,7 +77,7 @@
 		<dependency>
 			<groupId>com.dougronthebold</groupId>
 			<artifactId>da_utils2</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>[0.0.1, 0.1.0)</version>
 		</dependency>
 
 	</dependencies>
