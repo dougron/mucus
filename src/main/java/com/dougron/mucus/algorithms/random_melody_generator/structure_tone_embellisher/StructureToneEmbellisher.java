@@ -20,7 +20,11 @@ import main.java.com.dougron.mucus.mu_framework.mu_tags.MuTag;
 public class StructureToneEmbellisher
 {
 
-	public static Mu addEmbellishmentMus(Mu aMu, StructureToneEmbellisherParameterObject aPo)
+	public static Mu addEmbellishmentMus(
+			Mu aMu, 
+			StructureToneEmbellisherParameterObject aPo,
+			MuTag[] tagsToAddToEmbellishments
+			)
 	{
 		for (int key: aPo.getEmbellishmentRepetitionPattern())
 		{
@@ -51,6 +55,10 @@ public class StructureToneEmbellisher
 				{
 					recentlyAddedMu = currentMu.getMus().get(0);
 					recentlyAddedMu.addTag(MuTag.IS_EMBELLISHMENT);
+					for (MuTag tag: tagsToAddToEmbellishments)
+					{
+						recentlyAddedMu.addTag(tag);
+					}
 					if (aPo.getNonAccentVelocity() != 0)
 					{
 						for (MuNote mn: recentlyAddedMu.getMuNotes())
@@ -74,6 +82,15 @@ public class StructureToneEmbellisher
 			previousStructureToneMu = structureTone;
 		}
 		return aMu;
+	}
+	
+	
+	
+	public static Mu addEmbellishmentMus(
+			Mu aMu, 
+			StructureToneEmbellisherParameterObject aPo)
+	{
+		return addEmbellishmentMus(aMu, aPo, new MuTag[] {});
 	}
 
 	

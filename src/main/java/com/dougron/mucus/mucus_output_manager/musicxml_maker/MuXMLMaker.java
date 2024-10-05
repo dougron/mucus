@@ -32,6 +32,7 @@ public class MuXMLMaker {
 			{
 					MuTag.PART_MELODY, 
 					MuTag.PART_CHORDS, 
+					MuTag.PART_PAD,
 					MuTag.PART_BASS, 
 					MuTag.PART_DRUMS, 
 					MuTag.PART_1, 
@@ -42,6 +43,7 @@ public class MuXMLMaker {
 			};
 	private static MuTag[] defaultScorePartClef = new MuTag[] 
 			{
+					MuTag.TREBLE_CLEF, 
 					MuTag.TREBLE_CLEF, 
 					MuTag.TREBLE_CLEF, 
 					MuTag.BASS_CLEF, 

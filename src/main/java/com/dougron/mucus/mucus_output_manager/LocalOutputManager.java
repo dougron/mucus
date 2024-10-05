@@ -23,6 +23,7 @@ import main.java.com.dougron.mucus.mucus_output_manager.continuous_integrator.Co
 import main.java.com.dougron.mucus.mucus_output_manager.mucus_lom_injector.MuucusLOMInjector;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.MuXMLMaker;
 
+
 public class LocalOutputManager implements MucusOutputManager
 {
 

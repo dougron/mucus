@@ -3088,6 +3088,14 @@ public class Mu
 	{
 		return muTagBundles.toArray(new MuTagBundle[muTagBundles.size()]);
 	}
+	
+	
+	
+	public void setMuTagBundles(List<MuTagBundle> bundles)
+	{
+		muTagBundles = new ArrayList<MuTagBundle>();
+		muTagBundles.addAll(bundles);
+	}
 
 
 

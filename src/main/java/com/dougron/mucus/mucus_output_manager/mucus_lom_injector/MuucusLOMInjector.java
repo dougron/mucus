@@ -154,14 +154,24 @@ public class MuucusLOMInjector
 	
 	public void startPlayback()
 	{
-		conn.sendUDPMessage(startPlaybackMessage);
+		conn.sendUDPMessage(getTransportMessage(1));
+	}
+
+
+
+	private OSCMessMaker getTransportMessage(int value)
+	{
+		OSCMessMaker mess = new OSCMessMaker();
+		mess.addItem("play");
+		mess.addItem(value);
+		return mess;
 	}
 	
 	
 	
 	public void stopPlayback()
 	{
-		conn.sendUDPMessage(stopPlaybackMessage);
+		conn.sendUDPMessage(getTransportMessage(0));
 	}
 	
 	

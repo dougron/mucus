@@ -33,6 +33,17 @@ public class TestRandom extends Random
 	}
 	
 	
+	public TestRandom(Double... aValues)
+	{
+		for (double value: aValues)
+		{
+			list.add(value);
+		}
+	}
+	
+	
+	
+	
 	
 	public double nextDouble()
 	{

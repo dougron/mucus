@@ -11,6 +11,7 @@ import main.java.com.dougron.mucus.mu_framework.data_types.MuNote;
 import main.java.com.dougron.mucus.mu_framework.mu_controller.MuController;
 import main.java.com.dougron.mucus.mu_framework.mu_tags.MuTag;
 import main.java.com.dougron.mucus.mu_framework.position_model.PositionIsZeroInBars;
+import main.java.com.dougron.mucus.mucus_output_manager.mu_output_manager.PartTrackAndClip;
 import main.java.com.dougron.mucus.mucus_output_manager.mucus_lom_injector.MuucusLOMInjector;
 import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.MuXMLMaker;
 import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
@@ -135,6 +136,28 @@ public class ContinuousIntegrator
 	
 	
 	
+	public static void injectMultiPartMuIntoLive
+	(
+			Mu aMu, 
+			List<PartTrackAndClip> partTrackAndClips,
+			List<MuController> muControllerList, 
+			MuucusLOMInjector aInjector
+			)
+	{	
+		aMu.setPositionModel(new PositionIsZeroInBars());
+		aMu.setParent(null);
+		double tempo = aMu.getStartTempo();
+		aInjector.sendDuplicateSceneMessage(0);
+		aInjector.setTempo(tempo);
+		setSceneTempoForAllClipIndicesInPartTrackAndClipIndexMap(tempo, partTrackAndClips, aInjector);
+		setSceneNameForAllClipIndicesInPartTrackAndClipIndexMap(aMu.getName(), partTrackAndClips, aInjector);
+		aInjector.sendControllerClearAllMessage();
+		sendNotesToLive(aMu, partTrackAndClips, aInjector);
+		sendControllersToLive(aMu, muControllerList, aInjector);
+	}
+	
+	
+	
 	private static void setSceneNameForAllClipIndicesInPartTrackAndClipIndexMap(
 			String aName,
 			Map<MuTag, Integer[]> aMap, 
@@ -145,6 +168,26 @@ public class ContinuousIntegrator
 		for (Integer[] indexArr: aMap.values())
 		{
 			sceneIndexSet.add(indexArr[1]);
+		}
+		for (Integer index: sceneIndexSet)
+		{
+			aInjector.setSceneName(aName, index);
+		}
+		
+	}
+	
+	
+	
+	private static void setSceneNameForAllClipIndicesInPartTrackAndClipIndexMap(
+			String aName,
+			List<PartTrackAndClip> partTrackAndClips, 
+			MuucusLOMInjector aInjector
+			)
+	{
+		Set<Integer> sceneIndexSet = new HashSet<Integer>();
+		for (PartTrackAndClip ptac: partTrackAndClips)
+		{
+			sceneIndexSet.add(ptac.getClipIndex());
 		}
 		for (Integer index: sceneIndexSet)
 		{
@@ -172,6 +215,26 @@ public class ContinuousIntegrator
 			aInjector.setSceneTempo(tempo, index);
 		}
 	}
+	
+	
+	
+	private static void setSceneTempoForAllClipIndicesInPartTrackAndClipIndexMap(
+			double tempo, 
+			List<PartTrackAndClip> partTrackAndClips,
+			MuucusLOMInjector aInjector
+			)
+	{
+		// make set of clipIndices
+		Set<Integer> sceneIndexSet = new HashSet<Integer>();
+		for (PartTrackAndClip ptac: partTrackAndClips)
+		{
+			sceneIndexSet.add(ptac.getClipIndex());
+		}
+		for (Integer index: sceneIndexSet)
+		{
+			aInjector.setSceneTempo(tempo, index);
+		}
+	}
 
 
 
@@ -189,6 +252,24 @@ public class ContinuousIntegrator
 
 
 
+	private static void sendNotesToLive(
+			Mu aMu, 
+			List<PartTrackAndClip> partTrackAndClips,
+			MuucusLOMInjector aInjector
+			) 
+	{
+		for (PartTrackAndClip ptac: partTrackAndClips)
+		{
+			ArrayList<Mu> taggedMus = aMu.getMuWithTag(ptac.getPartTag());
+			if (taggedMus.size() > 0)
+			{
+//				Integer[] trackAndClipIndex = partTrackAndClipIndexMap.get(muTag);
+				injectMuIntoLive(ptac.getTrackIndex(), ptac.getClipIndex(), taggedMus.get(0), aInjector);	// only adds the first one for now
+			}
+		}
+	}
+	
+	
 	private static void sendNotesToLive(
 			Mu aMu, 
 			Map<MuTag, Integer[]> partTrackAndClipIndexMap,
