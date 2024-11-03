@@ -1,8 +1,7 @@
 package test.java.com.dougron.mucus.mu_framework.musicxml_maker;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +16,12 @@ import main.java.com.dougron.mucus.mucus_output_manager.musicxml_maker.MuXMLMake
 import main.java.da_utils.render_name.RenderName;
 import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
 
-class TupletTripletFour
+
+/*
+ * made this while testing nested tuplets, and the TupletTripleFour
+ * did not want to work properly
+ */
+class TupletTripleFour_NewTest
 {
 	
 	MuOutputManager outputManager = MuOutputManager.builder()
@@ -25,35 +29,38 @@ class TupletTripletFour
 			.partTrackAndClip(new PartTrackAndClip(MuTag.PART_CHORDS, 1, 0))
 			.build();
 
-	@Test
-	void name_changed_test()
-	{
-		System.out.println("weeeeelllllll....");
-		assertThat(true).isFalse();
-//		Mu mu = makeMu();
-//		String filename = RenderName.dateAndTime();
-//		System.out.println(filename);
-//		mu.addTag(MuTag.PART_CHORDS);
-//		outputManager.outputToMusicXML(filename, mu);
 	
-//		String correctResult = "part=010\n" + 
-//				"measure=1\n" + 
-//				"time signature=4/4\n" + 
-//				"key signature=-5\n" + 
-//				"division=3\n" + 
-//				"note: notes=54,58, offset=0.0 length=1.33333333\n" + 
-//				"note: notes=56,60, offset=1.33333333 length=1.33333333\n" + 
-//				"note: notes=54,58, offset=2.66666667 length=1.33333333\n" + 
-//				"measure=2\n" + 
-//				"rest: offset=0.0 length=4.0\n";
-//		
-//		String result = MuXMLMaker.makeTestOutput(mu);
-//		assertEquals(correctResult, result);
+	
+	@Test
+	void test()
+	{
+//		System.out.println("weeeeelllllll....");
 		
+		Mu mu = makeMu();
+		String filename = RenderName.dateAndTime();
+//		System.out.println(filename);
+		mu.addTag(MuTag.PART_CHORDS);
+//		outputManager.outputToMusicXML(filename, mu);
+		
+		String correctResult = "part=010\n" + 
+		"measure=1\n" + 
+		"time signature=4/4\n" + 
+		"key signature=-5\n" + 
+		"division=3\n" + 
+		"note: notes=54,58, offset=0.0 length=1.33333333\n" + 
+		"note: notes=56,60, offset=1.33333333 length=1.33333333\n" + 
+		"note: notes=54,58, offset=2.66666667 length=1.33333333\n" + 
+		"measure=2\n" + 
+		"rest: offset=0.0 length=4.0\n";
+
+		String result = MuXMLMaker.makeTestOutput(mu);
+		assertEquals(correctResult, result);
+		
+//		System.out.println("aaaand done.");
 	}
 	
 	
-	private static Mu makeMu() 
+	private Mu makeMu() 
 	{
 		Mu mu = new Mu("010");
 		
@@ -63,8 +70,7 @@ class TupletTripletFour
 	}
 	
 	
-	
-	private static void tupletTestFour(Mu mu)
+	private void tupletTestFour(Mu mu)
 	{
 		mu.setTimeSignatureGenerator(TimeSignatureListGeneratorFactory
 				.getGenerator(TimeSignature.FOUR_FOUR));
@@ -81,7 +87,6 @@ class TupletTripletFour
 	}
 	
 	
-	
 	private static Mu makeHalfTriplet(int[] is, double aLengthInQuarters)
 	{
 		Mu mu = new Mu("triplet-holder");
@@ -94,7 +99,12 @@ class TupletTripletFour
 		{
 			if (i >= 0)		// cater for rest when i = -1
 			{
-				mu.addMu(makeNoteMu(new int[] {i, i + 4}, 4.0 / 3, "triplet"), new BarsAndBeats(0, microPos));
+				mu.addMu(makeNoteMu(
+							new int[] {i, i + 4}, 
+							4.0 / 3, 
+							"triplet"), 
+						new BarsAndBeats(0, microPos)
+				);
 			}
 						
 			microPos += 4.0 / 3;
@@ -104,7 +114,10 @@ class TupletTripletFour
 	
 	
 	
-	private static Mu makeNoteMu(int[] notes, double aLengthInQuarters, String name) 
+	private static Mu makeNoteMu(
+			int[] notes, 
+			double aLengthInQuarters, 
+			String name) 
 	{
 		Mu mu = new Mu(name);
 		mu.setLengthInQuarters(aLengthInQuarters);
@@ -114,5 +127,6 @@ class TupletTripletFour
 		}			
 		return mu;
 	}
+	
 
 }

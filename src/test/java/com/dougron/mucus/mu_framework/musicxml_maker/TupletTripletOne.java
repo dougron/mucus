@@ -60,7 +60,14 @@ public class TupletTripletOne
 		mu.addMu(makeNoteMu(new int[] {49, 53}, 1.0, "note"), new BarsAndBeats(0, 0.0));
 		mu.addMu(makeNoteMu(new int[] {51, 54}, 0.5, "note"), new BarsAndBeats(0, 1.0));
 		mu.addMu(makeNoteMu(new int[] {53, 56}, 0.5, "note"), new BarsAndBeats(0, 1.5));
-		mu.addMu(makeEighthTriplet(new int[] {-1, 56, 54}, 0, 2.0, 1.0), new BarsAndBeats(0, 2.0));
+		mu.addMu(makeEighthTriplet(
+					new int[] {-1, 56, 54}, 
+					0, 
+					2.0, 
+					1.0
+					), 
+				new BarsAndBeats(0, 2.0)
+				);
 		mu.addMu(makeNoteMu(53, 1.0, "note"), new BarsAndBeats(0, 3.0));
 	}
 	
@@ -78,7 +85,14 @@ public class TupletTripletOne
 		{
 			if (i >= 0)		// cater for rest when i = -1
 			{
-				mu.addMu(makeNoteMu(new int[] {i, i + 4}, 1.0 / 3, "triplet"), new BarsAndBeats(barIndex, microPos));
+				mu.addMu(
+						makeNoteMu(
+								new int[] {i, i + 4}, 
+								1.0 / 3, 
+								"triplet"
+								), 
+						new BarsAndBeats(barIndex, microPos)
+						);
 			}
 						
 			microPos += 1.0 / 3;

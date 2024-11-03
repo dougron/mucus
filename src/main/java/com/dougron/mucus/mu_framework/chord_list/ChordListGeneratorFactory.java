@@ -1,5 +1,10 @@
 package main.java.com.dougron.mucus.mu_framework.chord_list;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import main.java.da_utils.combo_variables.DoubleAndString;
+
 public class ChordListGeneratorFactory
 {
 
@@ -27,6 +32,33 @@ public class ChordListGeneratorFactory
 			return new FloatBarChordProgression((double)aParameterObjectArray[1], orr);
 		}
 		return null;
+	}
+	
+	
+	
+	public static ChordListGenerator with(String chordName)
+	{
+		return new SingleChordGenerator(new Chord((String)chordName));
+	}
+	
+	
+	
+	public static ChordListGenerator with(String... chordNames)
+	{
+		return new SimpleEvenChordProgression(chordNames);
+	}
+
+	
+	
+	public static ChordListGenerator with(double lengthInFloatBars, DoubleAndString... floatBarAndChordNames)
+	{
+		List<Object> list = new ArrayList<Object>();
+		for (DoubleAndString das: floatBarAndChordNames)
+		{
+			list.add(das.d);
+			list.add(das.str);
+		}
+		return new FloatBarChordProgression(lengthInFloatBars, list.toArray(new Object[list.size()]));
 	}
 	
 	

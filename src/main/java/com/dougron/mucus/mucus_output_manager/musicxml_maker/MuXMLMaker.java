@@ -32,6 +32,8 @@ public class MuXMLMaker {
 			{
 					MuTag.PART_MELODY, 
 					MuTag.PART_CHORDS, 
+					MuTag.PART_CHORDS_RIGHT_HAND,
+					MuTag.PART_CHORDS_LEFT_HAND,
 					MuTag.PART_PAD,
 					MuTag.PART_BASS, 
 					MuTag.PART_DRUMS, 
@@ -45,6 +47,8 @@ public class MuXMLMaker {
 			{
 					MuTag.TREBLE_CLEF, 
 					MuTag.TREBLE_CLEF, 
+					MuTag.TREBLE_CLEF, 
+					MuTag.BASS_CLEF, 
 					MuTag.TREBLE_CLEF, 
 					MuTag.BASS_CLEF, 
 					MuTag.BASS_CLEF, 

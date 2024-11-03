@@ -54,12 +54,21 @@ public class TupletBrokenSeptuplet
 	
 	private static void septupdoublet(Mu mu)
 	{
-		mu.setTimeSignatureGenerator(TimeSignatureListGeneratorFactory.getGenerator(TimeSignature.FOUR_FOUR));
+		mu.setTimeSignatureGenerator(
+				TimeSignatureListGeneratorFactory
+				.getGenerator(TimeSignature.FOUR_FOUR)
+				);
 		mu.setLengthInBars(1);
 		
 		mu.setXMLKey(-5);
 		
-		mu.addMu(makeSeptuplet(new int[] {54, 56, 54, 53, 51, 53}, new int[] {1, 2, 1, 1, 1, 1}, 1.0, 4), new BarsAndBeats(0, 0.0));	
+		mu.addMu(makeSeptuplet(
+				new int[] {54, 56, 54, 53, 51, 53}, 
+				new int[] {1, 2, 1, 1, 1, 1}, 
+				1.0, 
+				4), 
+			new BarsAndBeats(0, 0.0)
+			);	
 	}
 
 	
@@ -85,8 +94,14 @@ public class TupletBrokenSeptuplet
 		{
 			if (i >= 0)		// cater for rest when i = -1
 			{
-				mu.addMu(makeNoteMu(new int[] {i, i + 4}, aLengthInQuarters / numerator * lengths[index], "quadruplet"), new BarsAndBeats(0, microPos));
+				mu.addMu(makeNoteMu(
+						new int[] {i, i + 4}, 
+						aLengthInQuarters / numerator * lengths[index], 
+						"quadruplet"), 
+					new BarsAndBeats(0, microPos)
+					);
 			}
+			
 						
 			microPos += aLengthInQuarters / numerator * lengths[index];
 			index++;

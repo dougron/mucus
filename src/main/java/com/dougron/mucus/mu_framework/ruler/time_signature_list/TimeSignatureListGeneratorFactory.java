@@ -39,5 +39,19 @@ public class TimeSignatureListGeneratorFactory
 	}
 	
 	
+	public static TimeSignatureListGenerator with(TimeSignature... timeSignatures)
+	{
+		if (timeSignatures.length == 0)
+		{
+			return new SingleTimeSignature(DEFAULT_TIMESIGNATURE);
+		}
+		else if (timeSignatures.length == 1)
+		{
+			return new SingleTimeSignature(timeSignatures[0]);
+		}
+		return new RepeatingTimeSignatureList(timeSignatures);
+	}
+	
+	
 	
 }

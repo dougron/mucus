@@ -79,29 +79,37 @@ public class Mu
 	private KeySignatureMap ksm = KeySignatureMap.KEY_SIGNATURE_MAP_OF_C_MAJOR;
 	private List<MuNote> muNotes = null;
 
+	// could be depreciated in favour of subdiv  positioning
 	private boolean isTupletPrintContainer;
 	private int tupletNumerator;
 	private int tupletDenominator;
 	
+	// this should become a muTag
 	private boolean hasLeadingDoubleBar = false;
 
+	// check for relevance, may only be used in case of MuGenerator or SuFiSu
 	private int startPitch;
 
+	// to be depreciated
 	private SuFiSu sufisu = null;
 	private MuGenerator muGenerator = null;
 
+	// to be depreciated
 	private List<MuRelationship> muRelationships = null;
 
 	private transient Mu nextMu = null;
 	private transient Mu previousMu = null;
 	private int muIndex = 0;
 	
+	// need to actually start using this puppy
 	private double controllerValue;
 	private boolean hasControllerValue = false;
 	
 	private int muId;
 	private static int muIdCount = 0;
 	
+	
+// deep copy ----------------------------------------------------------------
 	
 	public Mu getDeepCopy()
 	{
@@ -176,12 +184,6 @@ public class Mu
 
 
 
-	public PositionModel getPositionModel()
-	{
-		return positionModel;		
-	}
-
-
 
 	public String getDeepCopyContentString()
 	{
@@ -223,15 +225,10 @@ public class Mu
 	}
 
 
-
-//	private void addMuToParentWithSamePositionModel(Mu aParentMu, Mu aMu)
-//	{
-//		positionModel.addMuToParentWithSamePositionModel(aParentMu, aMu);
-//		
-//	}
-
-
-
+	
+// constructors ------------------------------------------------------------------
+	
+	
 	public Mu(String aName)
 	{
 		lengthModel = new LengthFromChildren(this);		// default 
@@ -240,7 +237,18 @@ public class Mu
 		muId = muIdCount;
 		muIdCount++;
 	}
+
 	
+
+// getters --------------------------------------------------------------------
+
+	
+	public PositionModel getPositionModel()
+	{
+		return positionModel;		
+	}
+
+
 	
 	public int getMuId()
 	{
@@ -270,7 +278,6 @@ public class Mu
 
 
 
-
 	public int getLengthInBars()
 	{
 		return lengthModel.getLengthInBars();
@@ -283,6 +290,181 @@ public class Mu
 		return lengthModel.getLengthInBarsAndBeats();
 	}
 	
+	
+	
+	public Ruler getRuler()
+	{
+		return ruler;
+	}
+
+	
+
+	public int getEndPositionInBars()
+	{
+		if (parent == null) return getGlobalBarIndexOfEnd();
+		return getGlobalBarIndexOfEnd() - getParent().getGlobalPositionInBars();
+	}
+	
+	
+	
+	public BarsAndBeats getEndPositionInBarsAndBeats()
+	{
+		int parentGlobalStartBar = parent.getGlobalPositionInBars();
+		BarsAndBeats thisEnd = getGlobalEndPositionInBarsAndBeats();
+		return new BarsAndBeats(thisEnd.getBarPosition() - parentGlobalStartBar, thisEnd.getOffsetInQuarters());
+	}
+	
+	
+	
+	public double getEndPositionInQuarters()
+	{
+		double positionOfParentInQuarters = parent.getGlobalPositionInQuarters();
+		return getGlobalEndPositionInQuarters() - positionOfParentInQuarters;
+	}
+
+
+	
+	public int getLocalPositionInBars(int aOffsetPositionInBars, Mu aAncestorMu)
+	{
+		return positionModel.getLocalPositionInBars(aAncestorMu) + aOffsetPositionInBars;
+	}
+	
+	
+	
+	public int getLocalPositionInBars(Mu aAncestorMu)
+	{
+		return positionModel.getLocalPositionInBars(aAncestorMu);
+	}
+	
+	
+	
+	public double getLocalPositionInQuarters(Mu aAncestorMu)
+	{
+		return positionModel.getLocalPositionInQuarters(aAncestorMu);
+	}
+	
+	
+	
+	public BarsAndBeats getLocalPositionInBarsAndBeats(Mu aAncestorMu)
+	{
+		return positionModel.getLocalPositionInBarsAndBeats(aAncestorMu);
+	}
+	
+	
+	
+	private BarsAndBeats getLocalPositionInBarsAndBeats(BarsAndBeats aGlobalPositionInBarsAndBeats)
+	{
+		return positionModel.getLocalPositionInBarsAndBeats(aGlobalPositionInBarsAndBeats);
+	}
+	
+
+
+	public boolean hasTimeSignatureGenerator()
+	{
+		return hasTimeSignatureGenerator;
+	}
+
+
+
+	public boolean hasChordListGenerator()
+	{
+		return hasChordListGenerator;
+	}
+	
+	
+	
+	private List<Mu> allDecendantMusWithTimeSignature()
+	{
+		List<Mu> list = new ArrayList<Mu>();
+		for (Mu mu: mus)
+		{
+			List<Mu> tempList = mu.allDecendantMusWithTimeSignature();
+			if (mu.hasTimeSignatureGenerator()) tempList.add(0, mu);
+			if (tempList.size() > 0) list.addAll(tempList);
+		}
+		return list;
+	}
+	
+	
+	
+	private List<Mu> allDecendantMusWithChordList()
+	{
+		List<Mu> list = new ArrayList<Mu>();
+		for (Mu mu: mus)
+		{
+			List<Mu> tempList = mu.allDecendantMusWithChordList();
+			if (mu.hasChordListGenerator()) tempList.add(0, mu);
+			if (tempList.size() > 0) list.addAll(tempList);
+		}
+		return list;
+	}
+
+	
+	
+	public ChordList getChordList()
+	{
+		checkForNullChordListAndCreate();
+		return chordList;
+	}
+	
+	
+	
+	public ChordList getMuSpecificParentChordListExcerpt()
+	{
+		ChordList excerptChordList = new ChordList();
+		excerptChordList.setLengthInBarsAndBeats(getLengthInBarsAndBeats());
+		double start = getGlobalPositionInQuarters();
+		double end = getGlobalEndPositionInQuarters();
+		int startBarPos = getGlobalPositionInBarsAndBeats().getBarPosition();
+		ChordList masterChordList = getMasterChordList();
+		for (ChordEvent ce: masterChordList.getChordEventList())
+		{
+			if (ce.getPositionInQuarters() >= start && ce.getPositionInQuarters() < end)
+			{
+				excerptChordList.addChord(
+						ce.getChord(), 
+						BarsAndBeats.at(
+								ce.getPositionInBarsAndBeats().getBarPosition() - startBarPos, 
+								ce.getPositionInBarsAndBeats().getOffsetInQuarters()
+								), 
+						getMasterTimeSignatureGenAndMap());
+			}
+		}
+		return excerptChordList;
+	}
+
+
+
+	public List<ChordEvent> getChordEventList()
+	{
+		return chordList.getChordEventList();
+	}
+
+
+
+	public int getNumberOfMuAnnotations()
+	{
+		if (muAnnotations == null) return 0; else return muAnnotations.size();
+	}
+	
+	
+	
+	public int getNumberOfMus()
+	{
+		return mus.size();
+	}
+	
+	
+	
+	public int getNumberOfMuNotes()
+	{
+		if (muNotes == null) return 0; else	return muNotes.size();
+	}
+
+
+
+	
+// setters ----------------------------------------------------------------------	
 	
 
 	public void setLengthInBars(int aLengthInBars)
@@ -381,13 +563,6 @@ public class Mu
 
 
 
-	public Ruler getRuler()
-	{
-		return ruler;
-	}
-	
-
-
 	private void checkForNullChordListAndCreate()
 	{
 		if (chordList == null) chordList = new ChordList();
@@ -402,7 +577,54 @@ public class Mu
 	}
 
 
+	
+	public void setPositionModel(PositionModel aPositionModel)
+	{
+		positionModel = aPositionModel;		
+	}
 
+
+
+	private void setHasTimeSignatureGenerator(boolean b)
+	{
+		if (ruler != null) ruler.setHasTimeSignature(b);
+		hasTimeSignatureGenerator = b;
+	}
+
+
+
+	public void setParent(Mu mu)
+	{
+		parent = mu;		
+	}
+
+
+	
+	public void setToGetLengthFromChildren()
+	{
+		int len = lengthModel.getLengthInBars();
+		lengthModel = new LengthFromChildren(this);
+		lengthModel.calculateLength(mus);
+		if (parent != null && len != lengthModel.getLengthInBars()) parent.recalculateLength();
+	}
+
+
+
+	public void setTimeSignatureGenerator(TimeSignatureListGenerator aGenerator)
+	{
+		checkForNullRulerAndCreate();
+		ruler.setTimeSignatureGenerator(aGenerator);	
+		hasTimeSignatureGenerator = true;
+		ruler.setLengthInBarsAndBeats(new BarsAndBeats(lengthModel.getLengthInBars(), 0.0));
+		recompileTimeSignatures();
+		lengthModel.calculateLength(mus);
+	}
+
+	
+	
+// adders --------------------------------------------------------------------------
+
+	
 	public void addMu(Mu aMu, int aBarPosition)
 	{
 //		System.out.println("addMu(" + aMu.getName() + ", " + aBarPosition + ")");
@@ -443,47 +665,30 @@ public class Mu
 	public void addMuWithoutLengthAdjustment(Mu aMu, BarsAndBeats aBarsAndBeatsPosition)
 	{
 //		System.out.println("addMu(" + aMu.getName() + ", " + aBarsAndBeatsPosition.toString() + ")");
-		if (lengthModel instanceof FixedLengthInBars || lengthModel instanceof FixedLengthInQuarters)
+		if (lengthModel instanceof FixedLengthInBars 
+				|| lengthModel instanceof FixedLengthInQuarters)
 		{
 			aMu.setParent(this);
-			aMu.setPositionModel(new BeginningOfParentInBarsAnBeats(aBarsAndBeatsPosition, aMu));
+			aMu.setPositionModel(new BeginningOfParentInBarsAnBeats(
+					aBarsAndBeatsPosition, 
+					aMu));
 			// this is the line removed from addMu
 //			if (!aMu.isFixedLengthInQuarters()) aMu.setLengthInQuarters(DEFAULT_FIXED_LENGTH_IN_QUARTERS);
 			aMu.setHasTimeSignatureGenerator(false);
 			mus.add(aMu);
 		}		
-		else if (lengthModel instanceof LengthFromChildren || lengthModel instanceof FixedLengthInBarsAndBeats)
+		else if (lengthModel instanceof LengthFromChildren 
+				|| lengthModel instanceof FixedLengthInBarsAndBeats)
 		{
 			aMu.setParent(this);
-			aMu.setPositionModel(new BeginningOfParentInBarsAnBeats(aBarsAndBeatsPosition, aMu));
+			aMu.setPositionModel(new BeginningOfParentInBarsAnBeats(
+					aBarsAndBeatsPosition, 
+					aMu));
 			mus.add(aMu);
 			lengthModel.calculateLength(mus);
 		}
 		Collections.sort(mus, globalPositionInQuartersComparator);
 	}
-	
-	
-	
-	public static Comparator<Mu> globalPositionInQuartersComparator = new Comparator<Mu>()
-	{
-
-		@Override
-		public int compare(Mu o1, Mu o2)
-		{
-			double pos1 = o1.getGlobalPositionInQuarters();
-			double pos2 = o2.getGlobalPositionInQuarters();
-			if (pos1 < pos2) return -1;
-			if (pos2 < pos1) return 1;
-			return 0;
-		}		
-	};
-	
-	
-	
-	public static Comparator<Mu> getAbsoluteQuartersDistanceComparator(double aGlobalPositionInQuarters) {
-	    return Comparator.comparingDouble(p -> Math.abs(aGlobalPositionInQuarters - p.getGlobalPositionInQuarters()));
-	}
-	
 	
 	
 	
@@ -511,131 +716,7 @@ public class Mu
 		}
 	}
 
-
-
-	private boolean isFixedLengthInQuarters()
-	{
-		return lengthModel instanceof FixedLengthInQuarters;
-	}
-
-
-
-	private void setHasTimeSignatureGenerator(boolean b)
-	{
-		if (ruler != null) ruler.setHasTimeSignature(b);
-		hasTimeSignatureGenerator = b;
-	}
-
-
-
-	public void setPositionModel(PositionModel aPositionModel)
-	{
-		positionModel = aPositionModel;		
-	}
-
-
-
-	public void setParent(Mu mu)
-	{
-		parent = mu;		
-	}
-
-
-
-	public int getEndPositionInBars()
-	{
-		if (parent == null) return getGlobalBarIndexOfEnd();
-		return getGlobalBarIndexOfEnd() - getParent().getGlobalPositionInBars();
-	}
 	
-	
-	
-	public BarsAndBeats getEndPositionInBarsAndBeats()
-	{
-		int parentGlobalStartBar = parent.getGlobalPositionInBars();
-		BarsAndBeats thisEnd = getGlobalEndPositionInBarsAndBeats();
-		return new BarsAndBeats(thisEnd.getBarPosition() - parentGlobalStartBar, thisEnd.getOffsetInQuarters());
-	}
-	
-	
-	
-	public double getEndPositionInQuarters()
-	{
-		double positionOfParentInQuarters = parent.getGlobalPositionInQuarters();
-		return getGlobalEndPositionInQuarters() - positionOfParentInQuarters;
-	}
-
-
-	
-	public String toString()
-	{
-		StringBuilder sb = new StringBuilder();
-		sb.append( "\nmu:" + name);
-		sb.append("\n" + positionModel.positionToString() + "\n" + lengthModel.positionToString());		
-		sb.append("\nglobalPositionInQuarters=" + getGlobalPositionInQuarters());
-		addRulerToStringInfo(sb);
-		addMuCount(sb);
-		addMuNotes(sb);
-
-		if (muTagBundles != null && muTagBundles.size() > 0 )sb.append("\n");
-		for (MuTagBundle muTagBundle: muTagBundles)
-		{
-			sb.append(muTagBundle.toString() + ",");
-		}
-		sb.append("\n");
-		return sb.toString();
-	}
-
-
-
-	private void addMuNotes(StringBuilder sb)
-	{
-		sb.append("\nmuNotes:");
-		if (muNotes == null || muNotes.size() == 0)
-		{
-			sb.append("--none--");
-		}
-		else
-		{
-			for (MuNote note: muNotes)
-			{
-				sb.append("(" + note.getPitch() + "," + note.getVelocity() + ")");
-			}
-		}
-	}
-
-
-
-	private void addMuCount(StringBuilder sb)
-	{
-		int count = 0;
-		if (mus != null) count  = mus.size();
-		sb.append("\nmu count=" + count);
-	}
-
-
-
-	private void addRulerToStringInfo(StringBuilder sb)
-	{
-		if (ruler == null)
-		{
-			sb.append("\nruler=null");
-		}
-		else
-		{
-//			if (hasTimeSignatureGenerator)
-//			{
-//				sb.append("\n<<placeholder for timesignature(s)>>");	// + getTimeSignaturesToString());
-//			}
-//			else
-//			{
-//				sb.append("\n...");
-//			}	
-			sb.append("\n" + ruler.toString());
-		}
-	}
-
-
 
 	// aMu is added to aSiblingToAddTo 
 	public void addMuToEndOfSibling(Mu aMuToAdd, int aPositionInBars, Mu aSiblingToAddTo)
@@ -659,6 +740,7 @@ public class Mu
 			System.out.println(e.getMessage());
 		}		
 	}
+	
 	
 	
 	public void addMuToEndOfSibling(Mu aMuToAdd, BarsAndBeats aBarsAndBeats, Mu aSiblingToAddTo)
@@ -687,15 +769,40 @@ public class Mu
 
 
 
-	public void setToGetLengthFromChildren()
+	// comparators ---------------------------------------------------------------------------------	
+	
+	
+	public static Comparator<Mu> globalPositionInQuartersComparator = new Comparator<Mu>()
 	{
-		int len = lengthModel.getLengthInBars();
-		lengthModel = new LengthFromChildren(this);
-		lengthModel.calculateLength(mus);
-		if (parent != null && len != lengthModel.getLengthInBars()) parent.recalculateLength();
+
+		@Override
+		public int compare(Mu o1, Mu o2)
+		{
+			double pos1 = o1.getGlobalPositionInQuarters();
+			double pos2 = o2.getGlobalPositionInQuarters();
+			if (pos1 < pos2) return -1;
+			if (pos2 < pos1) return 1;
+			return 0;
+		}		
+	};
+	
+	
+	
+	public static Comparator<Mu> getAbsoluteQuartersDistanceComparator(double aGlobalPositionInQuarters) {
+	    return Comparator.comparingDouble(p -> Math.abs(aGlobalPositionInQuarters - p.getGlobalPositionInQuarters()));
+	}
+	
+	
+
+	private boolean isFixedLengthInQuarters()
+	{
+		return lengthModel instanceof FixedLengthInQuarters;
 	}
 
-
+	
+	
+// methods that do stuff which is not getting, setting or adding -----------------------------
+	
 
 	public void recalculateLength()
 	{
@@ -704,55 +811,78 @@ public class Mu
 		if (len != lengthModel.getLengthInBars() && parent != null) parent.recalculateLength();		
 	}
 
+	
+	
+// toString -----------------------------------------------------------------------------------
+	
+	
+	public String toString()
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append( "\nmu:" + name);
+		sb.append("\n" + positionModel.positionToString() + "\n" + lengthModel.positionToString());		
+		sb.append("\nglobalPositionInQuarters=" + getGlobalPositionInQuarters());
+		appendRulerToStringBuilder(sb);
+		appendMuCountToStringBuilder(sb);
+		appendMuNotesToStringBuilder(sb);
+
+		if (muTagBundles != null && muTagBundles.size() > 0 )sb.append("\n");
+		for (MuTagBundle muTagBundle: muTagBundles)
+		{
+			sb.append(muTagBundle.toString() + ",");
+		}
+		sb.append("\n");
+		return sb.toString();
+	}
 
 
-	public int getLocalPositionInBars(int aOffsetPositionInBars, Mu aAncestorMu)
+
+	private void appendMuNotesToStringBuilder(StringBuilder sb)
 	{
-		return positionModel.getLocalPositionInBars(aAncestorMu) + aOffsetPositionInBars;
+		sb.append("\nmuNotes:");
+		if (muNotes == null || muNotes.size() == 0)
+		{
+			sb.append("--none--");
+		}
+		else
+		{
+			for (MuNote note: muNotes)
+			{
+				sb.append("(" + note.getPitch() + "," + note.getVelocity() + ")");
+			}
+		}
 	}
-	
-	
-	
-	public int getLocalPositionInBars(Mu aAncestorMu)
+
+
+
+	private void appendMuCountToStringBuilder(StringBuilder sb)
 	{
-		return positionModel.getLocalPositionInBars(aAncestorMu);
+		int count = 0;
+		if (mus != null) count  = mus.size();
+		sb.append("\nmu count=" + count);
 	}
-	
-	
-	
-	public double getLocalPositionInQuarters(Mu aAncestorMu)
+
+
+
+	private void appendRulerToStringBuilder(StringBuilder sb)
 	{
-		return positionModel.getLocalPositionInQuarters(aAncestorMu);
+		if (ruler == null)
+		{
+			sb.append("\nruler=null");
+		}
+		else
+		{
+//			if (hasTimeSignatureGenerator)
+//			{
+//				sb.append("\n<<placeholder for timesignature(s)>>");	// + getTimeSignaturesToString());
+//			}
+//			else
+//			{
+//				sb.append("\n...");
+//			}	
+			sb.append("\n" + ruler.toString());
+		}
 	}
-	
-	
-	
-	public BarsAndBeats getLocalPositionInBarsAndBeats(Mu aAncestorMu)
-	{
-		return positionModel.getLocalPositionInBarsAndBeats(aAncestorMu);
-	}
-	
-	
-	
-	private BarsAndBeats getLocalPositionInBarsAndBeats(BarsAndBeats aGlobalPositionInBarsAndBeats)
-	{
-		return positionModel.getLocalPositionInBarsAndBeats(aGlobalPositionInBarsAndBeats);
-	}
-	
-	
-	
-//	private TimeSignatureList getTimeSignatureList(int aGlobalStartPositionInBars, int aLengthInBars)
-//	{
-//		if (parent == null)
-//		{
-//			checkForNullRulerAndCreate();
-//			return ruler.getTimeSignatureList().getSubsetTimeSignature(aGlobalStartPositionInBars, aLengthInBars);
-//		}
-//		else
-//		{
-//			return parent.getTimeSignatureList(aGlobalStartPositionInBars, aLengthInBars);
-//		}
-//	}
 
 
 
@@ -787,60 +917,6 @@ public class Mu
 
 
 
-	public void setTimeSignatureGenerator(TimeSignatureListGenerator aGenerator)
-	{
-		checkForNullRulerAndCreate();
-		ruler.setTimeSignatureGenerator(aGenerator);	
-		hasTimeSignatureGenerator = true;
-		ruler.setLengthInBarsAndBeats(new BarsAndBeats(lengthModel.getLengthInBars(), 0.0));
-		recompileTimeSignatures();
-		lengthModel.calculateLength(mus);
-	}
-
-
-
-	public boolean hasTimeSignatureGenerator()
-	{
-		return hasTimeSignatureGenerator;
-	}
-
-
-
-	public boolean hasChordListGenerator()
-	{
-		return hasChordListGenerator;
-	}
-	
-	
-	
-	private List<Mu> allDecendantMusWithTimeSignature()
-	{
-		List<Mu> list = new ArrayList<Mu>();
-		for (Mu mu: mus)
-		{
-			List<Mu> tempList = mu.allDecendantMusWithTimeSignature();
-			if (mu.hasTimeSignatureGenerator()) tempList.add(0, mu);
-			if (tempList.size() > 0) list.addAll(tempList);
-		}
-		return list;
-	}
-	
-	
-	
-	private List<Mu> allDecendantMusWithChordList()
-	{
-		List<Mu> list = new ArrayList<Mu>();
-		for (Mu mu: mus)
-		{
-			List<Mu> tempList = mu.allDecendantMusWithChordList();
-			if (mu.hasChordListGenerator()) tempList.add(0, mu);
-			if (tempList.size() > 0) list.addAll(tempList);
-		}
-		return list;
-	}
-
-
-
 	public String getChordListToString()
 	{
 		if (lengthModel.getLengthInBars() == 0)
@@ -855,76 +931,12 @@ public class Mu
 
 	
 	
-	public ChordList getChordList()
-	{
-		checkForNullChordListAndCreate();
-		return chordList;
-	}
-	
-	
-	
-	public ChordList getMuSpecificParentChordListExcerpt()
-	{
-		ChordList excerptChordList = new ChordList();
-		excerptChordList.setLengthInBarsAndBeats(getLengthInBarsAndBeats());
-		double start = getGlobalPositionInQuarters();
-		double end = getGlobalEndPositionInQuarters();
-		int startBarPos = getGlobalPositionInBarsAndBeats().getBarPosition();
-		ChordList masterChordList = getMasterChordList();
-		for (ChordEvent ce: masterChordList.getChordEventList())
-		{
-			if (ce.getPositionInQuarters() >= start && ce.getPositionInQuarters() < end)
-			{
-				excerptChordList.addChord(
-						ce.getChord(), 
-						BarsAndBeats.at(
-								ce.getPositionInBarsAndBeats().getBarPosition() - startBarPos, 
-								ce.getPositionInBarsAndBeats().getOffsetInQuarters()
-								), 
-						getMasterTimeSignatureGenAndMap());
-			}
-		}
-		return excerptChordList;
-	}
-
-
-
 	public void setChordListGenerator(ChordListGenerator aGenerator)
 	{
 		chordListGenerator = aGenerator;
 		hasChordListGenerator = true;
 		recompileChordList();
 	}
-
-
-
-	public List<ChordEvent> getChordEventList()
-	{
-		return chordList.getChordEventList();
-	}
-
-
-
-	public int getNumberOfMuAnnotations()
-	{
-		if (muAnnotations == null) return 0; else return muAnnotations.size();
-	}
-	
-	
-	
-	public int getNumberOfMus()
-	{
-		return mus.size();
-	}
-	
-	
-	
-	public int getNumberOfMuNotes()
-	{
-		if (muNotes == null) return 0; else	return muNotes.size();
-	}
-
-
 
 
 	public void addMuAnnotation(MuAnnotation aMuAnnotation)
@@ -1123,6 +1135,7 @@ public class Mu
 	}
 
 
+	
 	public void addMuNote(int aPitch, int aVelocity)
 	{
 		testForNullMuNotesAndCreate();

@@ -37,6 +37,12 @@ public class SimpleEvenChordProgression implements ChordListGenerator
 	}
 	
 	
+	public static SimpleEvenChordProgression with(String... aChordlist)
+	{
+		return new SimpleEvenChordProgression(aChordlist);
+	}
+	
+	
 	
 	@Override
 	public String chordsToString ()
