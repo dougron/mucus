@@ -2,7 +2,10 @@ package test.java.com.dougron.mucus.mu_framework;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.nio.file.Path;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import main.java.com.dougron.mucus.algorithms.generic_generator.AccentType;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuG_Anticipation;
@@ -29,7 +32,8 @@ import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
 class Mu_SaveToFileTests
 {
 	
-	String path = "D:/Documents/miscForBackup/MuSaveToXMLTestOutputs/";
+	@TempDir
+	Path tempDir;
 
 
 	@Test
@@ -84,7 +88,7 @@ class Mu_SaveToFileTests
 		grandchild5.setLengthInQuarters(1.0);
 		child1.addMuToEndOfSibling(grandchild6, new BarsAndBeats(1, 2.0), grandchild2);
 		
-		String muPath = path + "testMuXML.muxml";
+		String muPath = tempDir.resolve("testMuXML.muxml").toString();
 		MuXMLUtility.saveMuToXMLFile(muPath, mu);
 		
 		Mu newMu = MuXMLUtility.loadMuFromXMLFile(muPath);
@@ -115,7 +119,7 @@ class Mu_SaveToFileTests
 //				PrintParameter.MUS
 		};
 		
-		String muPath = path + "rulerTempoChangeMuXML.muxml";
+		String muPath = tempDir.resolve("rulerTempoChangeMuXML.muxml").toString();
 		MuXMLUtility.saveMuToXMLFile(muPath, mu);
 		
 		Mu newMu = MuXMLUtility.loadMuFromXMLFile(muPath);
@@ -139,7 +143,7 @@ class Mu_SaveToFileTests
 //				PrintParameter.MUS
 		};
 		
-		String muPath = path + "rulerStartTempoMuXML.muxml";
+		String muPath = tempDir.resolve("rulerStartTempoMuXML.muxml").toString();
 		MuXMLUtility.saveMuToXMLFile(muPath, mu);		
 		Mu newMu = MuXMLUtility.loadMuFromXMLFile(muPath);
 		newMu.setMuIndices();
@@ -162,7 +166,7 @@ class Mu_SaveToFileTests
 		child.setTimeSignatureGenerator(TimeSignatureListGeneratorFactory.getGenerator(TimeSignature.SEVEN_EIGHT_322));
 		mu.addMu(child, 5);
 		
-		String muPath = path + "rulerCustomTSMuXML.muxml";
+		String muPath = tempDir.resolve("rulerCustomTSMuXML.muxml").toString();
 		MuXMLUtility.saveMuToXMLFile(muPath, mu);
 		
 		Mu newMu = MuXMLUtility.loadMuFromXMLFile(muPath);
@@ -189,7 +193,7 @@ class Mu_SaveToFileTests
 		child.setTimeSignatureGenerator(TimeSignatureListGeneratorFactory.getGenerator(TimeSignature.SEVEN_EIGHT_322));
 		mu.addMu(child, 5);
 		
-		String muPath = path + "rulerMuXML.muxml";
+		String muPath = tempDir.resolve("rulerMuXML.muxml").toString();
 		MuXMLUtility.saveMuToXMLFile(muPath, mu);
 		
 		Mu newMu = MuXMLUtility.loadMuFromXMLFile(muPath);
@@ -207,7 +211,7 @@ class Mu_SaveToFileTests
 	{
 		Mu mu = new Mu("mu");
 		mu.addMuGenerator(new MuG_NothingToAdd());		
-		String muPath = path + "MuG_NothingToAddMuXML.muxml";
+		String muPath = tempDir.resolve("MuG_NothingToAddMuXML.muxml").toString();
 		MuXMLUtility.saveMuToXMLFile(muPath, mu);
 		
 		Mu newMu = MuXMLUtility.loadMuFromXMLFile(muPath);
@@ -230,7 +234,7 @@ class Mu_SaveToFileTests
 				AccentType.UNACCENTED
 				));
 		
-		String muPath = path + "MuG_EscapeTone_RRPMuXML.muxml";
+		String muPath = tempDir.resolve("MuG_EscapeTone_RRPMuXML.muxml").toString();
 		MuXMLUtility.saveMuToXMLFile(muPath, mu);
 		
 		Mu newMu = MuXMLUtility.loadMuFromXMLFile(muPath);
@@ -248,7 +252,7 @@ class Mu_SaveToFileTests
 		Mu mu = new Mu("mu");
 		mu.addMuGenerator(new MuG_EscapeTone(1.0, EscapeToneType.JUMP_STEP, AccentType.UNACCENTED));
 		
-		String muPath = path + "MuG_EscapeToneMuXML.muxml";
+		String muPath = tempDir.resolve("MuG_EscapeToneMuXML.muxml").toString();
 		MuXMLUtility.saveMuToXMLFile(muPath, mu);
 		
 		Mu newMu = MuXMLUtility.loadMuFromXMLFile(muPath);
@@ -266,7 +270,7 @@ class Mu_SaveToFileTests
 		Mu mu = new Mu("mu");
 		mu.addMuGenerator(new MuG_Anticipation_RRP(new RelativeRhythmicPosition(0, 1, -1, 2)));
 		
-		String muPath = path + "MuG_Anticipation_RRPMuXML.muxml";
+		String muPath = tempDir.resolve("MuG_Anticipation_RRPMuXML.muxml").toString();
 		MuXMLUtility.saveMuToXMLFile(muPath, mu);
 		
 		Mu newMu = MuXMLUtility.loadMuFromXMLFile(muPath);
@@ -284,7 +288,7 @@ class Mu_SaveToFileTests
 		Mu mu = new Mu("mu");
 		mu.addMuGenerator(new MuG_Anticipation(3, 0.75));
 		
-		String muPath = path + "MuG_AnticipationTestMuXML.muxml";
+		String muPath = tempDir.resolve("MuG_AnticipationTestMuXML.muxml").toString();
 		MuXMLUtility.saveMuToXMLFile(muPath, mu);
 		
 		Mu newMu = MuXMLUtility.loadMuFromXMLFile(muPath);
@@ -302,7 +306,7 @@ class Mu_SaveToFileTests
 		Mu mu = new Mu("mu");
 		mu.setXMLKey(-6);
 		
-		String muPath = path + "keySignatureMapTestMuXML.muxml";
+		String muPath = tempDir.resolve("keySignatureMapTestMuXML.muxml").toString();
 		MuXMLUtility.saveMuToXMLFile(muPath, mu);
 		
 		Mu newMu = MuXMLUtility.loadMuFromXMLFile(muPath);
@@ -320,7 +324,7 @@ class Mu_SaveToFileTests
 		Mu mu = new Mu("mu");
 		mu.setStartPitch(44);
 		
-		String muPath = path + "startPitchTestMuXML.muxml";
+		String muPath = tempDir.resolve("startPitchTestMuXML.muxml").toString();
 		MuXMLUtility.saveMuToXMLFile(muPath, mu);
 		
 		Mu newMu = MuXMLUtility.loadMuFromXMLFile(muPath);
@@ -340,7 +344,7 @@ class Mu_SaveToFileTests
 		mu.addMuAnnotation(new MuAnnotation("solo", MuAnnotation.TextPlacement.PLACEMENT_BELOW));
 		mu.addMuAnnotation(new MuAnnotation("solo", 24, MuAnnotation.TextPlacement.PLACEMENT_BELOW));
 		
-		String muPath = path + "muAnnotationTestMuXML.muxml";
+		String muPath = tempDir.resolve("muAnnotationTestMuXML.muxml").toString();
 		MuXMLUtility.saveMuToXMLFile(muPath, mu);
 		
 		Mu newMu = MuXMLUtility.loadMuFromXMLFile(muPath);
@@ -359,7 +363,7 @@ class Mu_SaveToFileTests
 		mu.addMuNote(new MuNote(64, 96));
 		mu.addMuNote(new MuNote(33, 44));
 		
-		String muPath = path + "muNoteTestMuXML.muxml";
+		String muPath = tempDir.resolve("muNoteTestMuXML.muxml").toString();
 		MuXMLUtility.saveMuToXMLFile(muPath, mu);
 		
 		Mu newMu = MuXMLUtility.loadMuFromXMLFile(muPath);
@@ -378,7 +382,7 @@ class Mu_SaveToFileTests
 		mu.addTag(MuTag.IS_CHORD_TONE);
 		mu.addTag(new MuTag[] {MuTag.IS_ANTICIPATION, MuTag.ACCENTED});
 		
-		String muPath = path + "muTagTestMuXML.muxml";
+		String muPath = tempDir.resolve("muTagTestMuXML.muxml").toString();
 		MuXMLUtility.saveMuToXMLFile(muPath, mu);
 		
 		Mu newMu = MuXMLUtility.loadMuFromXMLFile(muPath);
@@ -397,7 +401,7 @@ class Mu_SaveToFileTests
 		mu.setChordListGenerator(new SingleChordGenerator(new Chord("Dm")));
 		mu.setLengthInBars(4);
 		
-		String muPath = path + "singleChordGeneratorTestMuXML.muxml";
+		String muPath = tempDir.resolve("singleChordGeneratorTestMuXML.muxml").toString();
 		MuXMLUtility.saveMuToXMLFile(muPath, mu);
 		
 		Mu newMu = MuXMLUtility.loadMuFromXMLFile(muPath);
@@ -418,7 +422,7 @@ class Mu_SaveToFileTests
 		mu.setChordListGenerator(new SimpleEvenChordProgression(new String[] {"Am", "Dm", "C7", "G7"}));
 		mu.setLengthInBars(4);
 		
-		String muPath = path + "simpleEvenChordGeneratorTestMuXML.muxml";
+		String muPath = tempDir.resolve("simpleEvenChordGeneratorTestMuXML.muxml").toString();
 		MuXMLUtility.saveMuToXMLFile(muPath, mu);
 		
 		Mu newMu = MuXMLUtility.loadMuFromXMLFile(muPath);
@@ -439,7 +443,7 @@ class Mu_SaveToFileTests
 		mu.setChordListGenerator(new FloatBarChordProgression(2.0, new Object[] {0.0, "Am", 0.5, "Dm", 1.0, "C7", 1.5, "G7"}));
 		mu.setLengthInBars(4);
 		
-		String muPath = path + "floatBarChordGeneratorTestMuXML.muxml";
+		String muPath = tempDir.resolve("floatBarChordGeneratorTestMuXML.muxml").toString();
 		MuXMLUtility.saveMuToXMLFile(muPath, mu);
 		
 		Mu newMu = MuXMLUtility.loadMuFromXMLFile(muPath);
@@ -466,7 +470,7 @@ class Mu_SaveToFileTests
 		child.setLengthInQuarters(2.0);
 		mu.addMu(child, 1.0);
 		
-		String muPath = path + "tupletTestMuXML.muxml";
+		String muPath = tempDir.resolve("tupletTestMuXML.muxml").toString();
 		MuXMLUtility.saveMuToXMLFile(muPath, mu);
 		
 		Mu newMu = MuXMLUtility.loadMuFromXMLFile(muPath);

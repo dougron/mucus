@@ -2,10 +2,13 @@ package test.java.com.dougron.mucus.algorithms;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.File;
+import java.nio.file.Path;
 import java.util.Random;
 
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import main.java.com.dougron.mucus.algorithms.random_melody_generator.Parameter;
 import main.java.com.dougron.mucus.algorithms.random_melody_generator.RMG_001;
@@ -17,6 +20,10 @@ import main.java.com.dougron.mucus.mu_framework.Mu;
 
 class RandomMelodyGenerator_Tests
 {
+
+	@TempDir
+	Path tempDir;
+
 
 	@Test
 	void randomMelodyRandNumberContainer_deepCopy_does_actually_make_the_same_mu() throws Exception
@@ -45,8 +52,9 @@ class RandomMelodyGenerator_Tests
 		RandomMelodyGenerator rmg = RMG_001.getInstance();
 		RMRandomNumberContainer por = rmg.getRandomNumberContainer(rnd);
 //		RandomMelodyParameterObject po = rmg.getParameterObject(por, rnd);
-		por.saveAsTextDocument("testDoc");
-		RMRandomNumberContainer newpor = RMRandomNumberContainer.loadFile("testDoc");
+		String directory = tempDir.toString() + File.separator;
+		por.saveAsTextDocument(directory, "testDoc");
+		RMRandomNumberContainer newpor = RMRandomNumberContainer.loadFile(new File(directory + "testDoc.rnd_container"));
 //		System.out.println(newpor.toString());
 		assertEquals(por.get(Parameter.PHRASE_LENGTH).getValue(), newpor.get(Parameter.PHRASE_LENGTH).getValue());
 		assertEquals(por.get(Parameter.START_NOTE).getValue(), newpor.get(Parameter.START_NOTE).getValue());
@@ -70,7 +78,7 @@ class RandomMelodyGenerator_Tests
 	@Test
 	void rnd_container_written_to_json_file_creates_the_sameOutput_when_read () throws Exception
 	{
-		String directory = "D:/Documents/miscForBackup/random_csv/";
+		String directory = tempDir.toString() + File.separator;
 		String filename = "rndContainserJSON";
 		RMRandomNumberContainer rndContainer = RMG_002.getInstance().getRandomNumberContainer(new Random());
 		RandomMelodyParameterObject po = RMG_002.getInstance().getParameterObject(rndContainer, new Random());
