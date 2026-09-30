@@ -17,5 +17,5 @@ public enum Parameter
 	PATTERN_EMBELLISHER, 	// a depreciated Parameter kept for backwards compatibility. Use EMBELLISHMENT_GENERATOR for all embellishment activities 
 	EMBELLISHMENT_GENERATOR,
 	LOOP_MODEL,	// for whether a phrase will loop in playback or be continuous with other phrases on one or both sides
-	DURATION, PLUGIN_RUNNER, DURATION_EMBELLISHMENT
+	DURATION, PLUGIN_RUNNER, DURATION_EMBELLISHMENT, DURATION_STRUCTURE_TONE
 }
