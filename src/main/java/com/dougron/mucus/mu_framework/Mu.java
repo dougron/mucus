@@ -21,6 +21,7 @@ import main.java.com.dougron.mucus.algorithms.superimposifier.left_to_right.SuFi
 import main.java.com.dougron.mucus.algorithms.superimposifier.overwritable_vectors.SuFiSu_OverwritableVectors;
 import main.java.com.dougron.mucus.mu_framework.chord_list.Chord;
 import main.java.com.dougron.mucus.mu_framework.chord_list.ChordEvent;
+import main.java.com.dougron.mucus.mu_framework.chord_list.ChordAnalyzerType;
 import main.java.com.dougron.mucus.mu_framework.chord_list.ChordList;
 import main.java.com.dougron.mucus.mu_framework.chord_list.ChordListGenerator;
 import main.java.com.dougron.mucus.mu_framework.chord_list.SingleChordGenerator;
@@ -70,6 +71,7 @@ public class Mu
 	private Ruler ruler;
 	private ChordList chordList;
 	ChordListGenerator chordListGenerator = new SingleChordGenerator();
+	private ChordAnalyzerType chordAnalyzerType = ChordAnalyzerType.DEFAULT;	// only used on the root Mu
 	
 	ArrayList<MuTagBundle> muTagBundles = new ArrayList<MuTagBundle>();
 	
@@ -117,6 +119,7 @@ public class Mu
 		lengthModel.setSameLengthModel(mu);
 		if (ruler != null) mu.ruler = ruler.getDeepCopy();
 		mu.chordListGenerator = chordListGenerator;
+		mu.chordAnalyzerType = chordAnalyzerType;
 		// chordlist will be recompiled from generator
 		// muTags kept clear as generally may want to tag things differently 
 		// muAnnotations remains clear
@@ -412,6 +415,7 @@ public class Mu
 	public ChordList getMuSpecificParentChordListExcerpt()
 	{
 		ChordList excerptChordList = new ChordList();
+		excerptChordList.setChordAnalyzerType(getChordAnalyzerType());
 		excerptChordList.setLengthInBarsAndBeats(getLengthInBarsAndBeats());
 		double start = getGlobalPositionInQuarters();
 		double end = getGlobalEndPositionInQuarters();
@@ -529,6 +533,7 @@ public class Mu
 				BarsAndBeats bab = new BarsAndBeats(barPosition, 0.0);
 				chordList.addChordList(mu.getChordList(), bab, ruler.getTSGenAndMap());
 			}
+			chordList.setChordAnalyzerType(getChordAnalyzerType());
 		}
 		else
 		{
@@ -565,7 +570,11 @@ public class Mu
 
 	private void checkForNullChordListAndCreate()
 	{
-		if (chordList == null) chordList = new ChordList();
+		if (chordList == null) 
+		{
+			chordList = new ChordList();
+			chordList.setChordAnalyzerType(getChordAnalyzerType());
+		}
 		chordList.setLengthInBarsAndBeats(getLengthInBarsAndBeats());
 	}
 
@@ -929,6 +938,33 @@ public class Mu
 		}		
 	}
 
+	
+	
+	/*
+	 * which analyzer works out the prevailing key and function of each chord. Held by the root Mu, 
+	 * as that is where the master ChordList is compiled, so calling this on any Mu sets it for the 
+	 * whole tree. Chords already analysed are re-analysed straight away
+	 */
+	public void setChordAnalyzerType(ChordAnalyzerType aChordAnalyzerType)
+	{
+		if (parent != null)
+		{
+			parent.setChordAnalyzerType(aChordAnalyzerType);
+			return;
+		}
+		chordAnalyzerType = aChordAnalyzerType == null ? ChordAnalyzerType.DEFAULT : aChordAnalyzerType;
+		if (chordList != null) chordList.setChordAnalyzerType(chordAnalyzerType);
+	}
+	
+	
+	
+	public ChordAnalyzerType getChordAnalyzerType()
+	{
+		if (parent != null) return parent.getChordAnalyzerType();
+		// null when deserialized from data saved before this field existed
+		return chordAnalyzerType == null ? ChordAnalyzerType.DEFAULT : chordAnalyzerType;
+	}
+	
 	
 	
 	public void setChordListGenerator(ChordListGenerator aGenerator)

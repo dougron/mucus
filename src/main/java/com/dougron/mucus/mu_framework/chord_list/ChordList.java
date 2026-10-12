@@ -12,7 +12,7 @@ import main.java.com.dougron.mucus.mu_framework.data_types.BarsAndBeats;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureGenAndMap;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureList;
 import main.java.da_utils.chord_progression_analyzer.ChordInKeyObject;
-import main.java.da_utils.chord_progression_analyzer.ProgressionAnalyzer;
+import main.java.da_utils.chord_progression_analyzer.ChordSequenceKeyAnalyzer;
 import main.java.da_utils.chord_progression_analyzer.chord_chunk.ChordChunk;
 import main.java.da_utils.chord_progression_analyzer.chord_chunk.ChordChunkList;
 
@@ -40,7 +40,8 @@ public class ChordList
 	
 	private List<ChordEvent> chordList = new ArrayList<ChordEvent>();
 	private BarsAndBeats lengthInBarsAndBeats = null;
-	private ProgressionAnalyzer pa = null;
+	private ChordSequenceKeyAnalyzer pa = null;
+	private ChordAnalyzerType chordAnalyzerType = ChordAnalyzerType.DEFAULT;
 	private TimeSignatureGenAndMap tsgm;
  
 	
@@ -121,6 +122,25 @@ public class ChordList
 	public boolean hasProgressionAnalyzer()
 	{
 		return pa != null;
+	}
+	
+	
+	
+	public ChordAnalyzerType getChordAnalyzerType()
+	{
+		return chordAnalyzerType;
+	}
+	
+	
+	
+	// if the chords have already been analysed, they are re-analysed straight away so no Chord is left 
+	// holding an analysis from the previous analyzer
+	public void setChordAnalyzerType(ChordAnalyzerType aChordAnalyzerType)
+	{
+		if (aChordAnalyzerType == null) aChordAnalyzerType = ChordAnalyzerType.DEFAULT;
+		if (aChordAnalyzerType == chordAnalyzerType) return;
+		chordAnalyzerType = aChordAnalyzerType;
+		if (pa != null) refreshChordAnalysis();
 	}
 		
 		
@@ -420,7 +440,7 @@ public class ChordList
 	public void refreshChordAnalysis()
 	{
 		ChordChunkList ccl = new MucusChordChunkList(this);
-		pa = new ProgressionAnalyzer(ccl);
+		pa = chordAnalyzerType.create(ccl);
 //		((MucusChordChunkList)ccl).associateChordChunksWithChords();
 		associateChordsAndChordChunks();
 	}
