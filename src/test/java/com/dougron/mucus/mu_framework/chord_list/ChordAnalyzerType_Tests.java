@@ -13,9 +13,9 @@ import main.java.com.dougron.mucus.mu_framework.chord_list.SimpleEvenChordProgre
 class ChordAnalyzerType_Tests
 {
 
-	// ProgressionAnalyzer puts every chord of this in G (keyIndex 7), TonalParsimonyAnalyzer in C (keyIndex 0)
-	private static final String[] PROGRESSION = new String[] {"C", "E7", "Am", "D7", "G", "C"};
-	private static final int PROGRESSION_ANALYZER_KEY_INDEX = 7;
+	// ProgressionAnalyzer puts every chord of this in D (keyIndex 2), TonalParsimonyAnalyzer in C (keyIndex 0)
+	private static final String[] PROGRESSION = new String[] {"G", "C", "G", "Am", "Em", "Dm", "Am", "C", "Em", "G", "Em"};
+	private static final int PROGRESSION_ANALYZER_KEY_INDEX = 2;
 	private static final int TONAL_PARSIMONY_KEY_INDEX = 0;
 
 
