@@ -18,5 +18,6 @@ public enum Parameter
 	EMBELLISHMENT_GENERATOR,
 	LOOP_MODEL,	// for whether a phrase will loop in playback or be continuous with other phrases on one or both sides
 	DURATION, PLUGIN_RUNNER, DURATION_EMBELLISHMENT, DURATION_STRUCTURE_TONE,
-	CHORD_ANALYZER		// which ChordSequenceKeyAnalyzer works out the key and function of each chord
+	CHORD_ANALYZER,		// which ChordSequenceKeyAnalyzer works out the key and function of each chord
+	DYNAMIC			// the overall dynamic (pp to ff) that note velocities are scaled from
 }
