@@ -29,6 +29,7 @@ import org.xml.sax.SAXException;
 import main.java.com.dougron.mucus.algorithms.mu_generator.MuGenerator;
 import main.java.com.dougron.mucus.mu_framework.Mu;
 import main.java.com.dougron.mucus.mu_framework.chord_list.Chord;
+import main.java.com.dougron.mucus.mu_framework.chord_list.ChordAnalyzerType;
 import main.java.com.dougron.mucus.mu_framework.chord_list.FloatBarChordProgression;
 import main.java.com.dougron.mucus.mu_framework.chord_list.SimpleEvenChordProgression;
 import main.java.com.dougron.mucus.mu_framework.chord_list.SingleChordGenerator;
@@ -38,6 +39,7 @@ import main.java.com.dougron.mucus.mu_framework.data_types.MuAnnotation.TextPlac
 import main.java.com.dougron.mucus.mu_framework.data_types.MuNote;
 import main.java.com.dougron.mucus.mu_framework.mu_tags.MuTag;
 import main.java.com.dougron.mucus.mu_framework.mu_tags.MuTagBundle;
+import main.java.com.dougron.mucus.mu_framework.mu_tags.MuTagNamedParameter;
 import main.java.com.dougron.mucus.mu_framework.ruler.time_signature_list.TimeSignatureListGenerator;
 import main.java.da_utils.time_signature_utilities.time_signature.TimeSignature;
 
@@ -87,6 +89,7 @@ public class MuXMLUtility
 			
 			loadMuMap(muMap, nodeList);		
 			makeParentChildSiblingPositionRelationships(muMap, nodeList);			 
+			reanalyseChords(muMap.get(0));
 		}
 		catch (Exception e)
 		{
@@ -107,6 +110,7 @@ public class MuXMLUtility
 			
 			loadMuMap(muMap, nodeList);		
 			makeParentChildSiblingPositionRelationships(muMap, nodeList);			 
+			reanalyseChords(muMap.get(0));
 		}
 		catch (Exception e)
 		{
@@ -158,6 +162,22 @@ public class MuXMLUtility
 	
 	
 	
+	/*
+	 * the root's chords analysed again once the hierarchy is whole: a child's chord list is analysed
+	 * as it is loaded, before it has the root as its parent (so with the default analyzer), and it
+	 * shares its Chords with the root's list, so they would keep that analysis
+	 */
+	private static void reanalyseChords(Mu root)
+	{
+		if (root == null || root.getChordAnalyzerType() == ChordAnalyzerType.DEFAULT) return;
+		if (!root.getChordList().getChordEventList().isEmpty())
+		{
+			root.getChordList().refreshChordAnalysis();
+		}
+	}
+
+
+
 	private static void loadMuMap(HashMap<Integer, Mu> muMap, NodeList nodeList)
 	{ 
 		for (int itr = 0; itr < nodeList.getLength(); itr++)   
@@ -174,6 +194,7 @@ public class MuXMLUtility
 			addLengthModelToMuMapItem(element, mu);			
 			addHasLeadingDoubleBarToMuMapItem(element, mu);			
 			addChordListGeneratorToMuMapItem(element, mu);			
+			addChordAnalyzerTypeToMuMapItem(element, mu);
 			addTupletInfoToMuMapItem(element, mu);			
 			addMuTagsToMuMapItem(element, mu);
 			addMuNotesToMuMapItem(element, mu);			
@@ -341,7 +362,8 @@ public class MuXMLUtility
 				String str = mu_tag_node.getTextContent();
 				muTagArr[j] = MuTag.valueOf(str);
 			}
-			mu.addTag(muTagArr);
+			MuTagBundle bundle = mu.addTag(muTagArr);
+			addNamedParametersToMuTagBundle(mu_tag_bundle, bundle);
 		}
 	}
 
@@ -575,6 +597,7 @@ public class MuXMLUtility
 		addLengthModelXMLElement(document, element, aMu);		
 		addHasLeadingDoubleBarXMLElement(document, element, aMu);		
 		addChordListGeneratorAndHasChordListGeneratorXMLElement(document, element, aMu);		
+		addChordAnalyzerTypeXMLElement(document, element, aMu);
 		addTupletXMLElements(document, element, aMu);		
 		addMuTagBundleXMLElements(document, element, aMu);
 		addMuNoteXMLElements(document, element, aMu);
@@ -592,6 +615,32 @@ public class MuXMLUtility
 	
 	
 	
+	/*
+	 * the root's chord analyzer type (the analysis its chords are heard with), where it isn't the default
+	 */
+	private static void addChordAnalyzerTypeXMLElement(Document document, Element element, Mu aMu)
+	{
+		if (aMu.getParent() == null && aMu.getChordAnalyzerType() != ChordAnalyzerType.DEFAULT)
+		{
+			Element chord_analyzer_type = document.createElement("chord_analyzer_type");
+			chord_analyzer_type.appendChild(document.createTextNode(aMu.getChordAnalyzerType().name()));
+			element.appendChild(chord_analyzer_type);
+		}
+	}
+
+
+
+	private static void addChordAnalyzerTypeToMuMapItem(Element element, Mu mu)
+	{
+		NodeList list = element.getElementsByTagName("chord_analyzer_type");
+		if (list.getLength() > 0)
+		{
+			mu.setChordAnalyzerType(ChordAnalyzerType.valueOf(list.item(0).getTextContent()));
+		}
+	}
+
+
+
 	private static void addMuGeneratorXMLElement(Document document, Element element, Mu aMu)
 	{
 		if (aMu.getMuGenerator() != null) element.appendChild(aMu.getMuGenerator().getXMLElement(document));
@@ -675,7 +724,54 @@ public class MuXMLUtility
 				mu_tag.appendChild(document.createTextNode("" + tag));
 				mu_tag_bundle.appendChild(mu_tag);
 			}
+			addNamedParameterXMLElements(document, mu_tag_bundle, muTagBundle);
 			element.appendChild(mu_tag_bundle);
+		}
+	}
+
+
+
+	/*
+	 * a tag bundle's named parameters, each as <named_parameter name=".." type="..">value</named_parameter>.
+	 * Only values that can be written as text are kept (Double, Integer, Boolean, String); a Mu
+	 * (ORIGINAL_MU) is a reference into another hierarchy, so it is left out
+	 */
+	private static void addNamedParameterXMLElements(Document document, Element mu_tag_bundle, MuTagBundle muTagBundle)
+	{
+		if (muTagBundle.getNamedParameterMap() == null) return;
+		for (MuTagNamedParameter key: MuTagNamedParameter.values())
+		{
+			Object value = muTagBundle.getNamedParameter(key);
+			if (value instanceof Double || value instanceof Integer || value instanceof Boolean || value instanceof String)
+			{
+				Element named_parameter = document.createElement("named_parameter");
+				named_parameter.setAttribute("name", key.name());
+				named_parameter.setAttribute("type", value.getClass().getSimpleName());
+				named_parameter.appendChild(document.createTextNode(value.toString()));
+				mu_tag_bundle.appendChild(named_parameter);
+			}
+		}
+	}
+
+
+
+	private static void addNamedParametersToMuTagBundle(Element mu_tag_bundle, MuTagBundle bundle)
+	{
+		NodeList named_parameters = mu_tag_bundle.getElementsByTagName("named_parameter");
+		for (int k = 0; k < named_parameters.getLength(); k++)
+		{
+			Element named_parameter = (Element)named_parameters.item(k);
+			MuTagNamedParameter key = MuTagNamedParameter.valueOf(named_parameter.getAttribute("name"));
+			String text = named_parameter.getTextContent();
+			Object value;
+			switch (named_parameter.getAttribute("type"))
+			{
+			case "Double": value = Double.valueOf(text); break;
+			case "Integer": value = Integer.valueOf(text); break;
+			case "Boolean": value = Boolean.valueOf(text); break;
+			default: value = text;
+			}
+			bundle.addNamedParameter(key, value);
 		}
 	}
 
